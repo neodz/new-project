@@ -1,10 +1,10 @@
-$ clone the repository << git clone "remote" >> 
+clone the repository << git clone "remote" >> 
 #
-$ cd new-project/laravel and << run composer install >> 
+cd new-project/laravel and << run composer install >> 
 #
-$ run in the same folder << npm install >>
+run in the same folder << npm install >>
 #
-$ go to coreiu and run npm install 
+go to coreiu and run npm install 
 #
 $ in /laravel run npm run dev or watch (to compile all js files)
 # .env (config file)
