@@ -104,6 +104,10 @@ const DeleteMenuElement = () => import('@/views/menuElements/DeleteMenuElement')
 
 const Media = () => import('@/views/media/Media')
 
+// my components 
+const Test = () => import('@/views/test/test')
+
+
 
 Vue.use(Router)
 
@@ -120,7 +124,17 @@ router.beforeEach((to, from, next) => {
   if(roles != null){
     roles = roles.split(',')
   }
-  if(to.matched.some(record => record.meta.requiresAdmin)) {
+  if(to.matched.some(record => record.meta.requiresSuper)) {
+    if(roles != null && roles.indexOf('super') >= 0 ){
+      next()
+    }else{
+      next({
+        path: '/login',
+        params: { nextUrl: to.fullPath }
+      })
+    }
+  }
+  else if(to.matched.some(record => record.meta.requiresAdmin)) {
     if(roles != null && roles.indexOf('admin') >= 0 ){
       next()
     }else{
@@ -129,7 +143,8 @@ router.beforeEach((to, from, next) => {
         params: { nextUrl: to.fullPath }
       })
     }
-  }else if(to.matched.some(record => record.meta.requiresUser)) {
+  }
+  else if(to.matched.some(record => record.meta.requiresUser)) {
     if(roles != null && roles.indexOf('user') >= 0 ){
       next()
     }else{
