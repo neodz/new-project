@@ -14,21 +14,21 @@ class CreateLocationsTable extends Migration
     public function up()
     {
         Schema::create('locations', function (Blueprint $table) {
-            
+
             $table->id();
-            
+
             $table->integer('quantite')->default(1);
             $table->date('date_entrer');
             $table->date('date_sortie');
 
-            // article id 
+            // article id
             $table->unsignedBigInteger('article_id');
             $table->foreign('article_id')->references('id')->on('articles')->onDelete('cascade');
-            
-            // utilisateur of the article owner 
+
+            // utilisateur
             $table->unsignedBigInteger('utilisateur_id');
             $table->foreign('utilisateur_id')->references('id')->on('utilisateurs')->onDelete('cascade');
-   
+
             $table->timestamps();
         });
     }

@@ -19,15 +19,15 @@ class CreateExchangesTable extends Migration
             $table->string('element_echange');
             $table->string('adresse')->nullable();
             $table->string('marque')->nullable();
-            $table->enum('category',['cat1','cat2','cat3','cat4'])->default('cat1');
+
             $table->string('photo')->default('');
             $table->string('description')->nullable();
 
-            // article id 
+            // article id
             $table->unsignedBigInteger('article_id');
             $table->foreign('article_id')->references('id')->on('articles')->onDelete('cascade');
 
-            // utilisateur of the article owner 
+            // utilisateur
             $table->unsignedBigInteger('utilisateur_id');
             $table->foreign('utilisateur_id')->references('id')->on('utilisateurs')->onDelete('cascade');
 

@@ -17,13 +17,13 @@ class CreateTransactionAchatsTable extends Migration
             $table->id();
 
             $table->integer('quantite')->default(1);
-            $table->enum('couleur', ['blanc','rouge','vert','noir'])->default('blanc');
+            $table->enum('couleur', ['blanc','rouge','vert','noir'])->default('blanc')->nullable();
 
-            // article id 
+            // article id
             $table->unsignedBigInteger('article_id');
             $table->foreign('article_id')->references('id')->on('articles')->onDelete('cascade');
 
-            // utilisateur of the article owner 
+            // utilisateur of the article owner
             $table->unsignedBigInteger('utilisateur_id');
             $table->foreign('utilisateur_id')->references('id')->on('utilisateurs')->onDelete('cascade');
 
