@@ -14,8 +14,9 @@ use Illuminate\Http\Request;
 */
 
 Route::group(['middleware' => 'api'], function ($router) {
-    
+    // dd('xx');
     Route::get('menu', 'MenuController@index');
+    Route::get('article', 'ArticleController@index');
 
     Route::post('login', 'AuthController@login');
     Route::post('logout', 'AuthController@logout');
@@ -26,8 +27,8 @@ Route::group(['middleware' => 'api'], function ($router) {
 
     Route::resource('resource/{table}/resource', 'ResourceController');
     
-    Route::group(['middleware' => 'admin'], function ($router) {
-
+    Route::group(['middleware' => 'super'], function ($router) {
+        // dd('xx');
         Route::resource('mail',        'MailController');
         Route::get('prepareSend/{id}', 'MailController@prepareSend')->name('prepareSend');
         Route::post('mailSend/{id}',   'MailController@send')->name('mailSend');
@@ -37,6 +38,7 @@ Route::group(['middleware' => 'api'], function ($router) {
         Route::resource('users', 'UsersController')->except( ['create', 'store'] );
 
         Route::prefix('menu/menu')->group(function () { 
+            // dd('xx');
             Route::get('/',         'MenuEditController@index')->name('menu.menu.index');
             Route::get('/create',   'MenuEditController@create')->name('menu.menu.create');
             Route::post('/store',   'MenuEditController@store')->name('menu.menu.store');
@@ -79,5 +81,8 @@ Route::group(['middleware' => 'api'], function ($router) {
         Route::get('/roles/move/move-up',      'RolesController@moveUp')->name('roles.up');
         Route::get('/roles/move/move-down',    'RolesController@moveDown')->name('roles.down');
     });
+
+
+    
 });
 

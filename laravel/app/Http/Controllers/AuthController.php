@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
+use App\Models\Utilisateur;
 
 class AuthController extends Controller
 { 
@@ -26,8 +27,10 @@ class AuthController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function register(Request $request){
+        // dd($request->all());
         $validate = Validator::make($request->all(), [
             'name'      => 'required',
+            'prenom'      => 'required',
             'email'     => 'required|email|unique:users',
             'password'  => 'required|min:4|confirmed',
         ]);        
@@ -43,6 +46,20 @@ class AuthController extends Controller
         $user->password = bcrypt($request->password);
         $user->status = 'Active';
         $user->save();       
+
+        $utilisateur = new Utilisateur();
+        $utilisateur->prenom = $request->prenom;
+        $utilisateur->nom = $request->name;
+        $utilisateur->date_naissance = $request->date_naissance;
+        $utilisateur->lieu_naissance = $request->lieu_naissance;
+        $utilisateur->sexe = $request->sexe;
+        $utilisateur->adresse = $request->adresse;
+        $utilisateur->num_tel = $request->num_tel;
+        $utilisateur->num_identite = $request->num_identite;
+        $utilisateur->user_id = $user->id;
+
+        $utilisateur->save();
+
         return response()->json(['status' => 'success'], 200);
     } 
 

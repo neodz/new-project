@@ -29,6 +29,12 @@ class UsersAndNotesSeeder extends Seeder
             'Pending',
             'Banned'
         );
+        
+        $superRole = $roleSuper = Role::create(['name' => 'super']);
+        RoleHierarchy::create([
+            'role_id' => $superRole->id,
+            'hierarchy' => 1,
+        ]);
         /* Create roles */
         $adminRole = $roleAdmin = Role::create(['name' => 'admin']);
         RoleHierarchy::create([
@@ -69,6 +75,20 @@ class UsersAndNotesSeeder extends Seeder
         ]);
         array_push($statusIds, DB::getPdo()->lastInsertId());
         /*  insert users   */
+        
+        $user = User::create([ 
+            'name' => 'super',
+            'email' => 'super@super.com',
+            'email_verified_at' => now(),
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'remember_token' => Str::random(10),
+            'menuroles' => 'user,admin,super',
+            'status' => 'Active'
+        ]);
+        $user->assignRole('user');
+        $user->assignRole($roleAdmin);
+        $user->assignRole($roleSuper);
+
         $user = User::create([ 
             'name' => 'admin',
             'email' => 'admin@admin.com',

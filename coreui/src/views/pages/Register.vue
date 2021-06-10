@@ -6,16 +6,73 @@
           <CCard class="mx-4 mb-0">
             <CCardBody class="p-4">
               <CForm @submit.prevent="register" method="POST">
-                <h1>Register</h1>
-                <p class="text-muted">Create your account</p>
+                <h1>S'inscrire</h1>
+                <p class="text-muted">Créez votre compte</p>
                 <CInput
-                  placeholder="Username"
+                  placeholder="Nom"
                   prependHtml="<i class='cui-user'></i>"
-                  autocomplete="username"
+                  autocomplete="nom"
                   v-model="name"
-                >
+                 >
                   <template #prepend-content><CIcon name="cil-user"/></template>
                 </CInput>
+                <CInput
+                  placeholder="Prenom"
+                  prependHtml="<i class='cui-user'></i>"
+                  autocomplete="Prenom"
+                  v-model="prenom"
+                 >
+                  <template #prepend-content><CIcon name="cil-user"/></template>
+                </CInput>
+                
+                
+                <CInput
+                  type="date"
+                  v-model="date_naissance"
+                  prependHtml="<i class='cil-calendar'></i>"
+                  horizontal
+                >
+                 <template #prepend-content><CIcon name="cil-calendar"/></template>
+                </CInput>
+
+              <CInput
+                  placeholder="Lieu naissance"
+                  prependHtml="<i class='cil-house'></i>"
+                  autocomplete="Lieu naissance"
+                  v-model="lieu_naissance"
+                 >
+                  <template #prepend-content><CIcon name="cil-house"/></template>
+                </CInput>
+
+              <CInput
+                  placeholder="adresse"
+                  prependHtml="<i class='cil-house'></i>"
+                  autocomplete="adresse"
+                  v-model="adresse"
+                 >
+                  <template #prepend-content><CIcon name="cil-house"/></template>
+                </CInput>
+
+
+              <CInput
+                  placeholder="Numéro de téléphone"
+                  prependHtml="<i class='cil-phone'></i>"
+                  autocomplete="Numéro de téléphone"
+                  v-model="num_tel"
+                 >
+                  <template #prepend-content><CIcon name="cil-phone"/></template>
+                </CInput>
+
+                <CInput
+                  placeholder="Carte identité"
+                  prependHtml="<i class='cil-credit-card'></i>"
+                  autocomplete="Carte identité"
+                  v-model="num_identite"
+                 >
+                  <template #prepend-content><CIcon name="cil-credit-card"/></template>
+                </CInput>
+
+
                 <CInput
                   placeholder="Email"
                   prepend="@"
@@ -41,23 +98,31 @@
                 >
                   <template #prepend-content><CIcon name="cil-lock-locked"/></template>
                 </CInput>
+
+                
+                <div class="form-row form-group">
+                    
+                    
+                  <CCol sm="9" :class="'form-inline'" >
+                    <CInputRadio
+                      v-for="(option) in options"
+                      :key="option"
+                      :label="option"
+                      type="radio"
+                      :value="options_value[option]"
+                      :custom="true"
+                      :name="`option`"
+                      :checked="true"
+                      :inline="true"
+                      @click="sexe = option"
+                    />
+                  </CCol>
+
+
+                </div>
                 <CButton type="submit" color="success" block>Create Account</CButton>
               </CForm>
             </CCardBody>
-            <CCardFooter class="p-4">
-              <CRow>
-                <CCol col="6">
-                  <CButton block color="facebook">
-                    Facebook
-                  </CButton>
-                </CCol>
-                <CCol col="6">
-                  <CButton block color="twitter">
-                    Twitter
-                  </CButton>
-                </CCol>
-              </CRow>
-            </CCardFooter>
           </CCard>
         </CCol>
       </CRow>
@@ -71,9 +136,18 @@
       data() {
         return {
           name: '',
+          prenom : '',
+          date_naissance : '',
+          lieu_naissance : '',
+          adresse : '',
+          num_tel : '',
+          num_identite : '',
+          sexe : 'Male',
           email: '',
           password: '',
-          password_confirmation: ''
+          password_confirmation: '',
+      options: ['Female', 'Male'],
+      options_value: {Female : 'female', Male : 'male'},
         }
       },    
       methods: {
@@ -81,11 +155,25 @@
           var self = this;
           axios.post(  this.$apiAdress + '/api/register', {
             name: self.name,
+            prenom: self.prenom,
+            date_naissance : self.date_naissance,
+            lieu_naissance : self.lieu_naissance,
+            adresse : self.adresse,
+            num_tel : self.num_tel,
+            num_identite : self.num_identite,
+            sexe : self.options_value[self.sexe],
             email: self.email,
             password: self.password,
             password_confirmation: self.password_confirmation
           }).then(function (response) {
             self.name = '';
+            self.prenom = '';
+            self.sexe = '';
+            self.num_identite = '';
+            self.num_tel = '';
+            self.adresse = '';
+            self.lieu_naissance = '';
+            self.date_naissance = '';
             self.email = '';
             self.password = '';
             self.password_confirmation = '';
