@@ -18,8 +18,9 @@ class MenuEditController extends Controller
      */
     public function __construct()
     {
+        // dd('xx');
         $this->middleware('auth');
-        $this->middleware('admin');
+        $this->middleware('super');
     }
 
     /**

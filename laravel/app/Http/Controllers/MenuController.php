@@ -14,6 +14,7 @@ class MenuController extends Controller
      */
     public function index(Request $request)
     {
+        // dd('xx');
         try {
             $user = auth()->user();
             if($user && !empty($user)){
@@ -30,6 +31,7 @@ class MenuController extends Controller
             $menuName = 'sidebar menu';
         }
         $menus = new GetSidebarMenu();
+
         return response()->json( $menus->get( $roles, $menuName ) );
     }
 

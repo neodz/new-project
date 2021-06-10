@@ -19,7 +19,7 @@ class CreateUtilisateursTable extends Migration
             $table->string('nom');
             $table->string('prenom');
             $table->date('date_naissance')->nullable();
-            $table->date('lieu_naissance')->nullable();
+            $table->string('lieu_naissance')->nullable();
             $table->enum('sexe',['male','female']);
             $table->string('adresse')->nullable();
             $table->string('num_tel')->nullable();
