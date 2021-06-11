@@ -17,6 +17,23 @@ class User extends Authenticatable implements JWTSubject
     use HasRoles;
     use HasFactory;
 
+    public function utilisateur()
+    {
+        return $this->hasOne(Utilisateur::class);
+    }
+
+    public function admin()
+    {
+        return $this->hasOne(Admin::class);
+    }
+
+    public function evaluation()
+    {
+        return $this->hasMany(User::class);
+    }
+
+
+
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
@@ -35,7 +52,7 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
-    }    
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -67,10 +84,10 @@ class User extends Authenticatable implements JWTSubject
     protected $dates = [
         'deleted_at'
     ];
-    
+
     protected $guard_name = 'api';
 
-    protected $attributes = [ 
+    protected $attributes = [
         'menuroles' => 'user',
     ];
 
