@@ -105,7 +105,11 @@ const DeleteMenuElement = () => import('@/views/menuElements/DeleteMenuElement')
 const Media = () => import('@/views/media/Media')
 
 // my components 
-const Test = () => import('@/views/test/test')
+const Article = () => import('@/views/article/Articles')
+const CreateArticle = () => import('@/views/article/CreateArticle')
+const EditArticle = () => import('@/views/article/EditArticle')
+const DeleteArticle = () => import('@/views/article/DeleteArticle')
+const ArticleDetails = () => import('@/views/article/ArticleDetails')
 
 
 
@@ -304,6 +308,59 @@ function configRoutes () {
               component: DeleteMenuElement,
               meta:{
                 requiresAdmin: true
+              }
+            },
+          ]
+        },
+        
+        {
+          path: 'articles',
+          meta: { label: 'Articles'},
+          component: {
+            render (c) { return c('router-view') }
+          },
+          children: [
+            {
+              path: '',
+              component: Article,
+              meta:{
+                requiresUser: true
+              }
+            },
+            {
+              path: 'create',
+              meta: { label: 'Create Article' },
+              name: 'CreateArticle',
+              component: CreateArticle,
+              meta:{
+                requiresUser: true
+              }
+            },
+            {
+              path: ':id/edit',
+              meta: { label: 'Edit Article' },
+              name: 'EditArticle',
+              component: EditArticle,
+              meta:{
+                requiresUser: true
+              }
+            },
+            {
+              path: ':id/delete',
+              meta: { label: 'Delete Article' },
+              name: 'DeleteArticle',
+              component: DeleteArticle,
+              meta:{
+                requiresAdmin: true
+              }
+            },
+             {
+              path: ':id',
+              meta: { label: 'Article Details'},
+              name: 'Article Details',
+              component: ArticleDetails,
+              meta:{
+                requiresUser: true
               }
             },
           ]
