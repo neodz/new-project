@@ -17,7 +17,7 @@ class CreateArticlesTable extends Migration
 
             $table->id();
 
-            $table->enum('etat_article',['pending','accepted','rejected']);
+            $table->enum('etat_article',['pending','accepted','rejected'])->default('pending');
             $table->string('designation');
             $table->float('prix')->default(0);
             $table->integer('quantite')->default(1);

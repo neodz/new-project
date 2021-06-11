@@ -150,6 +150,12 @@ class MenusTableSeeder extends Seeder
             $this->insertLink('super', 'BREAD',    '/bread');
             $this->insertLink('super', 'Email',    '/email');
         $this->endDropdown();
+        
+        // user
+        $this->insertTitle('user', 'Explorer');
+        $this->insertLink('user', 'Mes article', '/articles', 'cil-list');
+        
+
 
         $this->insertTitle('super', 'Theme');
         $this->insertLink('super', 'Colors', '/colors', 'cil-drop');
@@ -218,6 +224,9 @@ class MenusTableSeeder extends Seeder
             $this->insertLink('super', 'BREAD',                   '/bread');
             $this->insertLink('super', 'E-mail',                  '/email');
         $this->endDropdown();
+
+        
+        
 
         $this->joinAllByTransaction(); ///   <===== Must by use on end of this seeder
     }

@@ -73,4 +73,11 @@ class User extends Authenticatable implements JWTSubject
     protected $attributes = [ 
         'menuroles' => 'user',
     ];
+
+
+    public function utilisateur(){
+        
+        return $this->hasOne(Utilisateur::class);
+
+    }
 }

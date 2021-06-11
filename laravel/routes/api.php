@@ -16,8 +16,11 @@ use Illuminate\Http\Request;
 Route::group(['middleware' => 'api'], function ($router) {
     // dd('xx');
     Route::get('menu', 'MenuController@index');
-    Route::get('article', 'ArticleController@index');
 
+    // user
+    //Route::get('article', 'ArticleController@index');
+    //Route::ress('articles', 'ArticleController@index');
+   
     Route::post('login', 'AuthController@login');
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
@@ -80,6 +83,11 @@ Route::group(['middleware' => 'api'], function ($router) {
         Route::resource('roles',        'RolesController');
         Route::get('/roles/move/move-up',      'RolesController@moveUp')->name('roles.up');
         Route::get('/roles/move/move-down',    'RolesController@moveDown')->name('roles.down');
+    });
+    Route::group(['middleware' => 'user'], function ($router) {
+
+        Route::resource('articles', 'ArticleController');
+ 
     });
 
 
