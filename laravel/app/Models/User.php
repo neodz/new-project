@@ -17,11 +17,6 @@ class User extends Authenticatable implements JWTSubject
     use HasRoles;
     use HasFactory;
 
-    public function utilisateur()
-    {
-        return $this->hasOne(Utilisateur::class);
-    }
-
     public function admin()
     {
         return $this->hasOne(Admin::class);

@@ -25,9 +25,9 @@
             :items-per-page="5"
             pagination
           >
-          <template #status="{item}">
+          <template #etat_article="{item}">
             <td>
-              <CBadge :color="getBadge(item.status)">{{ item.status }}</CBadge>
+              <CBadge :color="getBadge(item.etat_article)">{{ item.etat_article }}</CBadge>
             </td>
           </template>
           <template #show="{item}">
@@ -63,6 +63,11 @@ export default {
       items: [],
       fields: ['id', 'designation', 'etat_article', 'prix', 'category', 'methode_paiement', 'quantite','show', 'edit', 'delete'],
       currentPage: 1,
+      etat_article_class : {
+          accepted : 'success',
+          rejected : 'danger',
+          pending : 'warning'
+      },
       perPage: 5,
       totalRows: 0,
       you: null,
@@ -81,10 +86,12 @@ export default {
   },
   methods: {
     getBadge (status) {
-      return status === 'Active' ? 'success'
-        : status === 'Inactive' ? 'secondary'
-          : status === 'Pending' ? 'warning'
-            : status === 'Banned' ? 'danger' : 'primary'
+      return this.etat_article_class[status];
+
+      // return status === 'accepted' ? 'success'
+      //       : status === 'Inactive' ? 'secondary'
+      //       : status === 'pending' ? 'warning'
+      //       : status === 'rejected' ? 'danger' : 'primary'
     },
     ArticleLink (id) {
       return `Articles/${id.toString()}`
