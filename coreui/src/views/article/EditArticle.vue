@@ -99,7 +99,7 @@
 <script>
 import axios from 'axios'
 export default {
-  name: 'EditUser',
+  name: 'EditArticle',
   props: {
     caption: {
       type: String,
@@ -178,9 +178,16 @@ export default {
         .then(function (response) {
             self.message = 'Successfully updated article.';
             self.showAlert();
-        }).catch(function (error) {
-            console.log(error);
-            self.$router.push({ path: '/login' });
+        }).catch(function (error) { 
+              self.message = '';
+              for (let key in error.response.data.errors) {
+                if (error.response.data.errors.hasOwnProperty(key)) {
+                  self.message += error.response.data.errors[key][0] + '  ';
+                }
+              }
+              self.showAlert();
+
+              console.log(error);
         });
     },
     countDownChanged (dismissCountDown) {
@@ -192,6 +199,7 @@ export default {
   },
   mounted: function(){
     let self = this;
+
     axios.get(  this.$apiAdress + '/api/articles/' + self.$route.params.id + '/edit?token=' + localStorage.getItem("api_token"))
     .then(function (response) {
                 self.type_transaction =   response.data.type_transaction;

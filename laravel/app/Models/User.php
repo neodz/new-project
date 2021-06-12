@@ -17,14 +17,16 @@ class User extends Authenticatable implements JWTSubject
     use HasRoles;
     use HasFactory;
 
+    protected $appends = ['name', 'rate', 'viewer_rate'];
+
     public function admin()
     {
         return $this->hasOne(Admin::class);
     }
 
-    public function evaluation()
+    public function evaluations()
     {
-        return $this->hasMany(User::class);
+        return $this->hasMany(Evaluation::class, 'noted_user_id');
     }
 
 
@@ -87,9 +89,49 @@ class User extends Authenticatable implements JWTSubject
     ];
 
 
-    public function utilisateur(){
-        
-        return $this->hasOne(Utilisateur::class);
+    public function utilisateur()
+    {
 
+        return $this->hasOne(Utilisateur::class);
+    }
+
+    public function getNameAttribute()
+    {
+        $utilisateur = $this->utilisateur;
+        $admin = $this->admin;
+
+        $name = $utilisateur ? $utilisateur->nom . " " . $utilisateur->prenom : ($admin ? $admin->nom . " " . $admin->prenom : null);
+        return  $name;
+    }
+    public function getRateAttribute()
+    {
+        $count = $this->evaluations->count();
+        $rate = 0;
+
+        try {
+            $this->evaluations->map(function ($ev) use (&$rate) {
+                $rate += $ev->note_evaluation;
+            });
+
+            $rate = (int)$rate / $count;
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+
+        return $rate;
+    }
+
+
+    public function getViewerRateAttribute()
+    {
+        $eva = null;
+
+        try {
+            $you = auth()->user();
+            $eva = $this->evaluations()->where('noter_user_id', $you->id)->get()->first();
+         } catch (\Throwable $th) {
+        }
+
+        return $eva ? $eva->note_evaluation : 0;
     }
 }

@@ -17,31 +17,15 @@
     <CMenu/>
 
     <CHeaderNav class="mr-4">
-      <CHeaderNavItem class="d-md-down-none mx-2">
-        <CHeaderNavLink>
-          <CIcon name="cil-bell"/>
-        </CHeaderNavLink>
-      </CHeaderNavItem>
-      <CHeaderNavItem class="d-md-down-none mx-2">
-        <CHeaderNavLink>
-          <CIcon name="cil-list"/>
-        </CHeaderNavLink>
-      </CHeaderNavItem>
-      <CHeaderNavItem class="d-md-down-none mx-2">
-        <CHeaderNavLink>
-          <CIcon name="cil-envelope-open"/>
-        </CHeaderNavLink>
-      </CHeaderNavItem>
-      <TheHeaderDropdownAccnt/>
+      <TheHeaderDropdownAccnt v-if="connected"/>
     </CHeaderNav>
-    <CSubheader class="px-3">
-      <CBreadcrumbRouter class="border-0 mb-0"/>
-    </CSubheader>
+   
   </CHeader>
 </template>
 
 <script>
 import CMenu from './Menu'
+import axios from 'axios'
 import TheHeaderDropdownAccnt from './TheHeaderDropdownAccnt'
 
 export default {
@@ -50,5 +34,25 @@ export default {
     TheHeaderDropdownAccnt,
     CMenu
   }
+  ,
+ data: () => {
+    return {
+      connected: false,
+    }
+  },
+  methods: {
+        isLogin(){
+              let self = this; 
+            axios.post(this.$apiAdress + '/api/isLogin?token=' + localStorage.getItem("api_token"),{})
+            .then(function (response) {
+                self.connected = true;
+            }).catch(function (error) {
+                self.connected = false;
+            });
+        }
+  },
+  mounted() {
+    this.isLogin();
+  },
 }
 </script>

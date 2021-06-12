@@ -120,4 +120,9 @@ class AuthController extends Controller
             'roles' => $user->roles,
         ]);
     }
+
+    public function isLogin()
+    {
+        return response()->json();
+    }
 }

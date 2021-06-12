@@ -192,7 +192,7 @@ export default {
             self.message = 'Successfully created article.';
             self.showAlert();
         }).catch(function (error) {
-            if(error.response.data.message == 'The given data was invalid.'){
+            // if(error.response.data.message == 'The given data was invalid.'){
               self.message = '';
               for (let key in error.response.data.errors) {
                 if (error.response.data.errors.hasOwnProperty(key)) {
@@ -200,10 +200,10 @@ export default {
                 }
               }
               self.showAlert();
-            }else{
+            // }else{
               console.log(error);
               // self.$router.push({ path: '/login' }); 
-            }
+            // }
         });
     },
     countDownChanged (dismissCountDown) {

@@ -65,6 +65,7 @@ export default {
         }).catch(function (error) {
             console.log(error);
             self.$router.push({ path: '/login' });
+            
         });
     },
     countDownChanged (dismissCountDown) {

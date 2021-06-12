@@ -85,6 +85,7 @@ class UsersAndNotesSeeder extends Seeder
             'menuroles' => 'user,admin,super',
             'status' => 'Active'
         ]);
+
         $user->assignRole('user');
         $user->assignRole($roleAdmin);
         $user->assignRole($roleSuper);
@@ -100,6 +101,18 @@ class UsersAndNotesSeeder extends Seeder
         ]);
         $user->assignRole('user');
         $user->assignRole($roleAdmin);
+
+        DB::table('admins')->insert([
+            'prenom'         => $faker->firstName,
+            'nom'       => $faker->lastName,
+            'date_naissance'     => $faker->date(),
+            'lieu_naissance'     => 'mila',
+            'sexe' => 'male',
+            'adresse'      => $faker->address,
+            'num_tel'      => $faker->phoneNumber,
+            'user_id'      => $user->id,
+        ]);
+
         for($i = 0; $i<$numberOfUsers; $i++){
             $user = User::create([
                 'name' => $faker->name(),
@@ -113,6 +126,8 @@ class UsersAndNotesSeeder extends Seeder
             $user->assignRole('user');
             array_push($usersIds, $user->id);
         }
+
+
         /*  insert notes  */
         for($i = 0; $i<$numberOfNotes; $i++){
             $noteType = $faker->word();
@@ -126,6 +141,20 @@ class UsersAndNotesSeeder extends Seeder
                 'note_type'     => $noteType,
                 'applies_to_date' => $faker->date(),
                 'users_id'      => $usersIds[random_int(0,$numberOfUsers-1)]
+            ]);
+        }
+
+        foreach($usersIds as $i){
+            
+            DB::table('utilisateurs')->insert([
+                'prenom'         => $faker->firstName,
+                'nom'       => $faker->lastName,
+                'date_naissance'     => $faker->date(),
+                'lieu_naissance'     => 'mila',
+                'sexe' => 'male',
+                'adresse'      => $faker->address,
+                'num_tel'      => $faker->phoneNumber,
+                'user_id'      => $i,
             ]);
         }
     }

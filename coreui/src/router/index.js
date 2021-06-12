@@ -111,6 +111,11 @@ const EditArticle = () => import('@/views/article/EditArticle')
 const DeleteArticle = () => import('@/views/article/DeleteArticle')
 const ArticleDetails = () => import('@/views/article/ArticleDetails')
 
+// profile
+const UserProfile = () => import('@/views/user/profile')
+const EditProfile = () => import('@/views/user/EditProfile')
+const ShowProfile = () => import('@/views/user/ShowProfile')
+
 
 
 Vue.use(Router)
@@ -359,6 +364,39 @@ function configRoutes () {
               meta: { label: 'Article Details'},
               name: 'Article Details',
               component: ArticleDetails,
+              meta:{
+                requiresUser: true
+              }
+            },
+          ]
+        },
+        {
+          path: 'profile',
+          meta: { label: 'Profile'},
+          component: {
+            render (c) { return c('router-view') }
+          },
+          children: [
+            {
+              path: '',
+              component: UserProfile,
+              meta:{
+                requiresUser: true
+              }
+            },
+            {
+              path: ':id/edit',
+              meta: { label: 'Edit Profile' },
+              name: 'EditProfile',
+              component: EditProfile,
+              meta:{
+                requiresUser: true
+              }
+            },{
+              path: ':id',
+              meta: { label: 'Show Profile'},
+              name: 'Show Profile',
+              component: ShowProfile,
               meta:{
                 requiresUser: true
               }

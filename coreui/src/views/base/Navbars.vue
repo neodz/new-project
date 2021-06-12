@@ -115,7 +115,7 @@
                 <CDropdownItem>EN</CDropdownItem>
                 <CDropdownItem>ES</CDropdownItem>
                 <CDropdownItem>RU</CDropdownItem>
-                <CDropdownItem>FA</CDropdownItem>
+                <CDropdownItem>FA</CDropdownItem> 
               </CDropdown>
               <CDropdown
                 toggler-text="User"
