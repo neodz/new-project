@@ -116,6 +116,27 @@ const UserProfile = () => import('@/views/user/profile')
 const EditProfile = () => import('@/views/user/EditProfile')
 const ShowProfile = () => import('@/views/user/ShowProfile')
 
+// transactions
+// locations
+const Locations = () => import('@/views/location/Locations')
+const CreateLocation = () => import('@/views/location/CreateLocation')
+const EditLocation = () => import('@/views/location/EditLocation')
+const DeleteLocation = () => import('@/views/location/DeleteLocation')
+const LocationDetails = () => import('@/views/location/LocationDetails')
+
+// exchanges
+const Exchanges = () => import('@/views/exchange/Exchanges')
+const CreateExchange = () => import('@/views/exchange/CreateExchange')
+const EditExchange = () => import('@/views/exchange/EditExchange')
+const DeleteExchange = () => import('@/views/exchange/DeleteExchange')
+const ExchangeDetails = () => import('@/views/exchange/ExchangeDetails')
+// achat
+const Achats = () => import('@/views/achat/Achats') 
+const CreateAchat = () => import('@/views/achat/CreateAchat')
+const EditAchat = () => import('@/views/achat/EditAchat')
+const DeleteAchat = () => import('@/views/achat/DeleteAchat')
+const AchatDetails = () => import('@/views/achat/AchatDetails')
+
 
 
 Vue.use(Router)
@@ -364,6 +385,165 @@ function configRoutes () {
               meta: { label: 'Article Details'},
               name: 'Article Details',
               component: ArticleDetails,
+              meta:{
+                requiresUser: true
+              }
+            },
+          ]
+        },
+
+        {
+          path: 'achats',
+          meta: { label: 'Achats'},
+          component: {
+            render (c) { return c('router-view') }
+          },
+          children: [
+            {
+              path: '',
+              component: Achats,
+              meta:{
+                requiresUser: true
+              }
+            },
+            {
+              path: 'create',
+              meta: { label: 'Create Achat' },
+              name: 'CreateAchat',
+              component: CreateAchat,
+              meta:{
+                requiresUser: true
+              }
+            },
+            {
+              path: ':id/edit',
+              meta: { label: 'Edit Achat' },
+              name: 'EditAchat',
+              component: EditAchat,
+              meta:{
+                requiresUser: true
+              }
+            },
+            {
+              path: ':id/delete',
+              meta: { label: 'Delete Achat' },
+              name: 'DeleteAchat',
+              component: DeleteAchat,
+              meta:{
+                requiresAdmin: true
+              }
+            },
+             {
+              path: ':id',
+              meta: { label: 'Achat Details'},
+              name: 'Achat Details',
+              component: AchatDetails,
+              meta:{
+                requiresUser: true
+              }
+            },
+          ]
+        },
+        
+        {
+          path: 'exchanges',
+          meta: { label: 'Exchanges'},
+          component: {
+            render (c) { return c('router-view') }
+          },
+          children: [
+            {
+              path: '',
+              component: Exchanges,
+              meta:{
+                requiresUser: true
+              }
+            },
+            {
+              path: 'create',
+              meta: { label: 'Create Exchange' },
+              name: 'CreateExchange',
+              component: CreateExchange,
+              meta:{
+                requiresUser: true
+              }
+            },
+            {
+              path: ':id/edit',
+              meta: { label: 'Edit Exchange' },
+              name: 'EditExchange',
+              component: EditExchange,
+              meta:{
+                requiresUser: true
+              }
+            },
+            {
+              path: ':id/delete',
+              meta: { label: 'Delete Exchange' },
+              name: 'DeleteExchange',
+              component: DeleteExchange,
+              meta:{
+                requiresAdmin: true
+              }
+            },
+             {
+              path: ':id',
+              meta: { label: 'Exchange Details'},
+              name: 'Exchange Details',
+              component: ExchangeDetails,
+              meta:{
+                requiresUser: true
+              }
+            },
+          ]
+        },
+
+        {
+          path: 'locations',
+          meta: { label: 'Locations'},
+          component: {
+            render (c) { return c('router-view') }
+          },
+          children: [
+            {
+              path: '',
+              component: Locations,
+              meta:{
+                requiresUser: true
+              }
+            },
+            {
+              path: 'create',
+              meta: { label: 'Create Location' },
+              name: 'CreateLocation',
+              component: CreateLocation,
+              meta:{
+                requiresUser: true
+              }
+            },
+            {
+              path: ':id/edit',
+              meta: { label: 'Edit Location' },
+              name: 'EditLocation',
+              component: EditLocation,
+              meta:{
+                requiresUser: true
+              }
+            },
+            {
+              path: ':id/delete',
+              meta: { label: 'Delete Location' },
+              name: 'DeleteLocation',
+              component: DeleteLocation,
+              meta:{
+                requiresAdmin: true
+              }
+            },
+             {
+              path: ':id',
+              meta: { label: 'Location Details'},
+              name: 'Location Details',
+              component: LocationDetails,
               meta:{
                 requiresUser: true
               }

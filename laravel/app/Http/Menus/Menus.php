@@ -80,6 +80,11 @@ class Menus implements MenuInterface{
     private function getUserMenu(){
         $this->mb->addLink('Dashboard', '/', 'cui-speedometer');
         $this->mb->addLink('Mes article', '/articles', 'cil-list');
+        $this->mb->beginDropdown( 'Mes Transactions', '/transactions', 'cil-money');
+                     $this->mb->addLink('Locations',    '/locations');
+                     $this->mb->addLink( 'Articles',    '/exchanges');
+                     $this->mb->addLink( 'Transaction Achats',    '/achats');
+         $this->mb->endDropdown();
         // $this->mb->addTitle('Theme');
         // $this->mb->addLink('Colors', '/colors', 'cui-drop1');
         // $this->mb->addLink('Typography', '/typography', 'cui-pencil');

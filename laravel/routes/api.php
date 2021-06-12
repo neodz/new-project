@@ -25,7 +25,8 @@ Route::group(['middleware' => 'api'], function ($router) {
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
     Route::post('isLogin', 'AuthController@isLogin');
-    Route::post('register', 'AuthController@register'); 
+    Route::post('register', 'AuthController@register');  
+    
 
     Route::resource('profile', 'ProfileController');
     Route::post('profile/evaluer', 'ProfileController@evaluer');
@@ -91,6 +92,9 @@ Route::group(['middleware' => 'api'], function ($router) {
     Route::group(['middleware' => 'user'], function ($router) {
 
         Route::resource('articles', 'ArticleController');
+        Route::resource('locations', 'LocationController');
+        Route::resource('exchanges', 'ExchangeController');
+        Route::resource('achats', 'TransactionAchatController');
  
     });
 

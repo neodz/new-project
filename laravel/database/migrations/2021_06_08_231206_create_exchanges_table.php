@@ -19,10 +19,12 @@ class CreateExchangesTable extends Migration
             $table->string('element_echange');
             $table->string('adresse')->nullable();
             $table->string('marque')->nullable();
-
+            
             $table->string('photo')->default('');
             $table->string('description')->nullable();
 
+            $table->enum('etat_exchange',['pending','accepted','rejected'])->default('pending');
+           
             // article id
             $table->unsignedBigInteger('article_id');
             $table->foreign('article_id')->references('id')->on('articles')->onDelete('cascade');

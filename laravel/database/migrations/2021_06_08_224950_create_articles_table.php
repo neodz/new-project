@@ -20,7 +20,7 @@ class CreateArticlesTable extends Migration
             $table->enum('etat_article',['pending','accepted','rejected'])->default('pending');
             $table->string('designation');
             $table->float('prix')->default(0);
-            $table->integer('quantite')->default(1);
+            $table->integer('quantite')->default(1); 
             $table->enum('type_transaction',['exchange','location','achter']);
             $table->string('adresse')->nullable();
             $table->string('marque')->nullable();

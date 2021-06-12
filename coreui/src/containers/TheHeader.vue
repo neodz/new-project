@@ -10,6 +10,7 @@
       class="ml-3 d-md-down-none"
       @click="$store.commit('toggleSidebarDesktop')"
     />
+
     <CHeaderBrand class="mx-auto d-lg-none" to="/">
       <CIcon name="logo" height="48" alt="Logo"/>
     </CHeaderBrand>
@@ -19,6 +20,9 @@
     <CHeaderNav class="mr-4">
       <TheHeaderDropdownAccnt v-if="connected"/>
     </CHeaderNav>
+    <CSubheader class="px-3">
+      <CBreadcrumbRouter class="border-0 mb-0"/>
+    </CSubheader>
    
   </CHeader>
 </template>

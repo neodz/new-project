@@ -83,7 +83,7 @@ class ProfileController extends Controller
             'nom'      => 'required',
             'prenom'      => 'required',
             'email'     => 'required|email',
-            'password'  => 'min:4|confirmed',
+            'password'  => 'confirmed',
         ];
 
         $user = User::where('id', $id)->get()->first();

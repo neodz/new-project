@@ -20,7 +20,8 @@ class CreateLocationsTable extends Migration
             $table->integer('quantite')->default(1);
             $table->date('date_entrer');
             $table->date('date_sortie');
-
+            $table->enum('etat_location',['pending','accepted','rejected'])->default('pending');
+           
             // article id
             $table->unsignedBigInteger('article_id');
             $table->foreign('article_id')->references('id')->on('articles')->onDelete('cascade');
