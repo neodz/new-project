@@ -39,36 +39,24 @@ class LocationController extends Controller
     public function store(Request $request)
     {
 
-        $you = auth()->user();
-
         $request->validate([
-            'type_transaction' => 'in:achter,location,exchange',
-            'category' => 'in:cat1,cat2,cat3,cat4',
-            'methode_paiement' => 'in:Visa card,Master card,Edahabia',
-            'designation' => 'required|min:1|max:128',
+            'date_entrer' => 'required|date|after_or_equal:date_sortie',
+            'date_sortie' => 'required|date',
+            'quantite' => 'required|integer'
         ]);
 
+        $location = new Location();
 
-        
-        $article = new Article();
-        $article->etat_article = "pending";
-        $article->designation = $request->designation;
-        $article->prix = $request->prix ? $request->prix : 0;
-        $article->quantite = $request->quantite ? $request->quantite : 1;
-        $article->type_transaction = $request->type_transaction;
-        $article->adresse = $request->adresse;
-        $article->marque = $request->marque;
-        $article->category = $request->category;
-        $article->methode_paiement = $request->methode_paiement;
-        $article->description = $request->description? $request->description : "";
-        $article->tarif_livraison = $request->tarif_livraison ? $request->tarif_livraison : 0;
-        $article->utilisateur_id = $you->utilisateur->id;
+        $location->etat_location = "pending";
+        $location->date_entrer = $request->date_entrer;
+        $location->date_sortie = $request->date_sortie;
+        $location->quantite = $request->quantite;
+        $location->article_id = $request->article_id;
+        $location->utilisateur_id = $request->utilisateur_id;
+        $location->save();
 
-        $this->setUpPhoto($request,$article);
-
-        $article->save();
-        //$request->session()->flash('message', 'Successfully created role');
         return response()->json( ['status' => 'success'] );
+
     }
 
 

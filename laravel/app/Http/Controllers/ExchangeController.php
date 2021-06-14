@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use App\Models\Exchange;
 use Illuminate\Http\Request;
 
@@ -33,6 +34,76 @@ class ExchangeController extends Controller
         return response()->json( compact('exchanges', 'you') );
     }
 
+
+
+    public function index_by_article(Request $request){
+        
+        $article = Article::where('id',$request->id)->get()->first();
+        
+        $result = [];
+
+        if($article->type_transaction==="exchange") $result = $article->exchanges()->with(['utilisateur','article'])->get();
+        if($article->type_transaction==="location") $result = $article->locations()->with(['utilisateur','article'])->get();
+        if($article->type_transaction==="achter") $result = $article->transactionAchats()->with(['utilisateur','article'])->get();
+
+        // $exchang;es = Exchange::where('article_id',$id)->with('article')->get();
+
+        return response()->json( ['transactions' => $result,'article' => $article] );
+    }
+
+
+    public function getTransaction(Request $request,$id){
+        
+        $article = Article::where('id',$request->article_id)->get()->first();
+        // $article = Article::where('id',$request->id)->get()->first();
+        
+        $result = [];
+
+        if($article->type_transaction==="exchange") $result = $article->exchanges()->where('id',$id)->with(['utilisateur','article'])->get()->first();
+        if($article->type_transaction==="location") $result = $article->locations()->where('id',$id)->with(['utilisateur','article'])->get()->first();
+        if($article->type_transaction==="achter") $result = $article->transactionAchats()->where('id',$id)->with(['utilisateur','article'])->get()->first();
+
+        // $exchang;es = Exchange::where('article_id',$id)->with('article')->get();
+
+        return response()->json( ['transaction' => $result,'article' => $article] );
+    }
+
+
+    public function updateTransaction(Request $request,$id){
+        
+        $article = Article::where('id',$request->article_id)->get()->first();
+        // $article = Article::where('id',$request->id)->get()->first();
+        
+        $result = [];
+
+        if($article->type_transaction==="exchange") 
+        {
+            $result = $article->exchanges()->where('id',$id)->with(['utilisateur','article'])->get()->first();
+        
+            $result->etat_exchange = $request->etat;
+        }
+        if($article->type_transaction==="location")
+        {
+            $result = $article->locations()->where('id',$id)->with(['utilisateur','article'])->get()->first();
+            $result->etat_location = $request->etat;
+
+        }
+        // if($article->type_transaction==="achter") 
+        // {
+        //     $result = $article->transactionAchats()->where('id',$id)->with(['utilisateur','article'])->get()->first();
+
+        // }
+        
+        $result->save();
+
+        // $exchang;es = Exchange::where('article_id',$id)->with('article')->get();
+
+        return response()->json( ['transaction' => $result,'article' => $article] );
+    }
+
+
+    
+
     /**
      * Store a newly created resource in storage.
      *
@@ -41,35 +112,26 @@ class ExchangeController extends Controller
     public function store(Request $request)
     {
 
-        $you = auth()->user();
-
         $request->validate([
-            'type_transaction' => 'in:achter,location,exchange',
-            'category' => 'in:cat1,cat2,cat3,cat4',
-            'methode_paiement' => 'in:Visa card,Master card,Edahabia',
-            'designation' => 'required|min:1|max:128',
+            'element_echange' => 'required|string|min:4',
+            'adresse' => 'required|string',
+            'description' => 'required|string'
         ]);
 
+        $exchange = new Exchange();
 
+        $exchange->etat_exchange = "pending";
+
+        $exchange->element_echange = $request->element_echange;
+        $exchange->article_id = $request->article_id;
+        $exchange->utilisateur_id = $request->utilisateur_id;
+        $exchange->adresse = $request->adresse;
+        $exchange->description = $request->description;
+
+        $this->setUpPhoto($request,$exchange);
+
+        $exchange->save();
         
-        $article = new Article();
-        $article->etat_article = "pending";
-        $article->designation = $request->designation;
-        $article->prix = $request->prix ? $request->prix : 0;
-        $article->quantite = $request->quantite ? $request->quantite : 1;
-        $article->type_transaction = $request->type_transaction;
-        $article->adresse = $request->adresse;
-        $article->marque = $request->marque;
-        $article->category = $request->category;
-        $article->methode_paiement = $request->methode_paiement;
-        $article->description = $request->description? $request->description : "";
-        $article->tarif_livraison = $request->tarif_livraison ? $request->tarif_livraison : 0;
-        $article->utilisateur_id = $you->utilisateur->id;
-
-        $this->setUpPhoto($request,$article);
-
-        $article->save();
-        //$request->session()->flash('message', 'Successfully created role');
         return response()->json( ['status' => 'success'] );
     }
 

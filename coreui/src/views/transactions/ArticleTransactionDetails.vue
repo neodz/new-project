@@ -5,10 +5,10 @@
         <CCardHeader v-if="original_items">
            <p>Article id :  {{ $route.params.id }}</p>
                 
-          <div v-if="auth && (auth.utilisateur.id===original_items.utilisateur_id)"><CButton color="primary" @click="setTransaction()" v-if="original_items.type_transaction==='exchange'" >Toutes exchanges transactions</CButton>
+          <CButton color="primary" @click="setTransaction()" v-if="original_items.type_transaction==='exchange'" >Toutes exchanges transactions</CButton>
           <CButton color="primary" @click="setTransaction()" v-if="original_items.type_transaction==='location'">Toutes locations transactions</CButton>
           <CButton color="primary" @click="setTransaction()" v-if="original_items.type_transaction==='achter'">Toutes achats transactions</CButton>
-        </div>
+        
         </CCardHeader>
         <CCardBody v-if="auth">
           <CDataTable 
@@ -25,6 +25,8 @@
         </CCardBody>
         <CCardFooter>
           <CButton color="primary" @click="goBack">Back</CButton>
+          <CButton v-if="original_items.etat==='pending'" color="success" @click="updateTransaction('accepted')">Accepter</CButton>
+          <CButton v-if="original_items.etat==='pending'" color="danger" @click="updateTransaction('rejected')">Refuser</CButton>
         </CCardFooter>
       </CCard>
      
@@ -34,28 +36,17 @@
        <CCard>
         <CCardHeader>
           <CIcon name="cil-justify-center"/>
-          <strong> Article Poster</strong>
-          
-              <CButton v-if="auth && !original_items.viewer_transaction && auth.utilisateur.id!==original_items.utilisateur_id && original_items.type_transaction==='location'" color="primary" @click="setAction('location')"  class="mb-3 float-right">Louer Article</CButton>
-              <CButton v-if="auth && original_items.viewer_transaction && auth.utilisateur.id!==original_items.utilisateur_id && original_items.type_transaction==='location'" color="primary" @click="setEditAction('location')"  class="mb-3 float-right">Edit location</CButton>
-              <!-- <CButton v-if="article && article.viewer_transaction && auth && auth.utilisateur.id!==original_items.utilisateur_id && original_items.type_transaction==='location'" color="primary"  class="mb-3 float-right">Louer Article</CButton> -->
-              <CButton v-if="auth && !original_items.viewer_transaction && auth.utilisateur.id!==original_items.utilisateur_id &&original_items.type_transaction==='exchange'" color="primary" @click="setAction('exchange')" class="mb-3 float-right">Exchange Article</CButton>
-              <CButton v-if="auth && original_items.viewer_transaction && auth.utilisateur.id!==original_items.utilisateur_id &&original_items.type_transaction==='exchange'" color="primary" @click="setEditAction('exchange')" class="mb-3 float-right">Edit Exchange</CButton>
-              
-              
-              <CButton v-if="auth && auth.utilisateur.id!==original_items.utilisateur_id && original_items.type_transaction==='achter'" color="primary"  @click="setAction('achat')"  class="mb-3 float-right">Achter Article</CButton>
-
+          <strong> Article Exchange Poster</strong>
         </CCardHeader>
         <CCardBody>
           <CCarousel
-            arrows
             indicators
             animate
             height="500px"
              >
            
             <CCarouselItem
-            :image="original_items.photo"
+            :image="photo"
             />
 
           </CCarousel>
@@ -75,31 +66,89 @@ export default {
   data: () => {
     return {
       items: [],
+      article: [],
       original_items: [],
+
       except : [
-        'achter_income',
-        'transaction_achats',
-        'achter_income',
+        'article',
+        'utilisateur',
+        'utilisateur_id',
         'photo_url',
         'photo',
-        'viewer_transaction'
+        'viewer_transaction',
+        'etat'
       ],
       fields: [
         {key: 'key'},
         {key: 'value'},
       ],
+
+      showMessage: false,
+        message: '',
+        dismissSecs: 7,
+        dismissCountDown: 0,
+        showDismissibleAlert: false
     }
   },
   computed : {
     
     ...mapGetters({
         auth : 'getAuth'
-    })
-    // photo() {
-    //   return this.original_items.find(item => (item==="photo"));
-    // }
+    }),
+    photo() {
+
+      if(!this.original_items) return null;
+
+      return this.original_items.photo ? this.original_items.photo : this.article.photo_url;
+
+    }
   },
   methods: {
+    
+    countDownChanged (dismissCountDown) {
+      this.dismissCountDown = dismissCountDown
+    },
+    showAlert () {
+      this.dismissCountDown = this.dismissSecs
+    },
+    // refuserTransaction(){
+
+    //     this.updateTransaction('')
+    // },
+    // accepterTransaction(){
+    // },
+    updateTransaction(etat){
+        let self = this;
+    axios.post(  this.$apiAdress + '/api/articletransactions/'+self.$route.params.id.toString()+'/transaction/?token=' + localStorage.getItem("api_token"),
+    {
+        _method: 'PUT',
+        // id : self.$route.params.id.toString(),
+        article_id : self.$route.params.article_id.toString(),
+        etat : etat
+    })
+    .then(function (response) {
+      self.original_items = response.data.transaction;
+      self.article = response.data.article;
+      const items = Object.entries(response.data.transaction);
+      self.items = items.map(([key, value]) => { return {key: key, value: value}}).filter( item => !self.except.includes(item.key));
+      // self.items = self.items;  
+      self.message = `Successfully ${etat} article.`;
+      self.showAlert();    
+    }).catch(function (error) {
+      
+              self.message = '';
+              for (let key in error.response.data.errors) {
+                if (error.response.data.errors.hasOwnProperty(key)) {
+                  self.message += error.response.data.errors[key][0] + '  ';
+                }
+              }
+              self.showAlert();
+
+              console.log(error);
+
+      self.$router.push({ path: '/login' });
+    });
+    },
     setAction(action){
            if(action==="exchange")this.$router.push({path: `/exchanges/create/${this.$route.params.id.toString()}`});
            if(action==="location")this.$router.push({path: `/locations/create/${this.$route.params.id.toString()}`});
@@ -127,10 +176,15 @@ export default {
   },
   mounted: function(){
     let self = this;
-    axios.get(  this.$apiAdress + '/api/articles/' + self.$route.params.id + '?token=' + localStorage.getItem("api_token"))
+    axios.post(  this.$apiAdress + '/api/articletransactions/'+self.$route.params.id.toString()+'/transaction/?token=' + localStorage.getItem("api_token"),
+    {
+        // id : self.$route.params.id.toString(),
+        article_id : self.$route.params.article_id.toString()
+    })
     .then(function (response) {
-      self.original_items = response.data;
-      const items = Object.entries(response.data);
+      self.original_items = response.data.transaction;
+      self.article = response.data.article;
+      const items = Object.entries(response.data.transaction);
       self.items = items.map(([key, value]) => { return {key: key, value: value}}).filter( item => !self.except.includes(item.key));
       // self.items = self.items;      
     }).catch(function (error) {

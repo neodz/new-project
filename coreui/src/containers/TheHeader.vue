@@ -50,8 +50,12 @@ export default {
             axios.post(this.$apiAdress + '/api/isLogin?token=' + localStorage.getItem("api_token"),{})
             .then(function (response) {
                 self.connected = true;
+                self.$store.dispatch('_setAuth',response.data.user);
+
             }).catch(function (error) {
                 self.connected = false;
+                
+                self.$store.dispatch('_setAuth',null);
             });
         }
   },

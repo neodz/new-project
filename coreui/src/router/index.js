@@ -137,6 +137,14 @@ const EditAchat = () => import('@/views/achat/EditAchat')
 const DeleteAchat = () => import('@/views/achat/DeleteAchat')
 const AchatDetails = () => import('@/views/achat/AchatDetails')
 
+// 
+
+const ArticleTransactions = () => import('@/views/transactions/ArticleTransactions') 
+const EditArticleExchanges = () => import('@/views/transactions/EditArticleExchanges') 
+const ArticleTransactionDetails = () => import('@/views/transactions/ArticleTransactionDetails') 
+// const EditAchat = () => import('@/views/achat/EditAchat')
+// const DeleteAchat = () => import('@/views/achat/DeleteAchat')
+// const AchatDetails = () => import('@/views/achat/AchatDetails')
 
 
 Vue.use(Router)
@@ -266,6 +274,7 @@ function configRoutes () {
                 requiresAdmin: true
               }
             },
+            
             {
               path: ':id/edit',
               meta: { label: 'Edit Menu' },
@@ -338,7 +347,6 @@ function configRoutes () {
             },
           ]
         },
-        
         {
           path: 'articles',
           meta: { label: 'Articles'},
@@ -393,6 +401,50 @@ function configRoutes () {
         },
 
         {
+          path: 'articletransactions/:id',
+          meta: { label: 'Article Transactions'},
+          component: {
+            render (c) { return c('router-view') }
+          },
+          children: [
+            {
+              path: '',
+              component: ArticleTransactions,
+              meta:{
+                requiresUser: true
+              }
+            },
+            {
+              path: ':id/edit',
+              meta: { label: 'Edit article exchanges' },
+              name: 'ArticleExchanges',
+              component: EditArticleExchanges,
+              meta:{
+                requiresUser: true
+              }
+            },
+            {
+              path: ':id/delete',
+              meta: { label: 'Delete Article' },
+              name: 'DeleteArticle',
+              component: DeleteArticle,
+              meta:{
+                requiresAdmin: true
+              }
+            },
+             {
+              path: 'transaction/:article_id',
+              meta: { label: 'Article Transactions Details'},
+              name: 'Article Transactions Details',
+              component: ArticleTransactionDetails,
+              meta:{
+                requiresUser: true
+              }
+            },
+          ]
+        },
+
+        { 
           path: 'achats',
           meta: { label: 'Achats'},
           component: {
@@ -407,7 +459,7 @@ function configRoutes () {
               }
             },
             {
-              path: 'create',
+              path: 'create/:id',
               meta: { label: 'Create Achat' },
               name: 'CreateAchat',
               component: CreateAchat,
@@ -460,7 +512,7 @@ function configRoutes () {
               }
             },
             {
-              path: 'create',
+              path: 'create/:id',
               meta: { label: 'Create Exchange' },
               name: 'CreateExchange',
               component: CreateExchange,
@@ -513,7 +565,7 @@ function configRoutes () {
               }
             },
             {
-              path: 'create',
+              path: 'create/:id',
               meta: { label: 'Create Location' },
               name: 'CreateLocation',
               component: CreateLocation,

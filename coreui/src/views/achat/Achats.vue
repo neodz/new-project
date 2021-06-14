@@ -27,7 +27,7 @@
           >
           <template #article_id="{item}">
             <td>
-              <p @click="showArticle( item.id )">{{ item.article.designation }}</p>
+              <p @click="showArticle( item.article.id )">{{ item.article.designation }}</p>
             </td>
           </template>
           <template #delete="{item}">
@@ -71,7 +71,7 @@ export default {
   },
   methods: {
      ArticleLink (id) {
-      return `Articles/${id.toString()}`
+      return `/Articles/${id.toString()}`
     },
      showArticle ( id ) {
       const ArticleLink = this.ArticleLink( id );

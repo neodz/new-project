@@ -26,7 +26,11 @@ Route::group(['middleware' => 'api'], function ($router) {
     Route::post('refresh', 'AuthController@refresh');
     Route::post('isLogin', 'AuthController@isLogin');
     Route::post('register', 'AuthController@register');  
+
+    Route::post('acceptedarticles', 'ArticleController@acceptedArticles');  
     
+    
+
 
     Route::resource('profile', 'ProfileController');
     Route::post('profile/evaluer', 'ProfileController@evaluer');
@@ -95,6 +99,10 @@ Route::group(['middleware' => 'api'], function ($router) {
         Route::resource('locations', 'LocationController');
         Route::resource('exchanges', 'ExchangeController');
         Route::resource('achats', 'TransactionAchatController');
+
+        Route::post('articletransactions', 'ExchangeController@index_by_article');
+        Route::post('articletransactions/{id}/transaction', 'ExchangeController@getTransaction');
+        Route::put('articletransactions/{id}/transaction', 'ExchangeController@updateTransaction');
  
     });
 

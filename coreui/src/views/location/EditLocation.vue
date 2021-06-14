@@ -51,7 +51,7 @@
             arrows
             indicators
             animate
-            height="400px"
+            height="500px"
              >
            
             <CCarouselItem

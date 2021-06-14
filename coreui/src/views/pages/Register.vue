@@ -8,6 +8,13 @@
               <CForm @submit.prevent="register" method="POST">
                 <h1>S'inscrire</h1>
                 <p class="text-muted">Créez votre compte</p>
+                <CAlert
+                  :show.sync="dismissCountDown"
+                  color="primary"
+                  fade
+                >
+                  ({{dismissCountDown}}) {{ message }}
+                </CAlert>
                 <CInput
                   placeholder="Nom"
                   prependHtml="<i class='cui-user'></i>"
@@ -148,9 +155,29 @@
           password_confirmation: '',
       options: ['Female', 'Male'],
       options_value: {Female : 'female', Male : 'male'},
+
+      
+      created : false,
+      showMessage: false,
+      message: '',
+      dismissSecs: 7,
+      dismissCountDown: 0,
+      showDismissibleAlert: false
         }
-      },    
+      },  
+       watch: {
+      dismissCountDown (newV,oldV){
+        if(newV===0 && this.created)
+        this.$router.push({ path: "/login" });
+      }
+    }, 
       methods: {
+        countDownChanged (dismissCountDown) {
+            this.dismissCountDown = dismissCountDown
+          },
+          showAlert () {
+            this.dismissCountDown = this.dismissSecs
+          },
         register() {
           var self = this;
           axios.post(  this.$apiAdress + '/api/register', {
@@ -177,11 +204,27 @@
             self.email = '';
             self.password = '';
             self.password_confirmation = '';
+            self.created = true;
             console.log(response);
-            self.$router.push({ path: '/login' });
+            self.dismissSecs = 3;
+
+            self.message = "Votre compte créé avec succès vous serez redirigé vers la page de connexion...";
+
+              self.showAlert();
+            // self.$router.push({ path: '/login' });
           })
           .catch(function (error) {
-            console.log(error);
+              self.message = '';
+              for (let key in error.response.data.errors) {
+                if (error.response.data.errors.hasOwnProperty(key)) {
+                  self.message += error.response.data.errors[key][0] + '  ';
+                }
+              }
+              
+              self.created = false;
+              self.showAlert();
+            // }else{
+              console.log(error);
           });
   
         }

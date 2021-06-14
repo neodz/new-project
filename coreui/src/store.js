@@ -4,7 +4,8 @@ Vue.use(Vuex)
 
 const state = {
   sidebarShow: 'responsive',
-  sidebarMinimize: false
+  sidebarMinimize: false,
+  auth : null
 }
 
 const mutations = {
@@ -19,10 +20,27 @@ const mutations = {
   set (state, [variable, value]) {
     state[variable] = value
   }
-}
+};
+
+const getters = {
+  getAuth ( state )  {
+    return state.auth;
+  }
+
+
+};
+
+const actions = {
+  
+  _setAuth  ({commit} , auth )  {
+      commit('set' , ['auth',auth]);
+  }
+};
 
 
 export default new Vuex.Store({
   state,
-  mutations
+  mutations,
+  actions,
+  getters
 })

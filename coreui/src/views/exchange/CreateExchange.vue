@@ -1,94 +1,60 @@
 <template>
   <CRow>
-    <CCol col="12" xl="8">
-      <transition name="slide">
-      <CCard>
-        <CCardHeader>
-            Create Article
-        </CCardHeader>
-             
+    <CCol col="12" lg="6">
+      <CCard no-header>
         <CCardBody>
-          <CAlert
-            :show.sync="dismissCountDown"
-            color="primary"
-            fade
-          >
-            ({{dismissCountDown}}) {{ message }}
-          </CAlert>
+          <CForm>
+            <template class="mb-4" v-if="article">
+              Exchange article : <strong>{{ article.designation }}</strong>
+            </template>
+            <CAlert :show.sync="dismissCountDown" color="primary" fade>
+              ({{ dismissCountDown }}) {{ message }}
+            </CAlert>
+            <CInput
+              label="Element echange"
+              type="text"
+              placeholder="Element echange"
+              v-model="element_echange"
+            ></CInput>
 
-
-        <CInput label="Designation" type="text" placeholder="Designation" v-model="designation"></CInput>
-          <CInput label="Prix" type="number" placeholder="Prix" v-model="prix"></CInput>
-          <CInput label="Tarif de livraison" type="number" placeholder="Tarif de livraison" v-model="tarif_livraison"></CInput>
-          <CInput label="Quantite" type="number" placeholder="Quantite" v-model="quantite"></CInput>
-          <CSelect
-                label="Type transaction"
-                horizontal
-                :options="type_transactions"
-                placeholder="Please select"
-                :value.sync="type_transaction"
-           />
-           <CTextarea
-                label="Adresse"
-                placeholder="Adresse..."
-                horizontal
-                v-model="adresse"
-                rows="9"
-              />
-            <CSelect
-                label="Category"
-                horizontal
-                :options="categories"
-                placeholder="Please select"
-                :value.sync="category"
-           />
-            <CSelect
-                label="Methode paiment"
-                horizontal
-                :options="methode_paiements"
-                placeholder="Please select"
-                :value.sync="methode_paiement"
-           />
-           <CTextarea
-                label="Description"
-                placeholder="Description..."
-                horizontal
-                v-model="description"
-                rows="9"
-              />
-            <CInputFile
-                label="Poster"
-                horizontal
-                :placeholder="photo.name ? photo.name  : 'Choisi photo'"
-                custom 
-                @change="setPhoto"
-              />
-              <!-- <input type="file"  @change="processFile"/> -->
-          <CButton color="primary" @click="store()">Create</CButton>
-          <CButton color="primary" @click="goBack">Back</CButton>
-        </CCardBody>
-      </CCard>
-      </transition>
-    </CCol>
-     <CCol col="12" lg="4">
-       <CCard>
-        <CCardHeader>
-          <CIcon name="cil-justify-center"/>
-          <strong> Cuurent Poster</strong>
-         
-        </CCardHeader>
-        <CCardBody>
-          <CCarousel
-            arrows
-            indicators
-            animate
-            height="400px"
-             >
-           
-            <CCarouselItem
-            :image="photo_url"
+            <CTextarea
+              label="Adresse"
+              placeholder="Adresse..."
+              horizontal
+              v-model="adresse"
+              rows="9"
             />
 
+            <CTextarea
+              label="Description"
+              placeholder="Description..."
+              horizontal
+              v-model="description"
+              rows="9"
+            />
+            <CInputFile
+              label="Poster"
+              horizontal
+              :placeholder="photo.name ? photo.name : 'Choisi photo'"
+              custom
+              @change="setPhoto"
+            />
+
+            <CButton color="primary" @click="update()">Save</CButton>
+            <CButton color="primary" @click="goBack">Back</CButton>
+          </CForm>
+        </CCardBody>
+      </CCard>
+    </CCol>
+    <CCol col="12" lg="6">
+      <CCard>
+        <CCardHeader>
+          <CIcon name="cil-justify-center" />
+          <strong> Cuurent Poster</strong>
+        </CCardHeader>
+        <CCardBody>
+          <CCarousel arrows indicators animate height="400px">
+            <CCarouselItem :image="photo_url" />
           </CCarousel>
         </CCardBody>
       </CCard>
@@ -97,135 +63,145 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
+import { mapGetters } from "vuex";
 
 export default {
-  name: 'CreateArticle',
+  name: "EditExchange",
+  props: {
+    caption: {
+      type: String,
+      default: "User id",
+    },
+  },
   data: () => {
     return {
-      name: '',
-      type_transaction : '',
-      photo : '',
-      description : '',
-      methode_paiement : '',
-      category : '',
-      adresse : '',
-      quantite : '',
-      tarif_livraison : '',
-      prix : '',
-      designation : '',
-      message: '',
-      type_transactions : ['exchange','location','achter'],
-      categories : ['cat1','cat2','cat3','cat4'],
-      methode_paiements : ['Visa card','Master card','Edahabia'],
+      element_echange: "",
+      photo: "",
+      photo_url: "",
+      description: "",
+      adresse: "",
+      marque: "",
+      article: "",
+
       showMessage: false,
-      dismissSecs: 7,
+      message: "",
+      dismissSecs: 4,
       dismissCountDown: 0,
-      showDismissibleAlert: false
-    }
+      showDismissibleAlert: false,
+    };
   },
-  paginationProps: {
-    align: 'center',
-    doubleArrows: false,
-    previousButtonHtml: 'prev',
-    nextButtonHtml: 'next'
+  computed: {
+    ...mapGetters({
+      auth: "getAuth",
+    }),
   },
   methods: {
-    //    processFile(event) {
-
-    //    this.photo = event.target.files[0];
- 
-    // },
-    setPhoto(value){
-        console.log(value);
-        try {
+    setPhoto(value) {
+      console.log(value);
+      try {
         this.photo = value[0];
-        this.photo_url =  URL.createObjectURL(value[0]);
-        console.log(this.photo);
-        } catch (error) {
-            console.log(error);
-        }
+        this.photo_url = URL.createObjectURL(value[0]);
+
+        // this.imgUrl = URL.createObjectURL(e.target.files[0]);
+        // this.myClass.poster = e.target.files[0];
+        // this.photo_url = URL.createObjectURL(e.target.files[0]);
+        // this.myClass.poster = e.target.files[0];
+      } catch (error) {
+        console.log(error);
+      }
     },
+
     goBack() {
-      this.$router.go(-1)
+      this.$router.go(-1);
       // this.$router.replace({path: '/users'})
     },
-     store() {
-        let self = this;
-        let data = {
-                type_transaction :   self.type_transaction,
-                photo : self.photo,
-                description : self.description,
-                methode_paiement : self.methode_paiement,
-                category : self.category,
-                adresse : self.adresse,
-                quantite : self.quantite,
-                tarif_livraison : self.tarif_livraison,
-                prix : self.prix,
-                designation : self.designation,
-        };
-        
+    update() {
+      const self = this;
 
-        const form = new FormData();
-        
-        Object.keys(data).forEach(key => form.append(key, data[key]));
-      
-        axios.post(this.$apiAdress + '/api/articles?token=' + localStorage.getItem("api_token"),
-        form,{
-                headers:
-                    {'content-type': 'multipart/form-data'}
-                }
+      let data = {
+        // type_transaction :   self.type_transaction,
+        photo: self.photo,
+        description: self.description,
+        // methode_paiement : self.methode_paiement,
+        // category : self.category,
+        adresse: self.adresse,
+        utilisateur_id: self.auth.utilisateur.id,
+        article_id: self.article.id,
+        // quantite : self.quantite,
+        // tarif_livraison : self.tarif_livraison,
+        // prix : self.prix,
+        element_echange: self.element_echange,
+        // _method: 'PUT',
+      };
+
+      const form = new FormData();
+      Object.keys(data).forEach((key) => form.append(key, data[key]));
+
+      axios
+        .post(
+          this.$apiAdress +
+            "/api/exchanges/?token=" +
+            localStorage.getItem("api_token"),
+          form,
+          {
+            headers: { "content-type": "multipart/form-data" },
+          }
         )
         .then(function (response) {
-            self.name = '';
-            self.name= '',
-            self.type_transaction = '',
-            self.photo = '',
-            self.description = '',
-            self.methode_paiement = '',
-            self.category = '',
-            self.adresse = '',
-            self.quantite = '',
-            self.tarif_livraison = '',
-            self. prix = '',
-            self.designation = '',
-            self.message = 'Successfully created article.';
-            self.showAlert();
-        }).catch(function (error) {
-            // if(error.response.data.message == 'The given data was invalid.'){
-              self.message = '';
-              for (let key in error.response.data.errors) {
-                if (error.response.data.errors.hasOwnProperty(key)) {
-                  self.message += error.response.data.errors[key][0] + '  ';
-                }
-              }
-              self.showAlert();
-            // }else{
-              console.log(error);
-              // self.$router.push({ path: '/login' }); 
-            // }
+          self.message = "Successfully create exchange.";
+          self.photo = "";
+          self.description = "";
+          self.adresse = "";
+          self.utilisateur_id = "";
+          self.article_id = "";
+          self.element_echange = "";
+          self.showAlert();
+
+          
+            // self.$router.push({ path: "/exchanges" });
+        })
+        .catch(function (error) {
+          self.message = "";
+          for (let key in error.response.data.errors) {
+            if (error.response.data.errors.hasOwnProperty(key)) {
+              self.message += error.response.data.errors[key][0] + "  ";
+            }
+          }
+          self.showAlert();
+
+          console.log(error);
         });
     },
-    countDownChanged (dismissCountDown) {
-      this.dismissCountDown = dismissCountDown
+    countDownChanged(dismissCountDown) {
+      this.dismissCountDown = dismissCountDown;
     },
-    showAlert () {
-      this.dismissCountDown = this.dismissSecs
+    showAlert() {
+      this.dismissCountDown = this.dismissSecs;
     },
-    getArticles (){
-      let self = this;
-      axios.get(  this.$apiAdress + '/api/articles?token=' + localStorage.getItem("api_token"))
-      .then(function (response) {
-        self.items = response.data.articles;
-        self.you = response.data.you;
-      }).catch(function (error) {
-        console.log(error);
-        self.$router.push({ path: '/login' });
-      });
-    }
+  },watch: {
+      dismissCountDown (newV,oldV){
+        if(newV===0)
+        this.$router.push({ path: "/exchanges" });
+      }
   },
-  mounted: function(){
-    this.getArticles();
-  }
-}
+  mounted: function () {
+    let self = this;
+    axios
+      .get(
+        this.$apiAdress +
+          "/api/articles/" +
+          self.$route.params.id +
+          "?token=" +
+          localStorage.getItem("api_token")
+      )
+      .then(function (response) {
+        self.article = response.data;
+      })
+      .catch(function (error) {
+        console.log(error);
+        self.$router.push({ path: "/login" });
+      });
+  },
+};
 </script>

@@ -44,31 +44,29 @@ class TransactionAchatController extends Controller
         $you = auth()->user();
 
         $request->validate([
-            'type_transaction' => 'in:achter,location,exchange',
-            'category' => 'in:cat1,cat2,cat3,cat4',
+            'couleur' => 'in:blanc,rouge,noir,vert',
+            'quantite' => 'min:1',
             'methode_paiement' => 'in:Visa card,Master card,Edahabia',
-            'designation' => 'required|min:1|max:128',
         ]);
 
 
         
-        $article = new Article();
-        $article->etat_article = "pending";
-        $article->designation = $request->designation;
-        $article->prix = $request->prix ? $request->prix : 0;
-        $article->quantite = $request->quantite ? $request->quantite : 1;
-        $article->type_transaction = $request->type_transaction;
-        $article->adresse = $request->adresse;
-        $article->marque = $request->marque;
-        $article->category = $request->category;
-        $article->methode_paiement = $request->methode_paiement;
-        $article->description = $request->description? $request->description : "";
-        $article->tarif_livraison = $request->tarif_livraison ? $request->tarif_livraison : 0;
-        $article->utilisateur_id = $you->utilisateur->id;
+        $achat = new TransactionAchat();
+        // $achat->etat_achat = "pending";
+        $achat->quantite = $request->quantite;
+        $achat->total = $request->total;
+        $achat->couleur = $request->couleur ;
+        $achat->article_id = $request->article_id;
+        $achat->methode_paiement = $request->methode_paiement;
+        $achat->utilisateur_id = $you->utilisateur->id;
 
-        $this->setUpPhoto($request,$article);
 
+        $achat->save();
+
+        $article = $achat->article;
+        $article->quantite  = $article->quantite - $request->quantite;
         $article->save();
+
         //$request->session()->flash('message', 'Successfully created role');
         return response()->json( ['status' => 'success'] );
     }

@@ -123,6 +123,6 @@ class AuthController extends Controller
 
     public function isLogin()
     {
-        return response()->json();
+        return response()->json(['user' => auth()->user()->load('utilisateur')]);
     }
 }

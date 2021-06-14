@@ -16,7 +16,7 @@ class ArticleController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api');
+        $this->middleware('auth:api', ['except' => ['acceptedArticles']]);
     }
 
    
@@ -31,6 +31,23 @@ class ArticleController extends Controller
         
         return response()->json( compact('articles', 'you') );
     }
+
+
+    
+    public function acceptedArticles(){
+
+        $rules = [['etat_article','accepted']];
+        $you = auth()->user();
+        if($you)
+        array_push($rules,['utilisateur_id','!=',$you->utilisateur->id]);
+
+        $articles = Article::where($rules)->with(['utilisateur.user'])->get();
+
+        return response()->json( ['articles' => $articles ] );
+    }
+
+
+    
 
     /**
      * Store a newly created resource in storage.

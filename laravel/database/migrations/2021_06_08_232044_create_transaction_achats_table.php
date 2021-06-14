@@ -18,7 +18,10 @@ class CreateTransactionAchatsTable extends Migration
 
             $table->integer('quantite')->default(1);
             $table->enum('couleur', ['blanc','rouge','vert','noir'])->default('blanc')->nullable();
-
+            
+            $table->enum('methode_paiement',['Visa card','Master card','Edahabia'])->nullable();
+            $table->string('total')->nullable();
+        
             // article id
             $table->unsignedBigInteger('article_id');
             $table->foreign('article_id')->references('id')->on('articles')->onDelete('cascade');

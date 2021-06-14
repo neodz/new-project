@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Exchange extends Model
 {
     use HasFactory;
+    
+    protected $appends = [
+        'etat'
+    ];
 
     public function article()
     {
@@ -16,5 +20,10 @@ class Exchange extends Model
     public function utilisateur()
     {
         return $this->belongsTo(Utilisateur::class);
+    }
+
+    
+    public function getEtatAttribute(){
+        return $this->etat_exchange;
     }
 }

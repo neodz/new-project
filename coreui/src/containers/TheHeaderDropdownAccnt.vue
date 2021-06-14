@@ -36,12 +36,20 @@
 
 <script>
 import axios from 'axios'
+
+import { mapGetters } from "vuex";
 export default {
   name: 'TheHeaderDropdownAccnt',
   data () {
     return { 
       itemsCount: 42,
     }
+  },
+  computed: {
+    
+    ...mapGetters({
+        
+    })
   },
   methods:{
     profileUser(){
