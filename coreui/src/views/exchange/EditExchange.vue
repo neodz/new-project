@@ -5,68 +5,64 @@
         <CCardBody>
           <CForm>
             <template slot="header">
-              Edit Exchange id:  {{ $route.params.id }}
+              Edit Exchange id: {{ $route.params.id }}
             </template>
-            <CAlert
-              :show.sync="dismissCountDown"
-              color="primary"
-              fade
-            >
-              ({{dismissCountDown}}) {{ message }}
+            <CAlert :show.sync="dismissCountDown" color="primary" fade>
+              ({{ dismissCountDown }}) {{ message }}
             </CAlert>
-            <CInput label="Element echange" type="text" placeholder="Element echange" v-model="element_echange"></CInput>
-          
-           <CTextarea
-                label="Adresse"
-                placeholder="Adresse..."
-                horizontal
-                v-model="adresse"
-                rows="9"
-              />
-           
-           <CTextarea
-                label="Description"
-                placeholder="Description..."
-                horizontal
-                v-model="description"
-                rows="9"
-              />
+            <CInput
+              label="Element echange"
+              type="text"
+              placeholder="Element echange"
+              v-model="element_echange"
+            ></CInput>
+
+            <CSelect
+              label="Quantite"
+              horizontal
+              :options="quantites"
+              placeholder="Please select"
+              :value.sync="quantite"
+            />
+
+            <CTextarea
+              label="Adresse"
+              placeholder="Adresse..."
+              horizontal
+              v-model="adresse"
+              rows="9"
+            />
+
+            <CTextarea
+              label="Description"
+              placeholder="Description..."
+              horizontal
+              v-model="description"
+              rows="9"
+            />
             <CInputFile
-                label="Poster"
-                horizontal
-                :placeholder="photo.name ? photo.name  : 'Choisi photo'"
-                custom 
-                @change="setPhoto"
-              />
-            
-            
-            
-            
+              label="Poster"
+              horizontal
+              :placeholder="photo.name ? photo.name : 'Choisi photo'"
+              custom
+              @change="setPhoto"
+            />
+
             <CButton color="primary" @click="update()">Save</CButton>
             <CButton color="primary" @click="goBack">Back</CButton>
           </CForm>
         </CCardBody>
       </CCard>
     </CCol>
-       <CCol col="12" lg="6">
-       <CCard>
+    <CCol col="12" lg="6">
+      <CCard>
         <CCardHeader>
-          <CIcon name="cil-justify-center"/>
+          <CIcon name="cil-justify-center" />
           <strong> Cuurent Poster</strong>
-         
         </CCardHeader>
         <CCardBody>
-          <CCarousel
-            arrows
-            indicators
-            animate
-            height="400px"
-             >
-           
-            <CCarouselItem
-            :image="photo_url"
-            />
-
+          <CCarousel arrows indicators animate height="400px">
+            <CCarouselItem :image="photo_url" />
           </CCarousel>
         </CCardBody>
       </CCard>
@@ -90,9 +86,10 @@ export default {
       photo : '',
       photo_url : '',
       description : '',
+      quantite : '',
       adresse : '',
       marque : '',
-
+      article : null,
         showMessage: false,
         message: '',
         dismissSecs: 7,
@@ -100,21 +97,30 @@ export default {
         showDismissibleAlert: false
     }
   },
+   computed: {
+     quantites (){
+           let qu = [];
+
+          try {
+             for (let index = 1; index <= this.article.quantite ; index++)
+             qu.push(index);
+          } catch (error) {
+            
+          }
+            
+            return qu;
+    },
+   },
   methods: {
    setPhoto(value){
-        console.log(value);
         try {
         this.photo = value[0];
         this.photo_url =  URL.createObjectURL(value[0]);
-        
-      // this.imgUrl = URL.createObjectURL(e.target.files[0]);
-      // this.myClass.poster = e.target.files[0];
-      // this.photo_url = URL.createObjectURL(e.target.files[0]);
-      // this.myClass.poster = e.target.files[0];
         } catch (error) {
             console.log(error);
         }
     },
+   
 
     goBack() {
       this.$router.go(-1)
@@ -129,7 +135,7 @@ export default {
                 // methode_paiement : self.methode_paiement,
                 // category : self.category,
                 adresse : self.adresse,
-                // quantite : self.quantite,
+                quantite : self.quantite,
                 // tarif_livraison : self.tarif_livraison,
                 // prix : self.prix,
                 element_echange : self.element_echange,
@@ -180,10 +186,13 @@ export default {
                 // self.methode_paiement = response.data.methode_paiement;
                 // self.category = response.data.category;
                 self.adresse = response.data.adresse;
+                self.quantite = response.data.quantite;
+                self.article =  response.data.article;
                 // self.quantite = response.data.quantite;
                 // self.tarif_livraison = response.data.tarif_livraison;
                 // self.prix = response.data.prix;
                 self.element_echange = response.data.element_echange;
+
     }).catch(function (error) {
         console.log(error);
         self.$router.push({ path: '/login' });

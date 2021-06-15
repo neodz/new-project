@@ -1,330 +1,43 @@
 <template>
   <div>
-    <CRow>
-      <CCol sm="6" lg="3">
-        <CWidgetProgress footer="Lorem ipsum dolor sit amet enim.">
-          <div class="h4 m-0">89.9%</div>
-          <div class="card-header-actions">
-            <a 
-              href="https://coreui.io/vue/docs/components/widgets" 
-              class="card-header-action position-absolute"
-              style="right:5px; top:5px"
-              rel="noreferrer noopener" 
-              target="_blank"
-            >
-              <small class="text-muted">docs</small>
-            </a>
-          </div>
-          <div>Lorem ipsum...</div>
-          <CProgress
-            color="success"
-            :value="25"
-            class="progress-xs my-3 mb-0"
-          />
-        </CWidgetProgress>
-      </CCol>
-      <CCol sm="6" lg="3">
-        <CWidgetProgress
-          header="12.124"
-          text="Lorem ipsum..."
-          footer="Lorem ipsum dolor sit amet enim."
-          color="info"
-          :value="25"
-        />
-      </CCol>
-      <CCol sm="6" lg="3">
-        <CWidgetProgress
-          header="$98.111,00"
-          text="Lorem ipsum..."
-          footer="Lorem ipsum dolor sit amet enim."
-          color="warning"
-          :value="25"
-        />
-      </CCol>
-      <CCol sm="6" lg="3">
-        <CWidgetProgress
-          header="2 TB"
-          text="Lorem ipsum..."
-          footer="Lorem ipsum dolor sit amet enim."
-          color="danger"
-          :value="25"
-        />
-      </CCol>
-    </CRow>
-    <CRow>
-      <CCol sm="6" lg="3">
-        <CWidgetProgress
-          header="89.9%"
-          text="Lorem ipsum..."
-          footer="Lorem ipsum dolor sit amet enim."
-          color="success"
-          inverse :value="25"
-        />
-      </CCol>
-      <CCol sm="6" lg="3">
-        <CWidgetProgress
-          header="12.124"
-          text="Lorem ipsum..."
-          footer="Lorem ipsum dolor sit amet enim."
-          color="info"
-          inverse
-          :value="25"
-        />
-      </CCol>
-      <CCol sm="6" lg="3">
-        <CWidgetProgress
-          header="$98.111,00"
-          text="Lorem ipsum..."
-          footer="Lorem ipsum dolor sit amet enim."
-          color="warning"
-          inverse
-          :value="25"
-        />
-      </CCol>
-      <CCol sm="6" lg="3">
-        <CWidgetProgress
-          header="2 TB"
-          text="Lorem ipsum..."
-          footer="Lorem ipsum dolor sit amet enim."
-          color="danger"
-          inverse
-          :value="25"
-        />
-      </CCol>
-    </CRow>
-    <CRow>
-      <CCol col="12" sm="6" lg="3">
-        <CWidgetIcon
-          header="$1.999,50"
-          text="Income"
-          color="primary"
-        >
-          <CIcon name="cil-settings" width="24"/>
-        </CWidgetIcon>
-      </CCol>
-      <CCol col="12" sm="6" lg="3">
-        <CWidgetIcon
-          header="$1.999,50"
-          text="Income"
-          color="info"
-        >
-          <CIcon name="cil-laptop" width="24"/>
-        </CWidgetIcon>
-      </CCol>
-      <CCol col="12" sm="6" lg="3">
-        <CWidgetIcon
-          header="$1.999,50"
-          text="Income"
-          color="warning"
-        >
-          <CIcon name="cil-moon" width="24"/>
-        </CWidgetIcon>
-      </CCol>
-      <CCol col="12" sm="6" lg="3">
-        <CWidgetIcon
-          header="$1.999,50"
-          text="Income"
-          color="danger"
-        >
-          <CIcon name="cil-bell" width="24"/>
-        </CWidgetIcon>
-      </CCol>
-    </CRow>
-    <CRow>
-      <CCol col="12" sm="6" lg="3">
-        <CWidgetIcon
-          header="$1.999,50"
-          text="Income"
-          color="primary"
-          :icon-padding="false"
-        >
-          <CIcon name="cil-settings" width="24"/>
-        </CWidgetIcon>
-      </CCol>
-      <CCol col="12" sm="6" lg="3">
-        <CWidgetIcon
-          header="$1.999,50"
-          text="Income"
-          color="info"
-          :icon-padding="false"
-        >
-          <CIcon name="cil-laptop" width="24"/>
-        </CWidgetIcon>
-      </CCol>
-      <CCol col="12" sm="6" lg="3">
-        <CWidgetIcon
-          header="$1.999,50"
-          text="Income"
-          color="warning"
-          :icon-padding="false"
-        >
-          <CIcon name="cil-moon" width="24"/>
-        </CWidgetIcon>
-      </CCol>
-      <CCol col="12" sm="6" lg="3">
-        <CWidgetIcon
-          header="$1.999,50"
-          text="Income"
-          color="danger"
-          :icon-padding="false"
-        >
-          <CIcon name="cil-bell" width="24"/>
-        </CWidgetIcon>
-      </CCol>
-    </CRow>
-    <CRow>
-      <CCol col="12" sm="6" lg="4">
-        <CWidgetIcon
-          header="$1.999,50"
-          text="Income"
-          color="primary"
-          :icon-padding="false"
-        >
-          <CIcon name="cil-settings" class="mx-5 " width="24"/>
-        </CWidgetIcon>
-      </CCol>
-      <CCol col="12" sm="6" lg="4">
-        <CWidgetIcon
-          header="$1.999,50"
-          text="Income"
-          color="info"
-          :icon-padding="false"
-        >
-          <CIcon name="cil-laptop" class="mx-5 " width="24"/>
-        </CWidgetIcon>
-      </CCol>
-      <CCol col="12" sm="6" lg="4">
-        <CWidgetIcon
-          header="$1.999,50"
-          text="Income"
-          color="warning"
-          :icon-padding="false"
-        >
-          <CIcon name="cil-moon" class="mx-5 " width="24"/>
-          <template #footer>
-            <CCardFooter class="card-footer px-3 py-2">
-              <CLink
-                class="font-weight-bold font-xs btn-block text-muted"
-                href="https://coreui.io/"
-              >
-                View more
-                <CIcon name="cil-arrowRight" class="float-right" width="16"/>
-              </CLink>
-            </CCardFooter>
-          </template>
-        </CWidgetIcon>
-      </CCol>
-    </CRow>
-    <!-- <CRow>
-      <CCol col="12" sm="6" lg="4">
-        <CWidgetIcon
-          header="$1.999,50"
-          text="Income"
-          color="primary"
-          :icon-padding="false"
-          link="#"
-        >
-          <CIcon name="cil-settings" class="mx-5 " width="24"/>
-        </CWidgetIcon>
-      </CCol>
-      <CCol col="12" sm="6" lg="4">
-        <CWidgetIcon
-          header="$1.999,50"
-          text="Income"
-          color="info"
-          :icon-padding="false"
-          link="#"
-        >
-          <CIcon name="cil-laptop" class="mx-5 " width="24"/>
-        </CWidgetIcon>
-      </CCol>
-      <CCol col="12" sm="6" lg="4">
-        <CWidgetIcon
-          header="$1.999,50"
-          text="Income"
-          color="warning"
-          :icon-padding="false"
-          link="#"
-        >
-          <CIcon name="cil-moon" class="mx-5" width="24"/>
-        </CWidgetIcon>
-      </CCol>
-    </CRow> -->
-    <WidgetsBrand noCharts/>
-    <WidgetsBrand/>
-    <CCardGroup class="mb-4">
+     <CCardGroup class="mb-4">
       <CWidgetProgressIcon
-        header="87.500"
-        text="Visitors"
+        :header="totalUsers.toString()"
+        text="All Users"
         color="info"
+        inverse
       >
         <CIcon name="cil-people" height="36"/>
       </CWidgetProgressIcon>
+
       <CWidgetProgressIcon
-        header="385"
-        text="New Clients"
+        :header="usersPendingCount.toString()"
+        text="New Users"
         color="success"
+        inverse
       >
         <CIcon name="cil-userFollow" height="36"/>
       </CWidgetProgressIcon>
       <CWidgetProgressIcon
-        header="1238"
-        text="Products sold"
-        color="warning"
-      >
-        <CIcon name="cil-basket" height="36"/>
-      </CWidgetProgressIcon>
-      <CWidgetProgressIcon
-        header="28%"
-        text="Returning Visitors"
-      >
-        <CIcon name="cil-chartPie" height="36"/>
-      </CWidgetProgressIcon>
-      <CWidgetProgressIcon
-        header="5:34:11"
-        text="Avg. Time"
+        :header="usersBannedCount.toString()"
+        text="Users Banned"
         color="danger"
-      >
-        <CIcon name="cil-speedometer" height="36"/>
-      </CWidgetProgressIcon>
-    </CCardGroup>
-    <CCardGroup class="mb-4">
-      <CWidgetProgressIcon
-        header="87.500"
-        text="Visitors"
-        color="info"
-        inverse
-      >
-        <CIcon name="cil-people" height="36"/>
-      </CWidgetProgressIcon>
-      <CWidgetProgressIcon
-        header="385"
-        text="New Clients"
-        color="success"
-        inverse
-      >
-        <CIcon name="cil-userFollow" height="36"/>
-      </CWidgetProgressIcon>
-      <CWidgetProgressIcon
-        header="1238"
-        text="Products sold"
-        color="warning"
         inverse
       >
         <CIcon name="cil-basket" height="36"/>
       </CWidgetProgressIcon>
       <CWidgetProgressIcon
-        header="28%"
-        text="Returning Visitors"
+        :header="totalArticles.toString()"
+        text="Articles"
         color="primary"
         inverse
       >
         <CIcon name="cil-chartPie" height="36"/>
       </CWidgetProgressIcon>
       <CWidgetProgressIcon
-        header="5:34:11"
-        text="Avg. Time"
-        color="danger"
+        :header="totalTransactions.toString()"
+        text="All Transactions"
+        color="warning"
         inverse
       >
         <CIcon name="cil-speedometer" height="36"/>
@@ -333,35 +46,35 @@
     <CRow>
       <CCol sm="6" md="2">
         <CWidgetProgressIcon
-          header="87.500"
-          text="Visitors"
+          :header="locationArticlesCount.toString()"
+          text="Location Transactions"
           color="info"
         >
-          <CIcon name="cil-people" height="36"/>
+          <CIcon name="" height="36"/>
         </CWidgetProgressIcon>
       </CCol>
       <CCol sm="6" md="2">
         <CWidgetProgressIcon
-          header="385"
-          text="New Clients"
+          :header="exchangeArticlesCount.toString()"
+          text="Exchange Transactions"
           color="success"
         >
-          <CIcon name="cil-userFollow" height="36"/>
+          <CIcon name="" height="36"/>
         </CWidgetProgressIcon>
       </CCol>
       <CCol sm="6" md="2">
         <CWidgetProgressIcon
-          header="1238"
-          text="Products sold"
+          :header="achterArticlesCount.toString()"
+          text="Achat Transactions"
           color="warning"
         >
-          <CIcon name="cil-basket" height="36"/>
+          <CIcon name="" height="36"/>
         </CWidgetProgressIcon>
       </CCol>
       <CCol sm="6" md="2">
         <CWidgetProgressIcon
-          header="28%"
-          text="Returning Visitors"
+          :header="locationsCount.toString()"
+          text="Location Articles"
           color="primary"
         >
           <CIcon name="cil-chartPie" height="36"/>
@@ -369,8 +82,8 @@
       </CCol>
       <CCol sm="6" md="2">
         <CWidgetProgressIcon
-          header="5:34:11"
-          text="Avg. Time"
+          :header="exchangesCount.toString()"
+          text="Exchange Articles"
           color="danger"
         >
           <CIcon name="cil-speedometer" height="36"/>
@@ -378,109 +91,21 @@
       </CCol>
       <CCol sm="6" md="2">
         <CWidgetProgressIcon
-          header="972"
-          text="comments"
+          :header="achatsCount.toString()"
+          text="Achat Articles"
           color="info"
         >
           <CIcon name="cil-speech" height="36"/>
         </CWidgetProgressIcon>
       </CCol>
     </CRow>
-    <CRow>
-      <CCol sm="6" md="2">
-        <CWidgetProgressIcon
-          header="87.500"
-          text="Visitors"
-          color="info"
-          inverse
-        >
-          <CIcon name="cil-people" height="36"/>
-        </CWidgetProgressIcon>
+    <CCol lg="12">
+        <CTableWrapper
+          :items="getShuffledUsersData()"
+          striped
+          caption="Striped Table"
+        />
       </CCol>
-      <CCol sm="6" md="2">
-        <CWidgetProgressIcon
-          header="385"
-          text="New Clients"
-          color="success"
-          inverse
-        >
-          <CIcon name="cil-userFollow" height="36"/>
-        </CWidgetProgressIcon>
-      </CCol>
-      <CCol sm="6" md="2">
-        <CWidgetProgressIcon
-          header="1238"
-          text="Products sold"
-          color="warning"
-          inverse
-        >
-          <CIcon name="cil-basket" height="36"/>
-        </CWidgetProgressIcon>
-      </CCol>
-      <CCol sm="6" md="2">
-        <CWidgetProgressIcon
-          header="28%"
-          text="Returning Visitors"
-          color="primary"
-          inverse
-        >
-          <CIcon name="cil-chartPie" height="36"/>
-        </CWidgetProgressIcon>
-      </CCol>
-      <CCol sm="6" md="2">
-        <CWidgetProgressIcon
-          header="5:34:11"
-          text="Avg. Time"
-          color="danger"
-          inverse
-        >
-          <CIcon name="cil-speedometer" height="36"/>
-        </CWidgetProgressIcon>
-      </CCol>
-      <CCol sm="6" md="2">
-        <CWidgetProgressIcon
-          header="972"
-          text="comments"
-          color="info"
-          inverse
-        >
-          <CIcon name="cil-speech" height="36"/>
-        </CWidgetProgressIcon>
-      </CCol>
-    </CRow>
-    <WidgetsDropdown/>
-    <CRow>
-      <CCol sm="4" lg="2">
-        <CWidgetSimple header="title" text="1,123">
-          <CChartLineSimple style="height:40px" border-color="danger"/>
-        </CWidgetSimple>
-      </CCol>
-      <CCol sm="4" lg="2">
-        <CWidgetSimple header="title" text="1,123">
-          <CChartLineSimple style="height:40px" border-color="primary"/>
-        </CWidgetSimple>
-      </CCol>
-      <CCol sm="4" lg="2">
-        <CWidgetSimple header="title" text="1,123">
-          <CChartLineSimple style="height:40px" border-color="success"/>
-        </CWidgetSimple>
-      </CCol>
-      <CCol sm="4" lg="2">
-        <CWidgetSimple header="title" text="1,123">
-          <CChartBarSimple style="height:40px" background-color="danger"/>
-        </CWidgetSimple>
-      </CCol>
-      <CCol sm="4" lg="2">
-        <CWidgetSimple header="title" text="1,123">
-          <CChartBarSimple style="height:40px" background-color="primary"/>
-        </CWidgetSimple>
-      </CCol>
-      <CCol sm="4" lg="2">
-        <CWidgetSimple header="title" text="1,123">
-          <CChartBarSimple style="height:40px" background-color="success"/>
-        </CWidgetSimple>
-      </CCol>
-    </CRow>
   </div>
 </template>
 
@@ -489,13 +114,144 @@ import WidgetsBrand from './WidgetsBrand'
 import WidgetsDropdown from './WidgetsDropdown'
 import { CChartLineSimple, CChartBarSimple } from '../charts/index.js'
 
+import CTableWrapper from './Table.vue';
+
+import axios from 'axios'
+
+// import usersData from '../users/UsersData';
+
 export default {
   name: 'Widgets',
   components: {
     CChartLineSimple,
     CChartBarSimple,
+    CTableWrapper,
     WidgetsBrand,
     WidgetsDropdown
+  }
+  ,
+  data() {
+    return {
+      usersPending : null,
+      usersBanned : null,
+      usersActive : null,
+      locationArticles : null,
+      exchangeArticles : null,
+      achterArticles : null,
+      achats : null,
+      exchanges : null,
+      locations : null,
+      load : false,
+    }
+  },
+  mounted() {
+    this.getIndex();
+  },
+  computed: {
+       totalUsers (){
+        //  if(!this.load)
+         return this.usersPendingCount + this.usersBannedCount + this.usersActiveCount;
+        //  return 0; 
+       },
+       usersPendingCount(){
+         if(this.usersPending)
+         return this.usersPending.length ;
+         return 0;
+       },
+       usersBannedCount(){
+         if(this.usersBanned)
+         return this.usersBanned.length ;
+         return 0;
+       },
+       usersActiveCount(){
+         if(this.usersActive)
+         return this.usersActive.length ;
+         return 0;
+       },
+       
+       totalArticles(){
+         return this.achterArticlesCount + this.locationArticlesCount + this.exchangeArticlesCount ;
+       },
+        
+       achterArticlesCount(){
+         if(this.achterArticles)
+         return this.achterArticles.length ;
+         return 0;
+       },
+       exchangeArticlesCount(){
+         if(this.exchangeArticles)
+         return this.exchangeArticles.length ;
+         return 0;
+       },
+       locationArticlesCount(){
+         if(this.locationArticles)
+         return this.locationArticles.length ;
+         return 0;
+       },
+
+
+       totalTransactions(){
+         return this.achatsCount + this.locationsCount + this.exchangesCount ;
+       },
+        
+       achatsCount(){
+         if(this.achats)
+         return this.achats.length ;
+         return 0;
+       },
+       exchangesCount(){
+         if(this.exchanges)
+         return this.exchanges.length ;
+         return 0;
+       },
+       locationsCount(){
+         if(this.locations)
+         return this.locations.length ;
+         return 0;
+       },
+
+
+
+  },
+  methods: {
+    getIndex(){
+        let self = this;
+        self.load = !self.load;
+      axios.get(  this.$apiAdress + '/api/adminindex?token=' + localStorage.getItem("api_token"))
+      .then(function (response) {
+        self.usersPending = response.data.usersPending;
+        self.usersBanned = response.data.usersBanned;
+        self.usersActive = response.data.usersActive;
+        self.locationArticles = response.data.locationArticles;
+        self.exchangeArticles = response.data.exchangeArticles;
+        self.achterArticles = response.data.achterArticles;
+        self.achats = response.data.achats;
+        self.exchanges = response.data.exchanges;
+        self.locations = response.data.locations;
+        self.load = !self.load;
+      }).catch(function (error) {
+        console.log(error);
+        self.load = !self.load;
+        self.$router.push({ path: '/login' });
+      });
+    },
+    shuffleArray (array) {
+      // if(){
+      for (let i = array.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1))
+        let temp = array[i]
+        array[i] = array[j]
+        array[j] = temp
+      }
+      return array
+      // }
+      // return [];
+    },
+
+    getShuffledUsersData () {
+      // return [];
+      return this.usersActive ? this.shuffleArray(this.usersActive.slice(0)) : [];
+    }
   }
 }
 </script>

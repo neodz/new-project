@@ -16,6 +16,8 @@ class CreateExchangesTable extends Migration
         Schema::create('exchanges', function (Blueprint $table) {
             $table->id();
 
+            $table->integer('quantite')->default(1);
+            
             $table->string('element_echange');
             $table->string('adresse')->nullable();
             $table->string('marque')->nullable();

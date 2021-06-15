@@ -41,7 +41,7 @@ class LocationController extends Controller
 
         $request->validate([
             'date_entrer' => 'required|date|after_or_equal:date_sortie',
-            'date_sortie' => 'required|date',
+            'date_sortie' => 'required|date|after:yesterday',
             'quantite' => 'required|integer'
         ]);
 
@@ -122,7 +122,7 @@ class LocationController extends Controller
     {
         $request->validate([
             'date_entrer' => 'required|date|after_or_equal:date_sortie',
-            'date_sortie' => 'required|date',
+            'date_sortie' => 'required|date|after:yesterday',
             'quantite' => 'required|integer'
         ]);
 

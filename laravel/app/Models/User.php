@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Carbon;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -17,7 +18,7 @@ class User extends Authenticatable implements JWTSubject
     use HasRoles;
     use HasFactory;
 
-    protected $appends = ['name', 'rate', 'viewer_rate'];
+    protected $appends = ['name', 'rate', 'viewer_rate','is_admin','registered'];
 
     public function admin()
     {
@@ -103,6 +104,7 @@ class User extends Authenticatable implements JWTSubject
         $name = $utilisateur ? $utilisateur->nom . " " . $utilisateur->prenom : ($admin ? $admin->nom . " " . $admin->prenom : null);
         return  $name;
     }
+    
     public function getRateAttribute()
     {
         $count = $this->evaluations->count();
@@ -134,4 +136,17 @@ class User extends Authenticatable implements JWTSubject
 
         return $eva ? $eva->note_evaluation : 0;
     }
+
+
+    public function getIsAdminAttribute()
+    {
+        return $this->hasRole('admin');
+        // return $eva ? $eva->note_evaluation : 0;
+    }
+    public function getRegisteredAttribute()
+    {
+        return Carbon::parse($this->created_at)->format('Y-m-d H:i:s');
+        // return $eva ? $eva->note_evaluation : 0;
+    }
+
 }

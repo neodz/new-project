@@ -24,11 +24,11 @@
             :items-per-page="5"
             pagination
           >
-          <!-- <template #etat_article="{item}">
+          <template #utilisateur_id="{item}">
             <td>
-              <CBadge :color="getBadge(item.etat_article)">{{ item.etat_article }}</CBadge>
+              <strong @click="$router.push({path: `/profile/${item.utilisateur.user_id}`})">{{ item.utilisateur.name }}</strong>
             </td>
-          </template> -->
+          </template>
           <template #show="{item}">
             <td>
               <CButton color="primary" @click="showTransaction( item.id )">Show</CButton>
@@ -66,8 +66,8 @@ export default {
       currentPage: 1,
       fields : {
           exchange : ['id', 'element_echange', 'adresse', 'description','show','delete'],
-          location : ['id', 'element_echange', 'adresse', 'description','show','delete'],
-          achter : ['id', 'quantite', 'couleur', 'methode_paiement','total','delete'],
+          location : ['id', 'date_entrer', 'date_sortie','show','delete'],
+          achter : ['id', 'quantite', 'couleur', 'methode_paiement','utilisateur_id','total','delete'],
 
       },
       etat_article_class : {

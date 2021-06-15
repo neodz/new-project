@@ -1,6 +1,50 @@
 <template>
   <CRow>
+    <CCol col="12" md="12">
+        <CCard>
+          <CCardHeader>
+            <CIcon name="cil-justify-center"/>
+            <strong>Advanced Search</strong>
+          </CCardHeader>
+          <CCardBody class="">
+            <div class="row ">
+            <div class="col-6 mt-2">
+                  <div class="input-group rounded">
+                <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+                  aria-describedby="search-addon"
+                  v-model="searchKey"
+                   />
+  
+                    </div>
+            </div>
+            <div  class="float-right row col-6">
+              <CDropdown 
+                :toggler-text="selectedItemCategoryLabelCategory" 
+                class="m-2"
+                color="secondary"
+               >
+                <CDropdownHeader>Search by Category</CDropdownHeader>
+                <CDropdownItem v-for="category in categories" :key="category" @click="selectedItemCategory = category!=='none' ? category : null">{{category}}</CDropdownItem>
+                <!-- <CDropdownItem v-model="selectedItemCategory">Second Item</CDropdownItem>
+                <CDropdownItem v-model="selectedItemCategory">Third Item</CDropdownItem> -->
+              </CDropdown>
+              <CDropdown 
+                :toggler-text="selectedItemCategoryLabelType" 
+                class="m-2"
+                color="secondary"
+               >
+                <CDropdownHeader>Search by Type de transaction</CDropdownHeader>
+                <CDropdownItem v-for="type_transaction in type_transactions" :key="type_transaction" @click="selectedItemType = type_transaction!=='none' ? type_transaction : null">{{type_transaction}}</CDropdownItem>
+                <!-- <CDropdownItem v-model="selectedItemCategory">Second Item</CDropdownItem>
+                <CDropdownItem v-model="selectedItemCategory">Third Item</CDropdownItem> -->
+              </CDropdown>
+            </div>
+            </div>
+          </CCardBody>
+        </CCard>
+      </CCol>
     <template >
+
       <CCol v-for="item in items" :key="item.id" md="3" sm="6">
       <CCard> 
         <CCardHeader>
@@ -140,7 +184,33 @@ export default {
   data() {
     return {
       items : '',
+      selectedItemCategory : null,
+      selectedItemType : null,
+      searchKey : null,
+      categories : ['cat1','cat2','cat3','cat4','none'],
+      type_transactions : ['location','exchange','achter','none'],
     }
+  },
+  computed: {
+    selectedItemCategoryLabelCategory(){
+          return this.selectedItemCategory !== null ? this.selectedItemCategory : 'Select a Category';
+
+    },
+    selectedItemCategoryLabelType(){
+          return this.selectedItemType !== null ? this.selectedItemType : 'Type de transaction';
+
+    }
+  },
+  watch: {
+        selectedItemType (){
+          this.getSearchedArticles();
+        },
+        selectedItemCategory (){
+          this.getSearchedArticles();
+        },
+        searchKey (){
+          this.getSearchedArticles();
+        }
   },
   methods: {
     ArticleLink (id) {
@@ -160,6 +230,23 @@ export default {
      getArticles (){
       let self = this;
       axios.post(  this.$apiAdress + '/api/acceptedarticles?token=' + localStorage.getItem("api_token"))
+      .then(function (response) {
+        self.items = response.data.articles;
+      }).catch(function (error) {
+        console.log(error);
+        self.$router.push({ path: '/login' });
+      });
+    },
+     getSearchedArticles (){
+      let self = this;
+      
+      axios.post(  this.$apiAdress + '/api/acceptedarticles?token=' + localStorage.getItem("api_token"),{
+            search: {
+              type_transaction : self.selectedItemType ? self.selectedItemType : null,
+              category : self.selectedItemCategory ? self.selectedItemCategory : null,
+              search_key : self.searchKey ? self.searchKey : null
+            }
+      })
       .then(function (response) {
         self.items = response.data.articles;
       }).catch(function (error) {

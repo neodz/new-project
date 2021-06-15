@@ -18,7 +18,13 @@ class CreateUsersTable extends Migration
             $table->string('name')->nullable();
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('status')->nullable();
+            $table->string('status',array(
+                'Active',
+                'Inactive',
+                'Pending',
+                'Banned'
+            )
+            )->nullable();
             
 
             // 

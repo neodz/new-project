@@ -8,7 +8,7 @@
         </CCardHeader>
              
         <CCardBody>
-          <CButton color="primary" @click="addUser()" class="mb-3">Add Location</CButton>
+          <CButton color="primary" @click="$router.push({ path: '/dashboard' })" class="mb-3">Add Location</CButton>
           
           <CAlert
             :show.sync="dismissCountDown"
@@ -37,7 +37,7 @@
           </template>
           <template #edit="{item}">
             <td>
-              <CButton color="primary" @click="editLocation( item.id )">Edit</CButton>
+              <CButton v-if="item.etat!=='accepted'" color="primary" @click="editLocation( item.id )">Edit</CButton>
             </td>
           </template>
           <template #delete="{item}">

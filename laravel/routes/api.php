@@ -28,6 +28,8 @@ Route::group(['middleware' => 'api'], function ($router) {
     Route::post('register', 'AuthController@register');  
 
     Route::post('acceptedarticles', 'ArticleController@acceptedArticles');  
+    Route::post('searchedarticles', 'ArticleController@searchedIndex');  
+    Route::get('adminindex', 'AdminController@index');  
     
     
 
@@ -96,6 +98,7 @@ Route::group(['middleware' => 'api'], function ($router) {
     Route::group(['middleware' => 'user'], function ($router) {
 
         Route::resource('articles', 'ArticleController');
+        // Route::get('articles', 'ArticleController');
         Route::resource('locations', 'LocationController');
         Route::resource('exchanges', 'ExchangeController');
         Route::resource('achats', 'TransactionAchatController');

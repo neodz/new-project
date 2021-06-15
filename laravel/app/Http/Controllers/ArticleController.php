@@ -22,29 +22,72 @@ class ArticleController extends Controller
    
 
 
-    public function index(){
+    public function index(Request $request){
 
         $you = auth()->user();
 
-        $articles = Article::where('utilisateur_id',$you->utilisateur->id)->get();
+        $model = Article::where('utilisateur_id',$you->utilisateur->id);
+        
+        $this->setModel($request,$model);
 
+        $articles = $model->get();
+        
+        
+        return response()->json( compact('articles', 'you') );
+    }
+
+
+    public function searchedIndex(Request $request){
+
+        $you = auth()->user();
+
+        $model = Article::where('utilisateur_id',$you->utilisateur->id);
+        
+        $this->setModel($request,$model);
+
+        $articles = $model->get();
+        
         
         return response()->json( compact('articles', 'you') );
     }
 
 
     
-    public function acceptedArticles(){
+    public function acceptedArticles(Request $request){
 
-        $rules = [['etat_article','accepted']];
+
+        $rules = [['etat_article','accepted'],['quantite','!=',0]];
+
         $you = auth()->user();
-        if($you)
+        if($you && $you->utilisateur)
         array_push($rules,['utilisateur_id','!=',$you->utilisateur->id]);
 
-        $articles = Article::where($rules)->with(['utilisateur.user'])->get();
+        $model = Article::where($rules)->with(['utilisateur.user']);
+        
+        $this->setModel($request,$model);
+
+        $articles = $model->get();
 
         return response()->json( ['articles' => $articles ] );
     }
+
+
+    public function setModel($request,&$model){
+
+        $search = $request->search;
+        
+        if($search){
+
+            foreach ($search as $index => $value) {
+                if($value && $index!=="search_key")
+                $model = $model->where($index,$value);
+                else if( $value && $index==="search_key")
+                $model = $model->where('designation','like','%'.$value.'%');
+            }
+            // $model =  $model->where($search);
+        }
+    }
+
 
 
     

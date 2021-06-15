@@ -53,7 +53,7 @@
           <strong> Curent Article Poster</strong>
         </CCardHeader>
         <CCardBody>
-          <CCarousel  indicators animate height="500px">
+          <CCarousel v-if="article"  indicators animate height="500px">
             <CCarouselItem :image="article.photo_url" />
           </CCarousel>
         </CCardBody>
@@ -98,7 +98,7 @@ export default {
            let qu = [];
 
           try {
-             for (let index = 1; index <= this.article.quantite ; index++)
+             for (let index = 1; index <= this.article.dynamique_quantite ; index++)
              qu.push(index);
           } catch (error) {
             
@@ -157,6 +157,10 @@ export default {
       }
   },
   mounted: function(){
+    let today = new Date();
+    this.date_entrer = today.toISOString().slice(0,10);
+    this.date_sortie = today.toISOString().slice(0,10);
+    
     let self = this;
     axios
       .get(

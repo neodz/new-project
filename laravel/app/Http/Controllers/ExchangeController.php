@@ -81,19 +81,24 @@ class ExchangeController extends Controller
             $result = $article->exchanges()->where('id',$id)->with(['utilisateur','article'])->get()->first();
         
             $result->etat_exchange = $request->etat;
+            if($request->etat!=="rejected")
+            $article->quantite  = $article->quantite - $request->quantite;
+            
+            $article->save();
         }
         if($article->type_transaction==="location")
         {
             $result = $article->locations()->where('id',$id)->with(['utilisateur','article'])->get()->first();
             $result->etat_location = $request->etat;
-
+            
         }
+
+        
         // if($article->type_transaction==="achter") 
         // {
         //     $result = $article->transactionAchats()->where('id',$id)->with(['utilisateur','article'])->get()->first();
 
         // }
-        
         $result->save();
 
         // $exchang;es = Exchange::where('article_id',$id)->with('article')->get();
@@ -115,12 +120,14 @@ class ExchangeController extends Controller
         $request->validate([
             'element_echange' => 'required|string|min:4',
             'adresse' => 'required|string',
-            'description' => 'required|string'
+            'description' => 'required|string',
+            'quantite' => 'required|integer',
         ]);
 
         $exchange = new Exchange();
 
         $exchange->etat_exchange = "pending";
+        $exchange->quantite = $request->quantite;
 
         $exchange->element_echange = $request->element_echange;
         $exchange->article_id = $request->article_id;
@@ -199,10 +206,13 @@ class ExchangeController extends Controller
         $request->validate([
             'element_echange' => 'required|string|min:4',
             'adresse' => 'required|string',
-            'description' => 'required|string'
+            'description' => 'required|string',
+            'quantite' => 'required|integer'
         ]);
 
         $location = Exchange::find($id);
+
+        $location->quantite = $request->quantite;
 
         $location->etat_exchange = "pending";
         $location->element_echange = $request->element_echange;

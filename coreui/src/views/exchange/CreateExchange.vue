@@ -10,12 +10,27 @@
             <CAlert :show.sync="dismissCountDown" color="primary" fade>
               ({{ dismissCountDown }}) {{ message }}
             </CAlert>
+
+
+
+
+
+        
             <CInput
               label="Element echange"
               type="text"
               placeholder="Element echange"
               v-model="element_echange"
             ></CInput>
+
+                <CSelect
+                label="Quantite"
+                horizontal
+                :options="quantites"
+                placeholder="Please select"
+                :value.sync="quantite"
+           />
+
 
             <CTextarea
               label="Adresse"
@@ -82,8 +97,8 @@ export default {
       description: "",
       adresse: "",
       marque: "",
-      article: "",
-
+      article: null,
+      quantite : '',
       showMessage: false,
       message: "",
       dismissSecs: 4,
@@ -95,6 +110,18 @@ export default {
     ...mapGetters({
       auth: "getAuth",
     }),
+     quantites (){
+           let qu = [];
+
+          try {
+             for (let index = 1; index <= this.article.quantite ; index++)
+             qu.push(index);
+          } catch (error) {
+            
+          }
+            
+            return qu;
+    },
   },
   methods: {
     setPhoto(value) {
@@ -128,7 +155,7 @@ export default {
         adresse: self.adresse,
         utilisateur_id: self.auth.utilisateur.id,
         article_id: self.article.id,
-        // quantite : self.quantite,
+        quantite : self.quantite,
         // tarif_livraison : self.tarif_livraison,
         // prix : self.prix,
         element_echange: self.element_echange,

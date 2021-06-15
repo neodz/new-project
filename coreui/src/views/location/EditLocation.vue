@@ -15,8 +15,14 @@
               ({{dismissCountDown}}) {{ message }}
             </CAlert>
            
-            <CInput label="Quantite" type="number" placeholder="Quantite" v-model="quantite"></CInput>
-           
+            <CSelect
+                label="Quantite"
+                horizontal
+                :options="quantites"
+                placeholder="Please select"
+                :value.sync="quantite"
+           />
+
                  <CInput
                   label="Date Sortie"
                   type="date"
@@ -81,6 +87,7 @@ export default {
       date_entrer : '',
       quantite : '',
       photo_url : '',
+      article : null,
       type_transactions : ['exchange','location','achter'],
       categories : ['cat1','cat2','cat3','cat4'],
       methode_paiements : ['Visa card','Master card','Edahabia'],
@@ -90,6 +97,20 @@ export default {
         dismissCountDown: 0,
         showDismissibleAlert: false
     }
+  },
+  computed: {
+    quantites (){
+           let qu = [];
+
+          try {
+             for (let index = 1; index <= this.article.dynamique_quantite ; index++)
+             qu.push(index);
+          } catch (error) {
+            
+          }
+            
+            return qu;
+    },
   },
   methods: {
     goBack() {
@@ -137,6 +158,7 @@ export default {
                 self.date_sortie =   response.data.date_sortie;
                 self.quantite = response.data.quantite;
                 self.photo_url = response.data.article.photo;
+                self.article = response.data.article;
 
     }).catch(function (error) {
         console.log(error);

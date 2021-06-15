@@ -44,7 +44,7 @@ class AuthController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
-        $user->status = 'Active';
+        $user->status = 'Pending';
         $user->save();       
 
         $utilisateur = new Utilisateur();

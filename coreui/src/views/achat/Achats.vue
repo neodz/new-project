@@ -8,7 +8,7 @@
         </CCardHeader>
              
         <CCardBody>
-          <CButton color="primary" @click="addUser()" class="mb-3">Add Transaction Achat</CButton> 
+          <CButton color="primary" @click="$router.push({ path: '/dashboard' })" class="mb-3">Add Transaction Achat</CButton> 
           
           <CAlert
             :show.sync="dismissCountDown"

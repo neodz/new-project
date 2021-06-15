@@ -3,9 +3,9 @@
     <CCol col="12" lg="6" >
       <CCard>
         <CCardHeader v-if="original_items">
-           <p>Article id :  {{ $route.params.id }}</p>
-                
-          <CButton color="primary" @click="setTransaction()" v-if="original_items.type_transaction==='exchange'" >Toutes exchanges transactions</CButton>
+           <p>Article id :  {{ $route.params.id }}</p> 
+          Utilisateur : <strong @click="$router.push({path: `/profile/${original_items.utilisateur.user_id}`})">{{original_items.utilisateur.name}}</strong>
+          <CButton color="primary"  @click="setTransaction()" v-if="original_items.type_transaction==='exchange'" >Toutes exchanges transactions</CButton>
           <CButton color="primary" @click="setTransaction()" v-if="original_items.type_transaction==='location'">Toutes locations transactions</CButton>
           <CButton color="primary" @click="setTransaction()" v-if="original_items.type_transaction==='achter'">Toutes achats transactions</CButton>
         
@@ -71,7 +71,7 @@ export default {
 
       except : [
         'article',
-        'utilisateur',
+        'utilisateur', 
         'utilisateur_id',
         'photo_url',
         'photo',
@@ -124,7 +124,8 @@ export default {
         _method: 'PUT',
         // id : self.$route.params.id.toString(),
         article_id : self.$route.params.article_id.toString(),
-        etat : etat
+        etat : etat ,
+        quantite : self.original_items.quantite
     })
     .then(function (response) {
       self.original_items = response.data.transaction;

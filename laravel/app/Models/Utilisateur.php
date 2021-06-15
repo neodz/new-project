@@ -9,6 +9,9 @@ class Utilisateur extends Model
 {
     use HasFactory;
 
+    
+    protected $appends = ['name'];
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -30,5 +33,11 @@ class Utilisateur extends Model
     public function transactionAchats()
     {
         return $this->hasMany(TransactionAchat::class);
+    }
+
+    public function getNameAttribute()
+    {
+        $name = $this->nom . " " . $this->prenom ;
+        return  $name;
     }
 }

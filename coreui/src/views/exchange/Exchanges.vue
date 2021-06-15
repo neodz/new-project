@@ -8,7 +8,7 @@
         </CCardHeader>
              
         <CCardBody>
-          <CButton color="primary" @click="addUser()" class="mb-3">Add Exhange</CButton>
+          <CButton color="primary" @click="$router.push({ path: '/dashboard' })" class="mb-3">Add Exhange</CButton>
           
           <CAlert
             :show.sync="dismissCountDown"
@@ -35,9 +35,9 @@
               <p @click="showArticle( item.id )">{{ item.article.designation }}</p>
             </td>
           </template>
-          <template #edit="{item}">
-            <td>
-              <CButton color="primary" @click="editExchange( item.id )">Edit</CButton>
+          <template  #edit="{item}">
+            <td >
+              <CButton v-if="item.etat!=='accepted'" color="primary" @click="editExchange( item.id )">Edit</CButton>
             </td>
           </template>
           <template #delete="{item}">
