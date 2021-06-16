@@ -5,14 +5,15 @@
     :show="show"
     @update:show="(value) => $store.commit('set', ['sidebarShow', value])"
   >
-    <CSidebarBrand class="d-md-down-none" to="/">
-      <CIcon 
+    <CSidebarBrand class="d-md-down-none" to="/" >
+      <!-- <CIcon 
         class="d-block" 
-        name="logo" 
+        name="cib-shopify" 
         size="custom-size" 
         :height="35" 
         :viewBox="`0 0 ${minimize ? 110 : 556} 134`"
-      />
+      /> -->
+      
     </CSidebarBrand>
     <CRenderFunction flat :content-to-render="nav"/>
     <CSidebarMinimizer
@@ -24,6 +25,9 @@
 
 <script>
 import axios from 'axios'
+
+import { brandSet as brands } from '@coreui/icons'
+
 export default {
   name: 'TheSidebar',
   data () {

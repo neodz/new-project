@@ -60,6 +60,27 @@
                     <!-- <CDropdownItem v-model="selectedItemCategory">Second Item</CDropdownItem>
                 <CDropdownItem v-model="selectedItemCategory">Third Item</CDropdownItem> -->
                   </CDropdown>
+
+                  <CDropdown
+                    :toggler-text="selectedItemEtatLabel"
+                    class="m-2"
+                    color="secondary"
+                  >
+                    <CDropdownHeader
+                      >Search by Etat de l'article</CDropdownHeader
+                    >
+                    <CDropdownItem
+                      v-for="etat_article in etats"
+                      :key="etat_article"
+                      @click="
+                        selectedItemEtat =
+                          etat_article !== 'none' ? etat_article : null
+                      "
+                      >{{ etat_article }}</CDropdownItem
+                    >
+                    <!-- <CDropdownItem v-model="selectedItemCategory">Second Item</CDropdownItem>
+                <CDropdownItem v-model="selectedItemCategory">Third Item</CDropdownItem> -->
+                  </CDropdown>
                 </div>
               </div>
             </div>
@@ -143,9 +164,11 @@ export default {
     return {
       selectedItemCategory: null,
       selectedItemType: null,
+      selectedItemEtat: null,
       searchKey: null,
       categories: ["cat1", "cat2", "cat3", "cat4", "none"],
       type_transactions: ["location", "exchange", "achter", "none"],
+      etats: ['pending','accepted','rejected',"none"],
       items: [],
       fields: [
         "id",
@@ -196,6 +219,11 @@ export default {
         ? this.selectedItemType
         : "Type de transaction";
     },
+    selectedItemEtatLabel() {
+      return this.selectedItemEtat !== null
+        ? this.selectedItemEtat
+        : "Select Etat de l'article";
+    },
   },
   watch: {
     selectedItemType() {
@@ -205,6 +233,9 @@ export default {
       this.getSearchedArticles();
     },
     searchKey() {
+      this.getSearchedArticles();
+    },
+    selectedItemEtat() {
       this.getSearchedArticles();
     },
   },
@@ -297,6 +328,9 @@ export default {
                 : null,
               category: self.selectedItemCategory
                 ? self.selectedItemCategory
+                : null,
+              etat_article: self.selectedItemEtat
+                ? self.selectedItemEtat
                 : null,
               search_key: self.searchKey ? self.searchKey : null,
             },

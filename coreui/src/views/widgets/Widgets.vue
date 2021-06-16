@@ -47,7 +47,7 @@
       <CCol sm="6" md="2">
         <CWidgetProgressIcon
           :header="locationArticlesCount.toString()"
-          text="Location Transactions"
+          text="LOCATION ARTICLES"
           color="info"
         >
           <CIcon name="" height="36"/>
@@ -56,7 +56,7 @@
       <CCol sm="6" md="2">
         <CWidgetProgressIcon
           :header="exchangeArticlesCount.toString()"
-          text="Exchange Transactions"
+          text="EXCHANGE ARTICLES"
           color="success"
         >
           <CIcon name="" height="36"/>
@@ -65,7 +65,7 @@
       <CCol sm="6" md="2">
         <CWidgetProgressIcon
           :header="achterArticlesCount.toString()"
-          text="Achat Transactions"
+          text="ACHAT ARTICLES"
           color="warning"
         >
           <CIcon name="" height="36"/>
@@ -74,7 +74,7 @@
       <CCol sm="6" md="2">
         <CWidgetProgressIcon
           :header="locationsCount.toString()"
-          text="Location Articles"
+          text="LOCATION TRANSACTIONS"
           color="primary"
         >
           <CIcon name="cil-chartPie" height="36"/>
@@ -83,7 +83,7 @@
       <CCol sm="6" md="2">
         <CWidgetProgressIcon
           :header="exchangesCount.toString()"
-          text="Exchange Articles"
+          text="EXCHANGE TRANSACTIONS"
           color="danger"
         >
           <CIcon name="cil-speedometer" height="36"/>
@@ -92,7 +92,7 @@
       <CCol sm="6" md="2">
         <CWidgetProgressIcon
           :header="achatsCount.toString()"
-          text="Achat Articles"
+          text="ACHAT TRANSACTIONS"
           color="info"
         >
           <CIcon name="cil-speech" height="36"/>
