@@ -1,6 +1,7 @@
 /composer.phar
 
 /laravel/public/*
+!/laravel/public/images/default
 !/laravel/public/index.php
 !/laravel/public/.htaccess
 !/laravel/public/web.config
