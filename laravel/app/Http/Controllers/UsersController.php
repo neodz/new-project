@@ -28,10 +28,11 @@ class UsersController extends Controller
     {
         $you = auth()->user()->id;
         
-        $users = DB::table('users')
-        ->select('users.id', 'users.name', 'users.email', 'users.menuroles as roles', 'users.status', 'users.email_verified_at as registered')
-        ->whereNull('deleted_at')
-        ->get();
+        // $users = DB::table('users')
+        // ->select('users.id', 'users.name', 'users.email', 'users.menuroles as roles', 'users.status', 'users.email_verified_at as registered')
+        // ->whereNull('deleted_at')
+        // ->get();
+        $users = User::whereHas('utilisateur')->get();
 
         return response()->json( compact('users', 'you') );
     }
@@ -44,10 +45,12 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        $user = DB::table('users')
-        ->select('users.id', 'users.name', 'users.email', 'users.menuroles as roles', 'users.status', 'users.email_verified_at as registered')
-        ->where('users.id', '=', $id)
-        ->first();
+        // $user = DB::table('users')
+        // ->select('users.id', 'users.name', 'users.utilisateur','users.email', 'users.menuroles as roles', 'users.status', 'users.email_verified_at as registered')
+        // ->where('users.id', '=', $id)
+        // ->first();
+        $user = User::where('id',$id)->with(['utilisateur'])->get()->first();
+
         return response()->json( $user );
     }
 
@@ -59,10 +62,9 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        $user = DB::table('users')
-        ->select('users.id', 'users.name', 'users.email', 'users.menuroles as roles', 'users.status')
-        ->where('users.id', '=', $id)
-        ->first();
+        
+        $user = User::where('id',$id)->with(['utilisateur'])->get()->first();
+
         return response()->json( $user );
     }
 
@@ -76,12 +78,13 @@ class UsersController extends Controller
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
-            'name'       => 'required|min:1|max:256',
-            'email'      => 'required|email|max:256'
+            'status'       => 'required|in:Active,Inactive,Pending,Banned'
         ]);
-        $user = User::find($id);
-        $user->name       = $request->input('name');
-        $user->email      = $request->input('email');
+        
+        $user = User::where('id',$id)->with(['utilisateur'])->get()->first();
+
+        $user->status       = $request->input('status');
+        
         $user->save();
         //$request->session()->flash('message', 'Successfully updated user');
         return response()->json( ['status' => 'success'] );

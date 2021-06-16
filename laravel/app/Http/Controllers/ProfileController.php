@@ -108,7 +108,7 @@ class ProfileController extends Controller
         $user->status = 'Active';
         $user->save();
 
-        $utilisateur = $user->utilisateur;
+        $utilisateur = $user->utilisateur ? $user->utilisateur : $user->admin;
 
         $utilisateur->prenom = $request->prenom;
         $utilisateur->nom = $request->nom;

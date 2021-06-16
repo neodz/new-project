@@ -25,8 +25,9 @@ class ArticleController extends Controller
     public function index(Request $request){
 
         $you = auth()->user();
-
-        $model = Article::where('utilisateur_id',$you->utilisateur->id);
+        $model = Article::with(['utilisateur']);
+        if(!$you->is_admin)
+        $model = $model->where('utilisateur_id',$you->utilisateur->id);
         
         $this->setModel($request,$model);
 
@@ -41,7 +42,9 @@ class ArticleController extends Controller
 
         $you = auth()->user();
 
-        $model = Article::where('utilisateur_id',$you->utilisateur->id);
+        $model = Article::with(['utilisateur']);
+        if(!$you->is_admin)
+        $model = $model->where('utilisateur_id',$you->utilisateur->id);
         
         $this->setModel($request,$model);
 
@@ -200,6 +203,8 @@ class ArticleController extends Controller
             'designation' => 'required|min:1|max:128',
         ]);
 
+        $user = auth()->user();
+
         $article = Article::find($id);
 
         $article->etat_article = "pending";
@@ -213,11 +218,12 @@ class ArticleController extends Controller
         $article->methode_paiement = $request->methode_paiement;
         $article->description = $request->description? $request->description : "";
         $article->tarif_livraison = $request->tarif_livraison ? $request->tarif_livraison : 0;
-        
-        $this->setUpPhoto($request,$article);
+        $article->etat_article = $request->etat_article;
 
+        $this->setUpPhoto($request,$article);
+        
         $article->save();
-        //$request->session()->flash('message', 'Successfully updated user');
+        
         return response()->json( ['status' => 'success'] );
     }
 

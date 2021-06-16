@@ -34,13 +34,17 @@ Route::group(['middleware' => 'api'], function ($router) {
     
 
 
+
     Route::resource('profile', 'ProfileController');
     Route::post('profile/evaluer', 'ProfileController@evaluer');
 
     Route::resource('notes', 'NotesController');
 
     Route::resource('resource/{table}/resource', 'ResourceController');
-    
+    Route::group(['middleware' => 'admin'], function ($router) {
+        Route::resource('users', 'UsersController')->except( ['create', 'store'] );
+    });
+
     Route::group(['middleware' => 'super'], function ($router) {
         // dd('xx');
         Route::resource('mail',        'MailController');
@@ -49,7 +53,7 @@ Route::group(['middleware' => 'api'], function ($router) {
 
         Route::resource('bread',  'BreadController');   //create BREAD (resource)
 
-        Route::resource('users', 'UsersController')->except( ['create', 'store'] );
+        // Route::resource('users', 'UsersController')->except( ['create', 'store'] );
 
         Route::prefix('menu/menu')->group(function () { 
             // dd('xx');
