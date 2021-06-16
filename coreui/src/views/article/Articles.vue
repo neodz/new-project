@@ -69,7 +69,7 @@
           </CCardHeader>
 
           <CCardBody>
-            <CButton color="primary" @click="addUser()" class="mb-3"
+            <CButton v-if="auth && !auth.is_admin" color="primary" @click="addUser()" class="mb-3"
               >Add Article</CButton
             >
 
@@ -135,6 +135,8 @@
 <script>
 import axios from "axios";
 
+import {mapGetters} from 'vuex';
+
 export default {
   name: "Articles",
   data: () => {
@@ -181,6 +183,9 @@ export default {
     nextButtonHtml: "next",
   },
   computed: {
+    ...mapGetters({
+        auth : 'getAuth'
+    }),
     selectedItemCategoryLabelCategory() {
       return this.selectedItemCategory !== null
         ? this.selectedItemCategory

@@ -103,7 +103,7 @@
         <CTableWrapper
           :items="getShuffledUsersData()"
           striped
-          caption="Striped Table"
+          caption="Users Active"
         />
       </CCol>
   </div>

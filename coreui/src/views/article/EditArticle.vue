@@ -14,7 +14,15 @@
             >
               ({{dismissCountDown}}) {{ message }}
             </CAlert>
-            <CInput label="Designation" type="text" placeholder="Designation" v-model="designation"></CInput>
+          <CSelect
+                v-if="auth && auth.is_admin"
+                label="Type transaction"
+                horizontal
+                :options="etats"
+                placeholder="Please select"
+                :value.sync="etat_article"
+           />
+          <CInput label="Designation" type="text" placeholder="Designation" v-model="designation"></CInput>
           <CInput label="Prix" type="number" placeholder="Prix" v-model="prix"></CInput>
           <CInput label="Tarif de livraison" type="number" placeholder="Tarif de livraison" v-model="tarif_livraison"></CInput>
           <CInput label="Quantite" type="number" placeholder="Quantite" v-model="quantite"></CInput>
@@ -98,6 +106,8 @@
 
 <script>
 import axios from 'axios'
+import {mapGetters} from "vuex";
+
 export default {
   name: 'EditArticle',
   props: {
@@ -119,15 +129,22 @@ export default {
       tarif_livraison : '',
       prix : '',
       designation : '',
+      etat_article : null,
       type_transactions : ['exchange','location','achter'],
       categories : ['cat1','cat2','cat3','cat4'],
       methode_paiements : ['Visa card','Master card','Edahabia'],
+      etats : ['pending','accepted','rejected'],
         showMessage: false,
         message: '',
         dismissSecs: 7,
         dismissCountDown: 0,
         showDismissibleAlert: false
     }
+  },
+  computed: {
+      ...mapGetters({
+          auth : 'getAuth'
+      }),
   },
   methods: {
    setPhoto(value){
@@ -136,12 +153,8 @@ export default {
         this.photo = value[0];
         this.photo_url =  URL.createObjectURL(value[0]);
         
-      // this.imgUrl = URL.createObjectURL(e.target.files[0]);
-      // this.myClass.poster = e.target.files[0];
-      // this.photo_url = URL.createObjectURL(e.target.files[0]);
-      // this.myClass.poster = e.target.files[0];
         } catch (error) {
-            console.log(error);
+        
         }
     },
 
@@ -150,6 +163,7 @@ export default {
       // this.$router.replace({path: '/users'})
     },
     update() {
+
         let self = this;
         let data = {
                 type_transaction :   self.type_transaction,
@@ -162,8 +176,13 @@ export default {
                 tarif_livraison : self.tarif_livraison,
                 prix : self.prix,
                 designation : self.designation,
+                etat_article : self.etat_article,
                 _method: 'PUT',
         };
+
+
+        // if (this.auth.is_admin) 
+        //     this.data.etat_article = this.etat_article;
 
         
         const form = new FormData();
@@ -213,6 +232,7 @@ export default {
                 self.tarif_livraison = response.data.tarif_livraison;
                 self.prix = response.data.prix;
                 self.designation = response.data.designation;
+                self.etat_article = response.data.etat_article;
     }).catch(function (error) {
         console.log(error);
         self.$router.push({ path: '/login' });

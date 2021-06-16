@@ -33,6 +33,28 @@ export default {
   data: () => {
     return {
       items: [],
+      except: [
+        'created_at',
+        "roles",
+        "evaluations",
+        "admin",
+        "utilisateur",
+        "is_admin",
+        "viewer_rate",
+        "rate",
+        "deleted_at",
+        "updated_at",
+        "menuroles",
+        "email_verified_at",
+        "api_token",
+      ],
+      exceptUtilisateur: [
+        'id',
+        'user_id',
+        'created_at',
+        'updated_at',
+        'name'
+      ],
       fields: [
         {key: 'key'},
         {key: 'value'},
@@ -54,7 +76,14 @@ export default {
     axios.get(  this.$apiAdress + '/api/users/' + self.$route.params.id + '?token=' + localStorage.getItem("api_token"))
     .then(function (response) {
       const items = Object.entries(response.data);
-      self.items = items.map(([key, value]) => {return {key: key, value: value}});
+      self.items = items.map(([key, value]) => {return {key: key, value: value}}).filter((item) => !self.except.includes(item.key));
+      
+      const itemsUtilisateur = Object.entries(response.data.utilisateur);
+
+      itemsUtilisateur.map((prp) => {
+        if(self.exceptUtilisateur.includes(prp[0]))
+        return ;
+        self.items.push({key: prp[0], value: prp[1]})})
     }).catch(function (error) {
       console.log(error);
       self.$router.push({ path: '/login' });

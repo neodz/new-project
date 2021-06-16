@@ -14,8 +14,13 @@
             >
               ({{dismissCountDown}}) {{ message }}
             </CAlert>
-            <CInput type="text" label="Name" placeholder="Name" v-model="name"></CInput>
-            <CInput type="text" label="Email" placeholder="Email" v-model="email"></CInput>
+            <CSelect
+                label="Etat de compte"
+                horizontal
+                :options="etats"
+                placeholder="Please select"
+                :value.sync="status"
+           />
             <CButton color="primary" @click="update()">Save</CButton>
             <CButton color="primary" @click="goBack">Back</CButton>
           </CForm>
@@ -37,8 +42,13 @@ export default {
   },
   data: () => {
     return {
-        name: '',
-        email: '',
+        // name: '',
+        // email: '',
+        status : null,
+        etats : [ 'Active',
+                'Inactive',
+                'Pending',
+                'Banned'],
         showMessage: false,
         message: '',
         dismissSecs: 7,
@@ -56,8 +66,8 @@ export default {
         axios.post(  this.$apiAdress + '/api/users/' + self.$route.params.id + '?token=' + localStorage.getItem("api_token"),
         {
             _method: 'PUT',
-            name: self.name,
-            email: self.email,
+            // name: self.name,
+            status: self.status,
         })
         .then(function (response) {
             self.message = 'Successfully updated user.';
@@ -79,8 +89,8 @@ export default {
     let self = this;
     axios.get(  this.$apiAdress + '/api/users/' + self.$route.params.id + '/edit?token=' + localStorage.getItem("api_token"))
     .then(function (response) {
-        self.name = response.data.name;
-        self.email = response.data.email;
+        self.status = response.data.status;
+        // self.email = response.data.email;
     }).catch(function (error) {
         console.log(error);
         self.$router.push({ path: '/login' });

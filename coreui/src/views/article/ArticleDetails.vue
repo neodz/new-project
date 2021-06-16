@@ -6,7 +6,7 @@
           <p>Article id : {{ $route.params.id }}</p>
 
           <div
-            v-if="auth && auth.utilisateur.id === original_items.utilisateur_id"
+            v-if="auth && !auth.is_admin && auth.utilisateur.id === original_items.utilisateur_id"
           >
             <CButton
               color="primary"
@@ -61,7 +61,7 @@
 
           <CButton
             v-if="
-              auth &&
+              auth &&  !auth.is_admin &&
               auth.utilisateur.id !== original_items.utilisateur_id 
               && original_items.type_transaction === 'location' 
               && original_items.dynamique_quantite 
@@ -75,7 +75,7 @@
           <!-- <CButton v-if="article && article.viewer_transaction && auth && auth.utilisateur.id!==original_items.utilisateur_id && original_items.type_transaction==='location'" color="primary"  class="mb-3 float-right">Louer Article</CButton> -->
           <CButton
             v-if="
-              auth &&
+              auth && !auth.is_admin &&
               auth.utilisateur.id !== original_items.utilisateur_id &&
               original_items.type_transaction === 'exchange'
               && original_items.dynamique_quantite 
@@ -89,7 +89,7 @@
 
           <CButton
             v-if="
-              auth &&
+              auth && !auth.is_admin &&
               auth.utilisateur.id !== original_items.utilisateur_id &&
               original_items.type_transaction === 'achter'
               && original_items.dynamique_quantite 
@@ -207,6 +207,8 @@ export default {
             return { key: key, value: value };
           })
           .filter((item) => !self.except.includes(item.key));
+
+          
         // self.items = self.items;
       })
       .catch(function (error) {
