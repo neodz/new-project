@@ -1,8 +1,6 @@
 /composer.phar
 
-!/laravel/public/images/default/user.png
-!/laravel/public/images/default/article.png
-!/laravel/public/images/default/logo.png 
+!/laravel/public/images/default/*
 /laravel/public/*
 !/laravel/public/index.php
 !/laravel/public/.htaccess
