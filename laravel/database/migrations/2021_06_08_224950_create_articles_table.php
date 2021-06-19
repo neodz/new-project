@@ -24,11 +24,18 @@ class CreateArticlesTable extends Migration
             $table->enum('type_transaction',['exchange','location','achter']);
             $table->string('adresse')->nullable();
             $table->string('marque')->nullable();
-            $table->enum('category',['cat1','cat2','cat3','cat4'])->default('cat1');
+            $table->enum('category',['Informatique','Téléphone','Voiture','Maisson','Vêtements','Bijoux','appareils électroménagers'])->default('Informatique');
             $table->enum('methode_paiement',['Visa card','Master card','Edahabia'])->nullable();
             $table->string('photo')->default('/images/default/article.png');
             $table->string('description')->default('');
             $table->float('tarif_livraison')->default(0);
+            // Informatique 
+            // Téléphone
+            // Voiture 
+            // Maisson 
+            // appareils électroménagers
+            // Vêtements( homme ,femme , enfants)
+            // Bijoux
 
             // utilisateur of the article owner
             $table->unsignedBigInteger('utilisateur_id');

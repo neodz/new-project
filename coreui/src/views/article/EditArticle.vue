@@ -131,7 +131,7 @@ export default {
       designation : '',
       etat_article : null,
       type_transactions : ['exchange','location','achter'],
-      categories : ['cat1','cat2','cat3','cat4'],
+      categories : ['Informatique','Téléphone','Voiture','Maisson','Vêtements','Bijoux','appareils électroménagers'],
       methode_paiements : ['Visa card','Master card','Edahabia'],
       etats : ['pending','accepted','rejected'],
         showMessage: false,

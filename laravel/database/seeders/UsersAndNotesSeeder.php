@@ -137,7 +137,7 @@ class UsersAndNotesSeeder extends Seeder
                 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
                 'remember_token' => Str::random(10),
                 'menuroles' => 'user',
-                'status' => $userStatus[ random_int(0,count($userStatus) - 1) ]
+                'status' => "Active",
             ]);
             $user->assignRole('user');
             array_push($usersIds, $user->id);
@@ -182,7 +182,7 @@ class UsersAndNotesSeeder extends Seeder
          // articles
         $etat_articles = ['pending','accepted','rejected'];
         $type_transactions = ['exchange','location','achter'];
-        $categories = ['cat1','cat2','cat3','cat4'];
+        $categories = ['Informatique','Téléphone','Voiture','Maisson','Vêtements','Bijoux','appareils électroménagers'];
         $methode_paiement = ['Visa card','Master card','Edahabia'];
         $quantites = [1,2,3];
 
