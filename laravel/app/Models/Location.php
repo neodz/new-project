@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Location extends Model
 {
     use HasFactory;
-    
+
     protected $appends = [
         'etat'
     ];
@@ -20,9 +20,10 @@ class Location extends Model
     public function utilisateur()
     {
         return $this->belongsTo(Utilisateur::class);
+
     }
 
-    
+
     public function getEtatAttribute(){
         return $this->etat_location;
     }
