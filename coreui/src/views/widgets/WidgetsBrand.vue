@@ -4,7 +4,7 @@
         <CCard>
           <CCardHeader>
             <CIcon name="cil-justify-center"/>
-            <strong>Advanced Search</strong>
+            <strong>Recherche</strong>
           </CCardHeader>
           <CCardBody class="">
             <div class="row ">
@@ -23,7 +23,7 @@
                 class="m-2"
                 color="secondary"
                >
-                <CDropdownHeader>Search by Category</CDropdownHeader>
+                <CDropdownHeader>Catégorie</CDropdownHeader>
                 <CDropdownItem v-for="category in categories" :key="category" @click="selectedItemCategory = category!=='none' ? category : null">{{category}}</CDropdownItem>
                 <!-- <CDropdownItem v-model="selectedItemCategory">Second Item</CDropdownItem>
                 <CDropdownItem v-model="selectedItemCategory">Third Item</CDropdownItem> -->
@@ -33,7 +33,7 @@
                 class="m-2"
                 color="secondary"
                >
-                <CDropdownHeader>Search by Type de transaction</CDropdownHeader>
+                <CDropdownHeader>Type de transaction</CDropdownHeader>
                 <CDropdownItem v-for="type_transaction in type_transactions" :key="type_transaction" @click="selectedItemType = type_transaction!=='none' ? type_transaction : null">{{type_transaction}}</CDropdownItem>
                 <!-- <CDropdownItem v-model="selectedItemCategory">Second Item</CDropdownItem>
                 <CDropdownItem v-model="selectedItemCategory">Third Item</CDropdownItem> -->
@@ -52,15 +52,15 @@
           <strong>Article : {{item.designation}}</strong>
           <div class="card-header-actions">
            
-              <small @click="showArticle(item.id)" class="text-muted">view article</small>
+              <small @click="showArticle(item.id)" class="text-muted">voir l'article</small>
             
           </div>
         </CCardHeader>
         <CCardBody>
           <p @click="viewProfile(item.utilisateur.user.id)">
-          Article Owner : <strong>{{item.utilisateur.user.name}}</strong></p>
+            Propriétaire: <strong>{{item.utilisateur.user.name}}</strong></p>
           <p>
-          Article Transaction : <strong>{{item.type_transaction}}</strong></p>
+          type de Transaction : <strong>{{item.type_transaction}}</strong></p>
 
           <CCarousel
             indicators
@@ -193,7 +193,7 @@ export default {
   },
   computed: {
     selectedItemCategoryLabelCategory(){
-          return this.selectedItemCategory !== null ? this.selectedItemCategory : 'Select a Category';
+          return this.selectedItemCategory !== null ? this.selectedItemCategory : 'Catégorie';
 
     },
     selectedItemCategoryLabelType(){

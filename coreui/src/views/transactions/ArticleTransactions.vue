@@ -4,7 +4,7 @@
       <transition name="slide">
       <CCard v-if="article">
         <CCardHeader>
-            Article <strong>{{article.designation}}</strong> exchanges
+            Article <strong>{{article.designation}}</strong> achats
         </CCardHeader>
              
         <CCardBody>   
