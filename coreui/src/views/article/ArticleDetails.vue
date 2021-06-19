@@ -7,7 +7,7 @@
 
           <div
             v-if="auth && !auth.is_admin && auth.utilisateur.id === original_items.utilisateur_id"
-          >
+             >
             <CButton
               color="primary"
               @click="setTransaction()"
@@ -35,7 +35,7 @@
               >{{
                 original_items.dynamique_quantite > 0
                   ? "Disponible : " + original_items.dynamique_quantite +' articles'
-                  : "Indisponible (tous les produits sont loués)"
+                  : "Indisponible"
               }}</CBadge
             >
           </h3>
