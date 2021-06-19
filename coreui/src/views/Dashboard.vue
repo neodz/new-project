@@ -23,6 +23,7 @@ export default {
     WidgetsBrand,
     Widgets
   },
+  
   computed: {
     ...mapGetters({
         auth : 'getAuth'
