@@ -116,7 +116,7 @@ export default {
       designation : '',
       message: '',
       type_transactions : ['exchange','location','achter'],
-      categories : ['cat1','cat2','cat3','cat4'],
+      categories : ['Informatique','Téléphone','Voiture','Maisson','Vêtements','Bijoux','appareils électroménagers'],
       methode_paiements : ['Visa card','Master card','Edahabia'],
       showMessage: false,
       dismissSecs: 7,

@@ -25,7 +25,13 @@ class ArticleController extends Controller
     public function index(Request $request){
 
         $you = auth()->user();
-        $model = Article::with(['utilisateur']);
+
+        $model = Article::with(['utilisateur'])->whereHas('utilisateur',function ($q){
+            $q->whereHas('user',function ($q){
+                    $q->where('status','Active');
+            });
+        });
+
         if(!$you->is_admin)
         $model = $model->where('utilisateur_id',$you->utilisateur->id);
         
@@ -42,7 +48,12 @@ class ArticleController extends Controller
 
         $you = auth()->user();
 
-        $model = Article::with(['utilisateur']);
+        $model = Article::with(['utilisateur'])->whereHas('utilisateur',function ($q){
+            $q->whereHas('user',function ($q){
+                    $q->where('status','Active');
+            });
+        });
+
         if(!$you->is_admin)
         $model = $model->where('utilisateur_id',$you->utilisateur->id);
         
@@ -65,7 +76,11 @@ class ArticleController extends Controller
         if($you && $you->utilisateur)
         array_push($rules,['utilisateur_id','!=',$you->utilisateur->id]);
 
-        $model = Article::where($rules)->with(['utilisateur.user']);
+        $model = Article::where($rules)->with(['utilisateur.user'])->whereHas('utilisateur',function ($q){
+            $q->whereHas('user',function ($q){
+                    $q->where('status','Active');
+            });
+        });
         
         $this->setModel($request,$model);
 
@@ -107,7 +122,7 @@ class ArticleController extends Controller
 
         $request->validate([
             'type_transaction' => 'in:achter,location,exchange',
-            'category' => 'in:cat1,cat2,cat3,cat4',
+            'category' => 'in:Informatique,Téléphone,Voiture,Maisson,Vêtements,Bijoux,appareils électroménagers',
             'methode_paiement' => 'in:Visa card,Master card,Edahabia',
             'designation' => 'required|min:1|max:128',
         ]);
@@ -198,7 +213,7 @@ class ArticleController extends Controller
     {
         $request->validate([
             'type_transaction' => 'in:achter,location,exchange',
-            'category' => 'in:cat1,cat2,cat3,cat4',
+            'category' => 'in:Informatique,Téléphone,Voiture,Maisson,Vêtements,Bijoux,appareils électroménagers',
             'methode_paiement' => 'in:Visa card,Master card,Edahabia',
             'designation' => 'required|min:1|max:128',
         ]);

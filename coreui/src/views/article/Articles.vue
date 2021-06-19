@@ -174,7 +174,7 @@ export default {
       selectedItemType: null,
       selectedItemEtat: null,
       searchKey: null,
-      categories: ["cat1", "cat2", "cat3", "cat4", "none"],
+      categories: ['Informatique','Téléphone','Voiture','Maisson','Vêtements','Bijoux','appareils électroménagers',"none"],
       type_transactions: ["location", "exchange", "achter", "none"],
       etats: ['pending', 'accepted', 'rejected', "none"],
       items: [],
