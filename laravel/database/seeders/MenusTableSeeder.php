@@ -15,7 +15,6 @@ class MenusTableSeeder extends Seeder
     private $sequence = 1;
     private $joinData = array();
     private $adminRole = null;
-    private $superRole = null;
     private $userRole = null;
 
     public function join($roles, $menusId){
@@ -75,9 +74,9 @@ class MenusTableSeeder extends Seeder
         if(in_array('admin', $roles)){
             $this->adminRole->givePermissionTo($permission);
         }
-        if(in_array('super', $roles)){
-            $this->superRole->givePermissionTo($permission);
-        }
+        // if(in_array('super', $roles)){
+        //     $this->superRole->givePermissionTo($permission);
+        // }
         return $lastId;
     }
 
@@ -130,7 +129,7 @@ class MenusTableSeeder extends Seeder
     public function run()
     {
         /* Get roles */
-        $this->superRole = Role::where('name' , '=' , 'super' )->first();
+        // $this->superRole = Role::where('name' , '=' , 'super' )->first();
         $this->adminRole = Role::where('name' , '=' , 'admin' )->first();
         $this->userRole = Role::where('name', '=', 'user' )->first();
         $dropdownId = array();
@@ -140,16 +139,10 @@ class MenusTableSeeder extends Seeder
         ]);
         $this->menuId = DB::getPdo()->lastInsertId();  //set menuId
         /* guest menu */
-        $this->insertLink('guest,user,admin,super', 'Dashboard', '/', 'cil-speedometer');
+        $this->insertLink('guest,user,admin', 'Dashboard', '/', 'cil-speedometer');
         $this->insertLink('guest', 'Login', '/login', 'cil-account-logout');
         $this->insertLink('guest', 'Register', '/register', 'cil-account-logout');
-        $this->beginDropdown('super', 'Settings', '/settings', 'cil-puzzle');
-            $this->insertLink('super', 'Media',    '/media');
-            $this->insertLink('super', 'Users',    '/users');
-            $this->insertLink('super', 'Menu',    '/menu');
-            $this->insertLink('super', 'BREAD',    '/bread');
-            $this->insertLink('super', 'Email',    '/email');
-        $this->endDropdown();
+       
         
         // user
         $this->insertTitle('user,admin', 'Explorer');
@@ -164,77 +157,14 @@ class MenusTableSeeder extends Seeder
          $this->endDropdown();
 
 
-        $this->insertTitle('super', 'Theme');
-        $this->insertLink('super', 'Colors', '/colors', 'cil-drop');
-        $this->insertLink('super', 'Typography', '/typography', 'cil-pencil');
-        $this->insertTitle('super', 'Components');
-        $this->beginDropdown('super', 'Base', '/base', 'cil-puzzle');
-            $this->insertLink('super', 'Breadcrumb',    '/base/breadcrumb');
-            $this->insertLink('super', 'Cards',         '/base/cards');
-            $this->insertLink('super', 'Carousel',      '/base/carousel');
-            $this->insertLink('super', 'Collapse',      '/base/collapse');
-            $this->insertLink('super', 'Forms',         '/base/forms');
-            $this->insertLink('super', 'Jumbotron',     '/base/jumbotron');
-            $this->insertLink('super', 'List group',    '/base/list-group');
-            $this->insertLink('super', 'Navs',          '/base/navs');
-            $this->insertLink('super', 'Pagination',    '/base/pagination');
-            $this->insertLink('super', 'Popovers',      '/base/popovers');
-            $this->insertLink('super', 'Progress',      '/base/progress');
-           // $this->insertLink('super', 'Scrollspy',     '/base/scrollspy');  
-            $this->insertLink('super', 'Switches',      '/base/switches');
-            $this->insertLink('super', 'Tables',        '/base/tables');
-            $this->insertLink('super', 'Tabs',          '/base/tabs');
-            $this->insertLink('super', 'Tooltips',      '/base/tooltips');
-        $this->endDropdown();
-        $this->beginDropdown('super', 'Buttons', '/buttons', 'cil-cursor');
-            $this->insertLink('super', 'Buttons',           '/buttons/buttons');
-            $this->insertLink('super', 'Buttons Group',     '/buttons/button-group');
-            $this->insertLink('super', 'Dropdowns',         '/buttons/dropdowns');
-            $this->insertLink('super', 'Brand Buttons',     '/buttons/brand-buttons');
-        $this->endDropdown();
-        $this->insertLink('super', 'Charts', '/charts', 'cil-chart-pie');
-        $this->beginDropdown('super', 'Icons', '/icon', 'cil-star');
-            $this->insertLink('super', 'CoreUI Icons',      '/icon/coreui-icons');
-            $this->insertLink('super', 'Flags',             '/icon/flags');
-            $this->insertLink('super', 'Brands',            '/icon/brands');
-        $this->endDropdown();
-        $this->beginDropdown('super', 'Notifications', '/notifications', 'cil-bell');
-            $this->insertLink('super', 'Alerts',     '/notifications/alerts');
-            $this->insertLink('super', 'Badge',      '/notifications/badge');
-            $this->insertLink('super', 'Modals',     '/notifications/modals');
-        $this->endDropdown();
-        $this->insertLink('super', 'Widgets', '/widgets', 'cil-calculator');
-        $this->insertTitle('super', 'Extras');
-        $this->beginDropdown('super', 'Pages', '/pages', 'cil-star');
-            $this->insertLink('super', 'Login',         '/login');
-            $this->insertLink('super', 'Register',      '/register');
-            $this->insertLink('super', 'Error 404',     '/404');
-            $this->insertLink('super', 'Error 500',     '/500');
-        $this->endDropdown();
-        // $this->insertLink('guest,super', 'Download CoreUI', 'https://coreui.io', 'cil-cloud-download');
-        // $this->insertLink('guest,super', 'Try CoreUI PRO', 'https://coreui.io/pro/', 'cil-layers');
-        
+      
         /* Create top menu */
         DB::table('menulist')->insert([
             'name' => 'top_menu'
         ]);
         $this->menuId = DB::getPdo()->lastInsertId();  //set menuId
-        $this->beginDropdown('super', 'Pages');
-            $this->insertLink('super', 'Dashboard',    '/');
-            $this->insertLink('super', 'Notes',              '/notes');
-            $this->insertLink('super', 'Users',                   '/users');
-        $this->endDropdown();
-        $this->beginDropdown('super', 'Settings');
-            $this->insertLink('super', 'Edit menu',               '/menu');
-            $this->insertLink('super', 'Edit roles',              '/roles');
-            $this->insertLink('super', 'Media',                   '/media');
-            $this->insertLink('super', 'BREAD',                   '/bread');
-            $this->insertLink('super', 'E-mail',                  '/email');
-        $this->endDropdown();
-
+      
         
-        
-
         $this->joinAllByTransaction(); ///   <===== Must by use on end of this seeder
     }
 }

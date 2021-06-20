@@ -27,10 +27,10 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UsersAndNotesSeeder::class,
             MenusTableSeeder::class,
-            FolderTableSeeder::class,
-            ExampleSeeder::class,
-            BREADSeeder::class,
-            EmailSeeder::class,
+            // FolderTableSeeder::class,
+            // ExampleSeeder::class,
+            // BREADSeeder::class,
+            // EmailSeeder::class,
         ]);
     }
 }
