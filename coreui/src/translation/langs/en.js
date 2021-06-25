@@ -1,5 +1,32 @@
 const en = {
-    
+    router : {
+        dashboard : 'Dashboard',
+        Home : 'Home',
+        articles : 'Articles',
+        CreateArticle : 'Create Article',
+        EditArticle : 'Edit Article',
+        ArticleDetails : 'Article Details',
+        ArticleTransactions : 'Article Transactions',
+        ArticleExchanges : 'Article Exchanges',
+        ArticleTransactionsDetails : 'Article Exchanges',
+        Achats : 'Article Exchanges',
+        CreateAchat : 'Create Purchase',
+        AchatDetails : 'Purchase Details',
+        Exchanges : 'Exchanges',
+        CreateExchange : 'Create Exchange',
+        EditExchange : 'Edit Exchange',
+        ExchangeDetails : 'Exchange Details',
+        Locations : 'Rentals',
+        CreateLocation : 'Create Rental',
+        EditLocation : 'Edit Rental',
+        LocationDetails : 'Rental Details',
+        Profile : 'Profile',
+        EditProfile : 'Edit Profile',
+        ShowProfile : 'Show Profile',
+        Users : 'Users',
+        User : 'User',
+        EditUser : 'Edit User'
+    },
     dashboard : {
         admin : { 
             all_users : 'All the users',

@@ -1,6 +1,26 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+import messages from "../translation/translation";
+
+import VueI18n from 'vue-i18n'
+
+Vue.use(VueI18n)
+
+
+
+var der = 'fr';
+
+if (localStorage.getItem('lang')) {
+                der=localStorage.getItem('lang');
+}
+
+const i18n = new VueI18n({
+    locale: der,
+    messages, // set locale messages
+})
+
+
 // Containers
 const TheContainer = () => import('@/containers/TheContainer')
 
@@ -119,12 +139,12 @@ function configRoutes () {
     {
       path: '/',
       redirect: '/dashboard',
-      name: 'Home',
+      name: i18n.t('router.Home'),
       component: TheContainer,
       children: [
         {
           path: 'dashboard',
-          name: 'Dashboard',
+          name: i18n.t('router.dashboard'),
           component: Dashboard
         },
         
@@ -133,7 +153,7 @@ function configRoutes () {
         // my routes 
         {
           path: 'articles',
-          meta: { label: 'Articles'},
+          meta: { label: i18n.t('router.articles')},
           component: {
             render (c) { return c('router-view') }
           },
@@ -148,7 +168,7 @@ function configRoutes () {
             {
               path: 'create',
               meta: { label: 'Create Article' },
-              name: 'CreateArticle',
+              name: i18n.t('router.CreateArticle'),
               component: CreateArticle,
               meta:{
                 requiresUser: true
@@ -157,7 +177,7 @@ function configRoutes () {
             {
               path: ':id/edit',
               meta: { label: 'Edit Article' },
-              name: 'EditArticle',
+              name: i18n.t('router.EditArticle'),
               component: EditArticle,
               meta:{
                 requiresUser: true
@@ -175,7 +195,7 @@ function configRoutes () {
              {
               path: ':id',
               meta: { label: 'Article Details'},
-              name: 'Article Details',
+              name: i18n.t('router.ArticleDetails'),
               component: ArticleDetails,
               meta:{
                 requiresUser: true
@@ -186,7 +206,7 @@ function configRoutes () {
 
         {
           path: 'articletransactions/:id',
-          meta: { label: 'Article Transactions'},
+          meta: { label:i18n.t('router.ArticleTransactions')},
           component: {
             render (c) { return c('router-view') }
           },
@@ -201,7 +221,7 @@ function configRoutes () {
             {
               path: ':id/edit',
               meta: { label: 'Edit article exchanges' },
-              name: 'ArticleExchanges',
+              name: i18n.t('router.ArticleExchanges'),
               component: EditArticleExchanges,
               meta:{
                 requiresUser: true
@@ -219,7 +239,7 @@ function configRoutes () {
              {
               path: 'transaction/:article_id',
               meta: { label: 'Article Transactions Details'},
-              name: 'Article Transactions Details',
+              name: i18n.t('router.ArticleTransactionsDetails'),
               component: ArticleTransactionDetails,
               meta:{
                 requiresUser: true
@@ -230,7 +250,7 @@ function configRoutes () {
 
         { 
           path: 'achats',
-          meta: { label: 'Achats'},
+          meta: { label: i18n.t('router.Achats')},
           component: {
             render (c) { return c('router-view') }
           },
@@ -245,7 +265,7 @@ function configRoutes () {
             {
               path: 'create/:id',
               meta: { label: 'Create Achat' },
-              name: 'CreateAchat',
+              name: i18n.t('router.CreateAchat'),
               component: CreateAchat,
               meta:{
                 requiresUser: true
@@ -272,7 +292,7 @@ function configRoutes () {
              {
               path: ':id',
               meta: { label: 'Achat Details'},
-              name: 'Achat Details',
+              name: i18n.t('router.AchatDetails'),
               component: AchatDetails,
               meta:{
                 requiresUser: true
@@ -283,7 +303,7 @@ function configRoutes () {
         
         {
           path: 'exchanges',
-          meta: { label: 'Exchanges'},
+          meta: { label: i18n.t('router.Exchanges')},
           component: {
             render (c) { return c('router-view') }
           },
@@ -298,7 +318,7 @@ function configRoutes () {
             {
               path: 'create/:id',
               meta: { label: 'Create Exchange' },
-              name: 'CreateExchange',
+              name: i18n.t('router.CreateExchange'),
               component: CreateExchange,
               meta:{
                 requiresUser: true
@@ -307,7 +327,7 @@ function configRoutes () {
             {
               path: ':id/edit',
               meta: { label: 'Edit Exchange' },
-              name: 'EditExchange',
+              name: i18n.t('router.EditExchange'),
               component: EditExchange,
               meta:{
                 requiresUser: true
@@ -325,7 +345,7 @@ function configRoutes () {
              {
               path: ':id',
               meta: { label: 'Exchange Details'},
-              name: 'Exchange Details',
+              name: i18n.t('router.ExchangeDetails'),
               component: ExchangeDetails,
               meta:{
                 requiresUser: true
@@ -336,7 +356,7 @@ function configRoutes () {
 
         {
           path: 'locations',
-          meta: { label: 'Locations'},
+          meta: { label: i18n.t('router.Locations')},
           component: {
             render (c) { return c('router-view') }
           },
@@ -351,7 +371,7 @@ function configRoutes () {
             {
               path: 'create/:id',
               meta: { label: 'Create Location' },
-              name: 'CreateLocation',
+              name: i18n.t('router.CreateLocation'),
               component: CreateLocation,
               meta:{
                 requiresUser: true
@@ -360,7 +380,7 @@ function configRoutes () {
             {
               path: ':id/edit',
               meta: { label: 'Edit Location' },
-              name: 'EditLocation',
+              name: i18n.t('router.EditLocation'),
               component: EditLocation,
               meta:{
                 requiresUser: true
@@ -378,7 +398,7 @@ function configRoutes () {
              {
               path: ':id',
               meta: { label: 'Location Details'},
-              name: 'Location Details',
+              name: i18n.t('router.LocationDetails'),
               component: LocationDetails,
               meta:{
                 requiresUser: true
@@ -388,7 +408,7 @@ function configRoutes () {
         },
         {
           path: 'profile',
-          meta: { label: 'Profile'},
+          meta: { label: i18n.t('router.Profile')},
           component: {
             render (c) { return c('router-view') }
           },
@@ -403,7 +423,7 @@ function configRoutes () {
             {
               path: ':id/edit',
               meta: { label: 'Edit Profile' },
-              name: 'EditProfile',
+              name: i18n.t('router.EditProfile'),
               component: EditProfile,
               meta:{
                 requiresUser: true
@@ -411,7 +431,7 @@ function configRoutes () {
             },{
               path: ':id',
               meta: { label: 'Show Profile'},
-              name: 'Show Profile',
+              name: i18n.t('router.ShowProfile'),
               component: ShowProfile,
               meta:{
                 requiresUser: true
@@ -421,7 +441,7 @@ function configRoutes () {
         },
         {
           path: 'users',
-          meta: { label: 'Users'},
+          meta: { label: i18n.t('router.Users')},
           component: {
             render (c) { return c('router-view') }
           },
@@ -436,7 +456,7 @@ function configRoutes () {
             {
               path: ':id',
               meta: { label: 'User Details'},
-              name: 'User',
+              name: i18n.t('router.User'),
               component: User,
               meta:{
                 requiresAdmin: true
@@ -445,7 +465,7 @@ function configRoutes () {
             {
               path: ':id/edit',
               meta: { label: 'Edit User' },
-              name: 'Edit User',
+              name: i18n.t('router.EditUser'),
               component: EditUser,
               meta:{
                 requiresAdmin: true

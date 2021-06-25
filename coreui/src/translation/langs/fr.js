@@ -1,5 +1,32 @@
 const fr = {
-
+    router : {
+        dashboard : 'Tableau de bord',
+        Home : 'Domicile',
+        articles : 'Articles',
+        CreateArticle : 'Créer un article',
+        EditArticle : "Modifier l'article",
+        ArticleDetails : "Détails de l'article",
+        ArticleTransactions : "Transactions d'articles",
+        ArticleExchanges : "Échanges d'articles",
+        ArticleTransactionsDetails : "Détails de Transactions d'articles",
+        Achats : 'Achats',
+        CreateAchat : 'Créer un achat',
+        AchatDetails : "Details d'Achat",
+        Exchanges : 'Exchanges',
+        CreateExchange : 'Créer un échange',
+        EditExchange : "Modifier l'échange",
+        ExchangeDetails : "Détails de l'échange",
+        Locations : 'Locations',
+        CreateLocation : 'Louer un article',
+        EditLocation : 'Modifier une Location',
+        LocationDetails : 'Details de Location',
+        Profile : 'Profil',
+        EditProfile : 'Editer le Profil',
+        ShowProfile : 'Afficher le Profile',
+        Users : 'Utilisateurs',
+        User : 'Utilisateur',
+        EditUser : 'Editer un Utilisateur'
+    },
     dashboard : {
         admin : { 
             all_users : 'Tous les utilisateurs',
