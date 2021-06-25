@@ -195,7 +195,8 @@ export default {
                 }
         )
         .then(function (response) {
-            self.message = 'Successfully updated article.';
+          
+            self.message = self.$t('alert.article.updated');
             self.showAlert();
         }).catch(function (error) { 
               self.message = '';

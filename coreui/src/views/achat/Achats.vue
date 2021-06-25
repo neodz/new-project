@@ -101,7 +101,7 @@ export default {
         _method: 'DELETE'
       })
       .then(function (response) {
-          self.message = 'Successfully deleted Achat.';
+          self.message = self.$t('alert.achat.deleted');
           self.showAlert();
           self.getAchats();
       }).catch(function (error) {

@@ -70,7 +70,7 @@ export default {
             status: self.status,
         })
         .then(function (response) {
-            self.message = 'Successfully updated user.';
+            self.message = self.$t('alert.user.updated');
             self.showAlert();
         }).catch(function (error) {
             console.log(error);

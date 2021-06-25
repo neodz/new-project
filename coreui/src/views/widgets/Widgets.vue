@@ -111,8 +111,6 @@
 
 <script>
 import WidgetsBrand from './WidgetsBrand'
-import WidgetsDropdown from './WidgetsDropdown'
-import { CChartLineSimple, CChartBarSimple } from '../charts/index.js'
 
 import CTableWrapper from './Table.vue';
 
@@ -123,11 +121,8 @@ import axios from 'axios'
 export default {
   name: 'Widgets',
   components: {
-    CChartLineSimple,
-    CChartBarSimple,
     CTableWrapper,
     WidgetsBrand,
-    WidgetsDropdown
   }
   ,
   data() {

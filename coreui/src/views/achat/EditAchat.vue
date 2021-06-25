@@ -38,8 +38,8 @@
                 custom 
                 @change="setPhoto"
               />
-            
-            
+               
+             
             
             
             <CButton color="primary" @click="update()">Save</CButton>
@@ -147,7 +147,7 @@ export default {
                 }
         )
         .then(function (response) {
-            self.message = 'Successfully updated exchange.';
+            self.message = self.$t('alert.achat.updated');
             self.showAlert();
         }).catch(function (error) { 
               self.message = '';

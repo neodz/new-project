@@ -119,7 +119,7 @@ export default {
         _method: 'DELETE'
       })
       .then(function (response) {
-          self.message = 'Successfully deleted Article.';
+            self.message = self.$t('alert.transaction.deleted');
           self.showAlert();
           self.getArticles();
       }).catch(function (error) {

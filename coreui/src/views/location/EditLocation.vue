@@ -128,7 +128,7 @@ export default {
         }
         )
         .then(function (response) {
-            self.message = 'Successfully updated location.';
+            self.message = self.$t('alert.location.updated');
             self.showAlert();
         }).catch(function (error) { 
               self.message = '';

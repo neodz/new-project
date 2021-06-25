@@ -149,6 +149,16 @@ const fr = {
         submit : 'Sauvegarder',
         current_poster : "Affiche actuelle"
     },
+    
+    create_achat : { 
+        amount : 'Quantite',
+        category : 'Catégorie',
+        payment_method : 'Methode de paiement',
+        back : 'Revenir',
+        submit : 'Sauvegarder',
+        current_poster : "Affiche actuelle"
+    },
+    
     edit_location : {
         amount : 'Quantite',
         date_start : 'Date sortie',
@@ -235,6 +245,38 @@ const fr = {
         },
         back : 'Revenir',
         submit : 'Sauvegarder',
+    },
+    alert : { 
+        achat : { 
+            created : 'Achat créé avec succès.',
+            updated : 'Achat mis à jour avec succès',
+            deleted : 'Achat supprimé avec succès'
+        },
+        exchange : { 
+            created : 'exchange créé avec succès.',
+            updated : 'exchange mis à jour avec succès',
+            deleted : 'exchange supprimé avec succès'
+        },
+        location : { 
+            created : 'location créé avec succès.',
+            updated : 'location mis à jour avec succès',
+            deleted : 'location supprimé avec succès'
+        },
+        article : { 
+            created : 'article créé avec succès.',
+            updated : 'article mis à jour avec succès',
+            deleted : 'article supprimé avec succès'
+        },
+        transaction : { 
+            created : 'transaction créé avec succès.',
+            updated : 'transaction mis à jour avec succès',
+            deleted : 'transaction supprimé avec succès'
+        },
+        user : { 
+            created : 'utilisateur créé avec succès.',
+            updated : 'utilisateur mis à jour avec succès',
+            deleted : 'utilisateur supprimé avec succès'
+        },
     }
 }
 

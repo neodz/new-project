@@ -291,7 +291,7 @@ export default {
               }
           )
           .then(function (response) {
-            self.message = "Successfully deleted Article.";
+            self.message = self.$t('alert.article.deleted');
             self.showAlert();
             self.getArticles();
           })

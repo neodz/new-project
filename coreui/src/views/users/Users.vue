@@ -104,7 +104,7 @@ export default {
         _method: 'DELETE'
       })
       .then(function (response) {
-          self.message = 'Successfully deleted user.';
+            self.message = self.$t('alert.user.deleted');
           self.showAlert();
           self.getUsers();
       }).catch(function (error) {

@@ -125,7 +125,7 @@ export default {
         }
         )
         .then(function (response) {
-            self.message = 'Successfully created location.';
+            self.message = self.$t('alert.location.created');
             self.quantite = ""
             self.date_entrer = ""
             self.date_sortie = ""

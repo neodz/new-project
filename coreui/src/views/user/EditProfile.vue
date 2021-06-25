@@ -198,7 +198,7 @@ export default {
         .then(function (response) {
           self.user = response.data.user;
           self.setUpUser();
-          self.message = "Successfully updated user.";
+            self.message = self.$t('alert.user.updated');
           self.showAlert();
           //   self.name = "";
           //   self.prenom = "";

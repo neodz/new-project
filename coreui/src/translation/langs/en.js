@@ -236,6 +236,48 @@ const en = {
         back : 'Back',
         submit : 'Save',
     }
+    ,
+    alert : { 
+        achat : { 
+            created : 'Successfully created Purchase',
+            updated : 'Successfully updated Purchase',
+            deleted : 'Successfully deleted Purchase'
+        },
+        exchange : { 
+            created : 'Successfully created exchange',
+            updated : 'Successfully updated exchange',
+            deleted : 'Successfully deleted exchange'
+        },
+        location : { 
+            created : 'Successfully created rental',
+            updated : 'Successfully updated rental',
+            deleted : 'Successfully deleted rental'
+        },
+        article : { 
+            created : 'Successfully created article',
+            updated : 'Successfully updated article',
+            deleted : 'Successfully deleted article'
+        },
+        transaction : { 
+            created : 'Successfully created transaction',
+            updated : 'Successfully updated transaction',
+            deleted : 'Successfully deleted transaction'
+        },
+        user : { 
+            created : 'Successfully created user',
+            updated : 'Successfully updated user',
+            deleted : 'Successfully deleted user'
+        },
+    }
+    ,
+    create_achat : { 
+        amount : 'Amount',
+        category : 'Category',
+        payment_method : 'Payment method',
+        back : 'Back',
+        submit : 'Save',
+        current_poster : "Current Poster"
+    },
     
 }
 

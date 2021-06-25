@@ -189,7 +189,7 @@ export default {
             self.tarif_livraison = '',
             self. prix = '',
             self.designation = '',
-            self.message = 'Successfully created article.';
+            self.message = self.$t('alert.article.created');
             self.showAlert();
         }).catch(function (error) {
             // if(error.response.data.message == 'The given data was invalid.'){

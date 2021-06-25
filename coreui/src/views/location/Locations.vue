@@ -124,7 +124,7 @@ export default {
         _method: 'DELETE'
       })
       .then(function (response) {
-          self.message = 'Successfully deleted location.';
+            self.message = self.$t('alert.location.deleted');
           self.showAlert();
           self.getLocations();
       }).catch(function (error) {

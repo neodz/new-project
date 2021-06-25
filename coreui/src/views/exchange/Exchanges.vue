@@ -127,7 +127,7 @@ export default {
         _method: 'DELETE'
       })
       .then(function (response) {
-          self.message = 'Successfully deleted Exchange.';
+            self.message = self.$t('alert.exchange.deleted');
           self.showAlert();
           self.getExchanges();
       }).catch(function (error) {

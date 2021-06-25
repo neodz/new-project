@@ -176,7 +176,7 @@ export default {
           }
         )
         .then(function (response) {
-          self.message = "Successfully create exchange.";
+            self.message = self.$t('alert.exchange.created');
           self.photo = "";
           self.description = "";
           self.adresse = "";

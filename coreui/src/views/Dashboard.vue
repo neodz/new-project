@@ -9,8 +9,6 @@
 </template>
 
 <script>
-import MainChartExample from './charts/MainChartExample'
-import WidgetsDropdown from './widgets/WidgetsDropdown'
 import WidgetsBrand from './widgets/WidgetsBrand'
 import Widgets from './widgets/Widgets'
 import {mapGetters} from 'vuex';
@@ -18,8 +16,6 @@ import {mapGetters} from 'vuex';
 export default {
   name: 'Dashboard',
   components: {
-    MainChartExample,
-    WidgetsDropdown,
     WidgetsBrand,
     Widgets
   },

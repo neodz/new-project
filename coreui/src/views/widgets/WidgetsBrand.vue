@@ -169,13 +169,11 @@
 </template>
 
 <script>
-import { CChartLineSimple } from '../charts/index.js'
 
 import axios from 'axios'
 export default {
   name: 'WidgetsBrand',
   components: {
-    CChartLineSimple
   },
   props: {
     noCharts: Boolean

@@ -19,7 +19,7 @@
             ></CInput> -->
 
             <CSelect
-                label="Quantite"
+                :label="$t('create_achat.amount')"
                 horizontal
                 :options="quantites"
                 placeholder="Please select"
@@ -27,7 +27,7 @@
            />
 
             <CSelect
-                label="Category"
+                :label="$t('create_achat.category')"
                 horizontal
                 :options="colors"
                 placeholder="Please select"
@@ -35,7 +35,7 @@
            />
 
            <CSelect
-                label="Methode paiment"
+                :label="$t('create_achat.payment_method')"
                 horizontal
                 :options="methode_paiements"
                 placeholder="Please select"
@@ -44,8 +44,8 @@
 
           
 
-            <CButton color="primary" @click="update()">Save</CButton>
-            <CButton color="primary" @click="goBack">Back</CButton>
+            <CButton color="primary" @click="update()">{{$t('create_achat.submit')}}</CButton>
+            <CButton color="primary" @click="goBack">{{$t('create_achat.back')}}</CButton>
             <!-- <CCol class="float-right"> -->
            <div class="float-right">  Total : <strong>{{total}} DA</strong></div>
           <!-- </CCol> -->
@@ -57,7 +57,7 @@
       <CCard>
         <CCardHeader>
           <CIcon name="cil-justify-center" />
-          <strong> Curent Article Poster</strong>
+          <strong> {{$t('create_achat.current_poster')}}</strong>
         </CCardHeader>
         <CCardBody>
           <CCarousel v-if="article" indicators animate height="500px">
@@ -167,7 +167,7 @@ export default {
         }
         )
         .then(function (response) {
-            self.message = 'Successfully created location.';
+            self.message = self.$t('alert.achat.created');
             self.quantite = ""
             self.date_entrer = ""
             self.date_sortie = ""
