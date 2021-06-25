@@ -19,6 +19,7 @@
     <CHeaderNav class="mr-4">
     
     <a href="#" @click="setLanguage()" class="mt-2 mr-5">{{lang_text}}</a>
+    
     <TheHeaderDropdownAccnt v-if="connected"/>
     </CHeaderNav>
     <CSubheader class="px-3">
@@ -80,7 +81,7 @@ export default {
         }
   },
   mounted() {
-    this.lang = localStorage.getItem('lang');
+    this.lang = localStorage.getItem('lang') ? localStorage.getItem('lang') : 'fr' ;
 
     //  var der;
 // if (localStorage.getItem('dore-direction')==='rtl') {

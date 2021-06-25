@@ -8,7 +8,7 @@
     <div class="rt-container">
     	<div class="col-rt-12">
         	<div class="rt-heading">
-            	<h1>Utilisateur Profile Page</h1>
+            	<h1>{{$t('profile.title')}}</h1>
             </div>
         </div>
     </div>
@@ -34,9 +34,9 @@
           ></star-rating2>
           </div>
           <div v-if="role" class="card-body">
-            <p class="mb-0"><strong class="pr-1">Numéro d'identité:</strong>{{role.num_identite ? role.num_identite : 'indéfini'}}</p>
-            <p class="mb-0"><strong class="pr-1">Numéro telephone :</strong>{{role.num_tel ? role.num_tel : 'indéfini'}}</p>
-            <p class="mb-0"><strong class="pr-1">Email :</strong>{{user.email ? user.email : 'indéfini'}}</p>
+            <p class="mb-0"><strong class="pr-1">{{$t('profile.card_id')}} :</strong>{{role.num_identite ? role.num_identite : $t('profile.none')}}</p>
+            <p class="mb-0"><strong class="pr-1">{{$t('profile.phone')}} :</strong>{{role.num_tel ? role.num_tel : $t('profile.none')}}</p>
+            <p class="mb-0"><strong class="pr-1">{{$t('profile.email')}} : </strong>{{user.email ? user.email : $t('profile.none')}}</p>
           </div>
         </div>
       </div>
@@ -48,19 +48,19 @@
           <div v-if="role" class="card-body pt-0">
             <table class="table table-bordered">
               <tr>
-                <th width="30%">Date naissance</th>
+                <th width="30%">{{$t('profile.date_of_birth')}}</th>
                 <td width="2%">:</td>
-                <td>{{role.date_naissance ? role.date_naissance : 'indéfini'}}</td>
+                <td>{{role.date_naissance ? role.date_naissance : $t('profile.none')}}</td>
               </tr>
               <tr>
-                <th width="30%">Lieu de naissance</th>
+                <th width="30%">{{$t('profile.place_of_birth')}}</th>
                 <td width="2%">:</td>
-                <td>{{role.lieu_naissance ? role.lieu_naissance : 'indéfini'}}</td>
+                <td>{{role.lieu_naissance ? role.lieu_naissance : $t('profile.none')}}</td>
               </tr>
               <tr>
-                <th width="30%">Sexe</th>
+                <th width="30%">{{$t('profile.sex')}}</th>
                 <td width="2%">:</td>
-                <td>{{role.sexe ? role.sexe : 'indéfini'}}</td>
+                <td>{{role.sexe ? role.sexe : $t('profile.none')}}</td>
               </tr>
             </table>
           </div>
@@ -68,10 +68,10 @@
           <div style="height: 26px"></div>
         <div class="card shadow-sm">
           <div class="card-header bg-transparent border-0">
-            <h3 class="mb-0"><i class="far fa-clone pr-1"></i>Adresse</h3>
+            <h3 class="mb-0"><i class="far fa-clone pr-1"></i>{{$t('profile.address')}}</h3>
           </div>
           <div v-if="role" class="card-body pt-0">
-              <p>{{role.adresse ? role.adresse : 'indéfini'}}</p>
+              <p>{{role.adresse ? role.adresse : $t('profile.none')}}</p>
           </div>
         </div>
       </div>

@@ -202,7 +202,7 @@ const fr = {
         Login : "Login",
         Register : "Register",
         Articles : "Articles",
-        Users : 'Users',
+        Users : 'Utilisateurs',
     },
     profile : { 
         title : 'Utilisateur Profile Page',

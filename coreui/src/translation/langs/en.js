@@ -6,7 +6,7 @@ const en = {
             new_users : 'New Users',
             users_banned : 'Users banned',
             articles : 'Articles',
-            all_transactions : 'Toutes Les transactions',
+            all_transactions : 'All transactions',
             location_articles : 'Rental type items',
             exchange_articles : 'Exchange type articles',
             achat_articles : 'Purchase type items',
