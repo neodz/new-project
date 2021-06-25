@@ -3,7 +3,7 @@
     <CCol col="12" lg="6">
       <CCard>
         <CCardHeader v-if="original_items">
-          <p>Article id : {{ $route.params.id }}</p>
+          <p>{{$t('article_details.card.article_id')}} : {{ $route.params.id }}</p>
 
           <div
             v-if="auth && !auth.is_admin && auth.utilisateur.id === original_items.utilisateur_id"
@@ -12,19 +12,19 @@
               color="primary"
               @click="setTransaction()"
               v-if="original_items.type_transaction === 'exchange'"
-              >Toutes exchanges transactions</CButton
+              >{{$t('article_details.card.all_exchange_transactions')}}</CButton
             >
             <CButton
               color="primary"
               @click="setTransaction()"
               v-if="original_items.type_transaction === 'location'"
-              >Toutes locations transactions</CButton
+              >{{$t('article_details.card.all_rental_transactions')}}</CButton
             >
             <CButton
               color="primary"
               @click="setTransaction()"
               v-if="original_items.type_transaction === 'achter'"
-              >Toutes achats transactions</CButton
+              >{{$t('article_details.card.all_purchase_transactions')}}</CButton
             >
           </div>
           <h3 class="mt-2" v-if="original_items">
@@ -34,8 +34,8 @@
               "
               >{{
                 original_items.dynamique_quantite > 0
-                  ? "Disponible : " + original_items.dynamique_quantite +' articles'
-                  : "Indisponible"
+                  ? $t('article_details.card.available')+" : " + original_items.dynamique_quantite +' articles'
+                  : $t('article_details.card.unavailable')
               }}</CBadge
             >
           </h3>
@@ -48,7 +48,7 @@
           </CDataTable>
         </CCardBody>
         <CCardFooter>
-          <CButton color="primary" @click="goBack">Back</CButton>
+          <CButton color="primary" @click="goBack">{{$t('article_details.card.back')}}</CButton>
         </CCardFooter>
       </CCard>
     </CCol>
@@ -57,7 +57,7 @@
       <CCard>
         <CCardHeader>
           <CIcon name="cil-justify-center" />
-          <strong> Article Poster</strong>
+          <strong>{{$t('article_details.poster.title')}}</strong>
 
           <CButton
             v-if="
@@ -69,7 +69,7 @@
             color="primary"
             @click="setAction('location')"
             class="mb-3 float-right"
-            >Louer Article</CButton
+            >{{$t('article_details.poster.rent_article')}}</CButton
           >
           <!-- <CButton v-if="auth &&  original_items.viewer_transaction_etat === 'pending' && auth.utilisateur.id!==original_items.utilisateur_id && original_items.type_transaction==='location'" color="primary" @click="setEditAction('location')"  class="mb-3 float-right">Edit location</CButton> -->
           <!-- <CButton v-if="article && article.viewer_transaction && auth && auth.utilisateur.id!==original_items.utilisateur_id && original_items.type_transaction==='location'" color="primary"  class="mb-3 float-right">Louer Article</CButton> -->
@@ -83,7 +83,7 @@
             color="primary"
             @click="setAction('exchange')"
             class="mb-3 float-right"
-            >Exchange Article</CButton
+            >{{$t('article_details.poster.exchange_article')}}</CButton
           >
           <!-- <CButton v-if="auth &&  original_items.viewer_transaction_etat === 'pending'  && auth.utilisateur.id!==original_items.utilisateur_id &&original_items.type_transaction==='exchange'" color="primary" @click="setEditAction('exchange')" class="mb-3 float-right">Edit Exchange</CButton> -->
 
@@ -97,7 +97,7 @@
             color="primary"
             @click="setAction('achat')"
             class="mb-3 float-right"
-            >Achter Article</CButton
+            >{{$t('article_details.poster.buy_article')}}</CButton
           >
         </CCardHeader>
         <CCardBody>

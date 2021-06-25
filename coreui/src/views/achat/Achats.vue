@@ -4,11 +4,11 @@
       <transition name="slide">
       <CCard>
         <CCardHeader>
-            Mes Transaction Achats 
+            {{$t('achats.title')}}
         </CCardHeader>
              
         <CCardBody>
-          <CButton color="primary" @click="$router.push({ path: '/dashboard' })" class="mb-3">Add Transaction Achat</CButton> 
+          <CButton color="primary" @click="$router.push({ path: '/dashboard' })" class="mb-3">{{$t('achats.buy_article')}}</CButton> 
           
           <CAlert
             :show.sync="dismissCountDown"
@@ -32,7 +32,7 @@
           </template>
           <template #delete="{item}">
             <td>
-              <CButton color="danger" @click="deleteAchat( item.id )">Delete</CButton>
+              <CButton color="danger" @click="deleteAchat( item.id )">{{$t('achats.delete')}}</CButton>
             </td>
           </template>
         </CDataTable>

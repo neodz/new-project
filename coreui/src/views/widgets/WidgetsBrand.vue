@@ -4,13 +4,13 @@
         <CCard>
           <CCardHeader>
             <CIcon name="cil-justify-center"/>
-            <strong>Recherche</strong>
+            <strong>{{$t('dashboard.search')}}</strong>
           </CCardHeader>
           <CCardBody class="">
             <div class="row ">
             <div class="col-6 mt-2">
                   <div class="input-group rounded">
-                <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+                <input type="search" class="form-control rounded" :placeholder="$t('dashboard.search')" aria-label="Search"
                   aria-describedby="search-addon"
                   v-model="searchKey"
                    />
@@ -23,8 +23,8 @@
                 class="m-2"
                 color="secondary"
                >
-                <CDropdownHeader>Catégorie</CDropdownHeader>
-                <CDropdownItem v-for="category in categories" :key="category" @click="selectedItemCategory = category!=='none' ? category : null">{{category}}</CDropdownItem>
+                <CDropdownHeader>{{$t('dashboard.categories.category')}}</CDropdownHeader>
+                <CDropdownItem v-for="category in categories" :key="category" @click="selectedItemCategory = category!==$t('dashboard.categories.none') ? category : null">{{category}}</CDropdownItem>
                 <!-- <CDropdownItem v-model="selectedItemCategory">Second Item</CDropdownItem>
                 <CDropdownItem v-model="selectedItemCategory">Third Item</CDropdownItem> -->
               </CDropdown>
@@ -33,8 +33,8 @@
                 class="m-2"
                 color="secondary"
                >
-                <CDropdownHeader>Type de transaction</CDropdownHeader>
-                <CDropdownItem v-for="type_transaction in type_transactions" :key="type_transaction" @click="selectedItemType = type_transaction!=='none' ? type_transaction : null">{{type_transaction}}</CDropdownItem>
+                <CDropdownHeader>{{$t('dashboard.type_transactions.type_transaction')}}</CDropdownHeader>
+                <CDropdownItem v-for="type_transaction in type_transactions" :key="type_transaction" @click="selectedItemType = type_transaction!==$t('dashboard.categories.none') ? type_transaction : null">{{type_transaction}}</CDropdownItem>
                 <!-- <CDropdownItem v-model="selectedItemCategory">Second Item</CDropdownItem>
                 <CDropdownItem v-model="selectedItemCategory">Third Item</CDropdownItem> -->
               </CDropdown>
@@ -49,18 +49,18 @@
       <CCard> 
         <CCardHeader>
           <CIcon name="cil-justify-center"/>
-          <strong>Article : {{item.designation}}</strong>
+          <strong>{{$t('dashboard.article.title')}} : {{item.designation}}</strong>
           <div class="card-header-actions">
            
-              <small @click="showArticle(item.id)" class="text-muted">voir l'article</small>
+              <small @click="showArticle(item.id)" class="text-muted">{{$t('dashboard.article.view_article')}}</small>
             
           </div>
         </CCardHeader>
         <CCardBody>
           <p @click="viewProfile(item.utilisateur.user.id)">
-            Propriétaire: <strong>{{item.utilisateur.user.name}}</strong></p>
+            {{$t('dashboard.article.owner')}} : <strong>{{item.utilisateur.user.name}}</strong></p>
           <p>
-          type de Transaction : <strong>{{item.type_transaction}}</strong></p>
+          {{$t('dashboard.article.type_transaction')}} : <strong>{{item.type_transaction}}</strong></p>
 
           <CCarousel
             indicators
@@ -187,17 +187,17 @@ export default {
       selectedItemCategory : null,
       selectedItemType : null,
       searchKey : null,
-      categories : ['Informatique','Téléphone','Voiture','Maisson','Vêtements','Bijoux','appareils électroménagers','none'],
-      type_transactions : ['location','exchange','achter','none'],
+      categories : ['Informatique','Téléphone','Voiture','Maisson','Vêtements','Bijoux','appareils électroménagers',this.$t('dashboard.categories.none')],
+      type_transactions : ['location','exchange','achter',this.$t('dashboard.categories.none')],
     }
   },
   computed: {
     selectedItemCategoryLabelCategory(){
-          return this.selectedItemCategory !== null ? this.selectedItemCategory : 'Catégorie';
+          return this.selectedItemCategory !== null ? this.selectedItemCategory : this.$t('dashboard.categories.category');
 
     },
     selectedItemCategoryLabelType(){
-          return this.selectedItemType !== null ? this.selectedItemType : 'Type de transaction';
+          return this.selectedItemType !== null ? this.selectedItemType : this.$t('dashboard.type_transactions.type_transaction');
 
     }
   },

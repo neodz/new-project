@@ -11,14 +11,14 @@
               ({{ dismissCountDown }}) {{ message }}
             </CAlert>
             <CInput
-              label="Element echange"
+              :label="$t('edit_exchange.name')"
               type="text"
-              placeholder="Element echange"
+              :placeholder="$t('edit_exchange.name')"
               v-model="element_echange"
             ></CInput>
 
             <CSelect
-              label="Quantite"
+              :label="$t('edit_exchange.amount')"
               horizontal
               :options="quantites"
               placeholder="Please select"
@@ -26,30 +26,30 @@
             />
 
             <CTextarea
-              label="Adresse"
-              placeholder="Adresse..."
+              :label="$t('edit_exchange.address')"
+              :placeholder="$t('edit_exchange.address')"
               horizontal
               v-model="adresse"
               rows="9"
             />
 
             <CTextarea
-              label="Description"
-              placeholder="Description..."
+              :label="$t('edit_exchange.description')"
+              :placeholder="$t('edit_exchange.description')"
               horizontal
               v-model="description"
               rows="9"
             />
             <CInputFile
-              label="Poster"
+              label="Photo"
               horizontal
-              :placeholder="photo.name ? photo.name : 'Choisi photo'"
+              :placeholder="photo.name ? photo.name : $t('edit_exchange.photo')"
               custom
               @change="setPhoto"
             />
 
-            <CButton color="primary" @click="update()">Save</CButton>
-            <CButton color="primary" @click="goBack">Back</CButton>
+            <CButton color="primary" @click="update()">{{$t('edit_exchange.submit')}}</CButton>
+            <CButton color="primary" @click="goBack">{{$t('edit_exchange.back')}}</CButton>
           </CForm>
         </CCardBody>
       </CCard>
@@ -58,7 +58,7 @@
       <CCard>
         <CCardHeader>
           <CIcon name="cil-justify-center" />
-          <strong> Cuurent Poster</strong>
+          <strong>{{$t('edit_exchange.current_poster')}}</strong>
         </CCardHeader>
         <CCardBody>
           <CCarousel arrows indicators animate height="400px">

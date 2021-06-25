@@ -149,7 +149,7 @@ class MenusTableSeeder extends Seeder
         $this->insertLink('admin', 'Articles', '/articles', 'cil-list');
         $this->insertLink('admin', 'Users', '/users', 'cil-list');
         
-        $this->insertLink('user', 'Mes article', '/articles', 'cil-list');
+        $this->insertLink('user', 'Mes articles', '/articles', 'cil-list');
         $this->beginDropdown('user', 'Mes Transactions', '/transactions', 'cil-list');
                      $this->insertLink('user', 'Locations',    '/locations');
                      $this->insertLink('user', 'Exchanges',    '/exchanges');

@@ -16,15 +16,15 @@
             </CAlert>
            
             <CSelect
-                label="Quantite"
+                :label="$t('edit_location.amount')"
                 horizontal
                 :options="quantites"
                 placeholder="Please select"
                 :value.sync="quantite"
            />
 
-                 <CInput
-                  label="Date Sortie"
+                 <CInput                
+                 :label="$t('edit_location.date_start')"
                   type="date"
                   v-model="date_sortie"
                   prependHtml="<i class='cil-calendar'></i>"
@@ -33,14 +33,14 @@
             
           
             <CInput
-                  label="Date entrer"
+                 :label="$t('edit_location.date_end')"
                   type="date"
                   v-model="date_entrer"
                   prependHtml="<i class='cil-calendar'></i>"
                   horizontal
                 />
-            <CButton color="primary" @click="update()">Save</CButton>
-            <CButton color="primary" @click="goBack">Back</CButton>
+            <CButton color="primary" @click="update()">{{$t('edit_location.submit')}}</CButton>
+            <CButton color="primary" @click="goBack">{{$t('edit_location.back')}}</CButton>
           </CForm>
         </CCardBody>
       </CCard>
@@ -49,7 +49,7 @@
        <CCard>
         <CCardHeader>
           <CIcon name="cil-justify-center"/>
-          <strong> Curent Article Poster</strong>
+          <strong>{{$t('edit_location.current_poster')}}</strong>
          
         </CCardHeader>
         <CCardBody>

@@ -6,8 +6,8 @@
           <CCard class="p-4">
             <CCardBody>
               <CForm @submit.prevent="login" method="POST">
-                <h1>Login</h1>
-                <p class="text-muted">Connectez-vous à votre compte</p>
+                <h1>{{$t('login.title')}}</h1>
+                <p class="text-muted">{{$t('login.description')}}</p>
                    <CAlert
                     :show.sync="dismissCountDown"
                     color="primary"
@@ -18,7 +18,7 @@
                 <CInput
                   v-model="email"
                   prependHtml="<i class='cui-user'></i>"
-                  placeholder="Nom d'utilisateur"
+                  :placeholder="$t('login.username')"
                   autocomplete="username email"
                 >
                   <template #prepend-content><CIcon name="cil-user"/></template>
@@ -26,7 +26,7 @@
                 <CInput
                   v-model="password"
                   prependHtml="<i class='cui-lock-locked'></i>"
-                  placeholder="Mot de passe"
+                  :placeholder="$t('login.password')"
                   type="password"
                   autocomplete="curent-password"
                 >
@@ -34,7 +34,7 @@
                 </CInput>
                 <CRow>
                   <CCol col="6">
-                    <CButton type="submit" color="primary" class="px-4">Connexion</CButton>
+                    <CButton type="submit" color="primary" class="px-4">{{$t('login.submit')}}</CButton>
                   </CCol>
                   <!-- <CCol col="6" class="text-right">
                     <CButton color="link" class="px-0">Forgot password?</CButton>
@@ -49,14 +49,14 @@
             class="text-center py-5 d-md-down-none"
             body-wrapper
           >
-            <h2>S'inscrire</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <h2>{{$t('login.register.title')}}</h2>
+            <p>{{$t('login.register.description')}}</p>
             <CButton
               color="primary"
               class="active mt-3"
               @click="goRegister()"
             >
-              S'inscrire maintenant!
+              {{$t('login.register.button')}}!
             </CButton>
           </CCard>
         </CCardGroup>

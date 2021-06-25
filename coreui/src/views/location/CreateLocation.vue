@@ -18,7 +18,7 @@
               v-model="quantite"
             ></CInput> -->
                <CSelect
-                label="Quantite"
+                :label="$t('create_location.amount')"
                 horizontal
                 :options="quantites"
                 placeholder="Please select"
@@ -26,7 +26,7 @@
            />
 
             <CInput
-              label="Date Sortie"
+                :label="$t('create_location.date_start')"
               type="date"
               v-model="date_sortie"
               prependHtml="<i class='cil-calendar'></i>"
@@ -34,14 +34,14 @@
             />
 
             <CInput
-              label="Date entrer"
+                :label="$t('create_location.date_end')"
               type="date"
               v-model="date_entrer"
               prependHtml="<i class='cil-calendar'></i>"
               horizontal
             />
-            <CButton color="primary" @click="update()">Save</CButton>
-            <CButton color="primary" @click="goBack">Back</CButton>
+            <CButton color="primary" @click="update()">{{$t('create_location.submit')}}</CButton>
+            <CButton color="primary" @click="goBack">{{$t('create_location.back')}}</CButton>
           </CForm>
         </CCardBody>
       </CCard>
@@ -50,7 +50,7 @@
       <CCard>
         <CCardHeader>
           <CIcon name="cil-justify-center" />
-          <strong> Curent Article Poster</strong>
+          <strong>{{$t('create_location.current_poster')}}</strong>
         </CCardHeader>
         <CCardBody>
           <CCarousel v-if="article"  indicators animate height="500px">

@@ -17,14 +17,14 @@
 
         
             <CInput
-              label="Element echange"
+              :label="$t('create_exchange.name')"
               type="text"
               placeholder="Element echange"
               v-model="element_echange"
             ></CInput>
 
                 <CSelect
-                label="Quantite"
+              :label="$t('create_exchange.amount')"
                 horizontal
                 :options="quantites"
                 placeholder="Please select"
@@ -33,30 +33,30 @@
 
 
             <CTextarea
-              label="Adresse"
-              placeholder="Adresse..."
+              :label="$t('create_exchange.address')"
+              :placeholder="$t('create_exchange.address')"
               horizontal
               v-model="adresse"
               rows="9"
             />
 
             <CTextarea
-              label="Description"
-              placeholder="Description..."
+              :label="$t('create_exchange.description')"
+              :placeholder="$t('create_exchange.description')"
               horizontal
               v-model="description"
               rows="9"
             />
             <CInputFile
-              label="Poster"
+              label="Photo"
               horizontal
-              :placeholder="photo.name ? photo.name : 'Choisi photo'"
+              :placeholder="photo.name ? photo.name : $t('create_exchange.photo')"
               custom
               @change="setPhoto"
             />
 
-            <CButton color="primary" @click="update()">Save</CButton>
-            <CButton color="primary" @click="goBack">Back</CButton>
+            <CButton color="primary" @click="update()">{{$t('create_exchange.submit')}}</CButton>
+            <CButton color="primary" @click="goBack">{{$t('create_exchange.back')}}</CButton>
           </CForm>
         </CCardBody>
       </CCard>
@@ -65,7 +65,7 @@
       <CCard>
         <CCardHeader>
           <CIcon name="cil-justify-center" />
-          <strong> Cuurent Poster</strong>
+          <strong>{{$t('create_exchange.current_poster')}}</strong>
         </CCardHeader>
         <CCardBody>
           <CCarousel arrows indicators animate height="400px">

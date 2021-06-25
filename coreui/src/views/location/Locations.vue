@@ -4,11 +4,11 @@
       <transition name="slide">
       <CCard>
         <CCardHeader>
-            Mes Locations
+            {{$t('locations.title')}}
         </CCardHeader>
              
         <CCardBody>
-          <CButton color="primary" @click="$router.push({ path: '/dashboard' })" class="mb-3">Add Location</CButton>
+          <CButton color="primary" @click="$router.push({ path: '/dashboard' })" class="mb-3">{{$t('locations.add_location')}}</CButton>
           
           <CAlert
             :show.sync="dismissCountDown"
@@ -37,12 +37,12 @@
           </template>
           <template #edit="{item}">
             <td>
-              <CButton v-if="item.etat!=='accepted'" color="primary" @click="editLocation( item.id )">Edit</CButton>
+              <CButton v-if="item.etat!=='accepted'" color="primary" @click="editLocation( item.id )">{{$t('locations.edit')}}</CButton>
             </td>
           </template>
           <template #delete="{item}">
             <td>
-              <CButton color="danger" @click="deleteLocation( item.id )">Delete</CButton>
+              <CButton color="danger" @click="deleteLocation( item.id )">{{$t('locations.delete')}}</CButton>
             </td>
           </template>
         </CDataTable>

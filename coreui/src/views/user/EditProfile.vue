@@ -5,8 +5,8 @@
         <CCardBody v-if="user" class="p-4">
           <CForm @submit.prevent="register" method="POST">
 
-            <h1>Edit</h1>
-            <p class="text-muted">Edit votre compte</p>
+            <h1>{{$t('edit_profile.title')}}</h1>
+            <p class="text-muted">{{$t('edit_profile.description')}}</p>
              <CAlert
               :show.sync="dismissCountDown"
               color="primary"
@@ -15,7 +15,7 @@
               ({{dismissCountDown}}) {{ message }}
             </CAlert>
             <CInput
-              placeholder="Nom"
+              :placeholder="$t('edit_profile.last_name')"
               prependHtml="<i class='cui-user'></i>"
               autocomplete="nom"
               v-model="nom"
@@ -23,7 +23,7 @@
               <template #prepend-content><CIcon name="cil-user" /></template>
             </CInput>
             <CInput
-              placeholder="Prenom"
+              :placeholder="$t('edit_profile.first_name')"
               prependHtml="<i class='cui-user'></i>"
               autocomplete="Prenom"
               v-model="prenom"
@@ -43,7 +43,7 @@
             </CInput>
 
             <CInput
-              placeholder="Lieu naissance"
+              :placeholder="$t('edit_profile.place_of_birth')"
               prependHtml="<i class='cil-house'></i>"
               autocomplete="Lieu naissance"
               v-model="lieu_naissance"
@@ -52,7 +52,7 @@
             </CInput>
 
             <CInput
-              placeholder="adresse"
+              :placeholder="$t('edit_profile.adresse')"
               prependHtml="<i class='cil-house'></i>"
               autocomplete="adresse"
               v-model="adresse"
@@ -61,7 +61,7 @@
             </CInput>
 
             <CInput
-              placeholder="Numéro de téléphone"
+              :placeholder="$t('edit_profile.phone')"
               prependHtml="<i class='cil-phone'></i>"
               autocomplete="Numéro de téléphone"
               v-model="num_tel"
@@ -70,7 +70,7 @@
             </CInput>
 
             <CInput
-              placeholder="Carte identité"
+              :placeholder="$t('edit_profile.card_id')"
               prependHtml="<i class='cil-credit-card'></i>"
               autocomplete="Carte identité"
               v-model="num_identite"
@@ -81,13 +81,13 @@
             </CInput>
 
             <CInput
-              placeholder="Email"
+              :placeholder="$t('edit_profile.email')"
               prepend="@"
               autocomplete="email"
               v-model="email"
             />
             <CInput
-              placeholder="Password"
+              :placeholder="$t('edit_profile.password')"
               type="password"
               prependHtml="<i class='cui-lock-locked'></i>"
               autocomplete="new-password"
@@ -98,7 +98,7 @@
               /></template>
             </CInput>
             <CInput
-              placeholder="Repeat password"
+              :placeholder="$t('edit_profile.repeat_password')"
               type="password"
               prependHtml="<i class='cui-lock-locked'></i>"
               autocomplete="new-password"
@@ -126,8 +126,8 @@
                 />
               </CCol>
             </div>
-            <CButton color="primary" @click="update()">Save</CButton>
-            <CButton color="primary" @click="goBack">Back</CButton>
+            <CButton color="primary" @click="update()">{{$t('edit_profile.submit')}}</CButton>
+            <CButton color="primary" @click="goBack">{{$t('edit_profile.back')}}</CButton>
           </CForm>
         </CCardBody>
       </CCard>

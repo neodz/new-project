@@ -6,8 +6,8 @@
           <CCard class="mx-4 mb-0">
             <CCardBody class="p-4">
               <CForm @submit.prevent="register" method="POST">
-                <h1>S'inscrire</h1>
-                <p class="text-muted">Créez votre compte</p>
+                <h1>{{$t('register.title')}}</h1>
+                <p class="text-muted">{{$t('register.description')}}</p>
                 <CAlert
                   :show.sync="dismissCountDown"
                   color="primary"
@@ -16,7 +16,7 @@
                   ({{dismissCountDown}}) {{ message }}
                 </CAlert>
                 <CInput
-                  placeholder="Nom"
+                  :placeholder="$t('register.last_name')"
                   prependHtml="<i class='cui-user'></i>"
                   autocomplete="nom"
                   v-model="name"
@@ -24,7 +24,7 @@
                   <template #prepend-content><CIcon name="cil-user"/></template>
                 </CInput>
                 <CInput
-                  placeholder="Prenom"
+                  :placeholder="$t('register.first_name')"
                   prependHtml="<i class='cui-user'></i>"
                   autocomplete="Prenom"
                   v-model="prenom"
@@ -43,7 +43,7 @@
                 </CInput>
 
               <CInput
-                  placeholder="Lieu naissance"
+                  :placeholder="$t('register.place_of_birth')"
                   prependHtml="<i class='cil-house'></i>"
                   autocomplete="Lieu naissance"
                   v-model="lieu_naissance"
@@ -52,7 +52,7 @@
                 </CInput>
 
               <CInput
-                  placeholder="adresse"
+                  :placeholder="$t('register.adresse')"
                   prependHtml="<i class='cil-house'></i>"
                   autocomplete="adresse"
                   v-model="adresse"
@@ -62,7 +62,7 @@
 
 
               <CInput
-                  placeholder="Numéro de téléphone"
+                  :placeholder="$t('register.phone')"
                   prependHtml="<i class='cil-phone'></i>"
                   autocomplete="Numéro de téléphone"
                   v-model="num_tel"
@@ -71,7 +71,7 @@
                 </CInput>
 
                 <CInput
-                  placeholder="Carte identité"
+                  :placeholder="$t('register.card_id')"
                   prependHtml="<i class='cil-credit-card'></i>"
                   autocomplete="Carte identité"
                   v-model="num_identite"
@@ -81,13 +81,13 @@
 
 
                 <CInput
-                  placeholder="Email"
+                  :placeholder="$t('register.email')"
                   prepend="@"
                   autocomplete="email"
                   v-model="email"
                 />
                 <CInput
-                  placeholder="Password"
+                  :placeholder="$t('register.password')"
                   type="password"
                   prependHtml="<i class='cui-lock-locked'></i>"
                   autocomplete="new-password"
@@ -96,7 +96,7 @@
                   <template #prepend-content><CIcon name="cil-lock-locked"/></template>
                 </CInput>
                 <CInput
-                  placeholder="Repeat password"
+                  :placeholder="$t('register.repeat_password')"
                   type="password"
                   prependHtml="<i class='cui-lock-locked'></i>"
                   autocomplete="new-password"
@@ -127,7 +127,7 @@
 
 
                 </div>
-                <CButton type="submit" color="success" block>Create Account</CButton>
+                <CButton type="submit" color="success" block>{{$t('register.submit')}}</CButton>
               </CForm>
             </CCardBody>
           </CCard>

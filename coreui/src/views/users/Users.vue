@@ -4,7 +4,7 @@
       <transition name="slide">
       <CCard>
         <CCardHeader>
-            Users
+            {{$t('users.title')}}
         </CCardHeader>
         <CCardBody>
           <CAlert
@@ -29,17 +29,17 @@
           </template>
           <template #show="{item}">
             <td>
-              <CButton color="primary" @click="showUser( item.id )">Show</CButton>
+              <CButton color="primary" @click="showUser( item.id )">{{$t('users.show')}}</CButton>
             </td>
           </template>
           <template #edit="{item}">
             <td>
-              <CButton color="primary" @click="editUser( item.id )">Edit</CButton>
+              <CButton color="primary" @click="editUser( item.id )">{{$t('users.edit')}}</CButton>
             </td>
           </template>
           <template #delete="{item}">
             <td>
-              <CButton v-if="you!=item.id" color="danger" @click="deleteUser( item.id )">Delete</CButton>
+              <CButton v-if="you!=item.id" color="danger" @click="deleteUser( item.id )">{{$t('users.delete')}}</CButton>
             </td>
           </template>
         </CDataTable>

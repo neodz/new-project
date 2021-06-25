@@ -4,11 +4,12 @@
       <transition name="slide">
       <CCard>
         <CCardHeader>
-            Mes exchanges
+            {{$t('exchanges.title')}}
         </CCardHeader>
              
         <CCardBody>
-          <CButton color="primary" @click="$router.push({ path: '/dashboard' })" class="mb-3">Add Exhange</CButton>
+          <CButton color="primary" @click="$router.push({ path: '/dashboard' })" class="mb-3">
+            {{$t('exchanges.add_exchange')}}</CButton>
           
           <CAlert
             :show.sync="dismissCountDown"
@@ -37,12 +38,14 @@
           </template>
           <template  #edit="{item}">
             <td >
-              <CButton v-if="item.etat!=='accepted'" color="primary" @click="editExchange( item.id )">Edit</CButton>
+              <CButton v-if="item.etat!=='accepted'" color="primary" @click="editExchange( item.id )">
+            {{$t('exchanges.edit')}}</CButton>
             </td>
           </template>
           <template #delete="{item}">
             <td>
-              <CButton color="danger" @click="deleteExchange( item.id )">Delete</CButton>
+              <CButton color="danger" @click="deleteExchange( item.id )">
+            {{$t('exchanges.delete')}}</CButton>
             </td>
           </template>
         </CDataTable>

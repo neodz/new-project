@@ -1,5 +1,5 @@
 <template>
-  <CDropdown
+    <CDropdown
     inNav
     class="c-header-nav-items"
     placement="bottom-end"
@@ -21,15 +21,17 @@
       class="text-center"
       color="light"
     >
-      <strong>Settings</strong>
+      <strong>
+      {{$t('nav_bar.settings')}}</strong>
     </CDropdownHeader>
     <CDropdownItem @click="profileUser()" >
       <CIcon name="cil-user" />
-      Profile
+      {{$t('nav_bar.profile')}}
     </CDropdownItem>
     <CDropdownDivider/>
     <CDropdownItem @click="logout()">
-      <CIcon name="cil-lock-locked" /> Logout
+      <CIcon name="cil-lock-locked" /> 
+      {{$t('nav_bar.logout')}}
     </CDropdownItem>
   </CDropdown>
 </template>

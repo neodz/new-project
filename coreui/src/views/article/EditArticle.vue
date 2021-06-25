@@ -5,7 +5,7 @@
         <CCardBody>
           <CForm>
             <template slot="header">
-              Edit Article id:  {{ $route.params.id }}
+             {{$t('edit_article.title')}}  :  {{ $route.params.id }}
             </template>
             <CAlert
               :show.sync="dismissCountDown"
@@ -22,49 +22,49 @@
                 placeholder="Please select"
                 :value.sync="etat_article"
            />
-          <CInput label="Designation" type="text" placeholder="Designation" v-model="designation"></CInput>
-          <CInput label="Prix" type="number" placeholder="Prix" v-model="prix"></CInput>
-          <CInput label="Tarif de livraison" type="number" placeholder="Tarif de livraison" v-model="tarif_livraison"></CInput>
-          <CInput label="Quantite" type="number" placeholder="Quantite" v-model="quantite"></CInput>
+          <CInput :label="$t('edit_article.name')" type="text" :placeholder="$t('edit_article.name')" v-model="designation"></CInput>
+          <CInput :label="$t('edit_article.price')" type="number" :placeholder="$t('edit_article.price')" v-model="prix"></CInput>
+          <CInput :label="$t('edit_article.delivery_rate')" type="number" :placeholder="$t('edit_article.delivery_rate')" v-model="tarif_livraison"></CInput>
+          <CInput :label="$t('edit_article.amount')" type="number" :placeholder="$t('edit_article.amount')" v-model="quantite"></CInput>
           <CSelect
-                label="Type transaction"
+                :label="$t('edit_article.type_transaction')"
                 horizontal
                 :options="type_transactions"
                 placeholder="Please select"
                 :value.sync="type_transaction"
            />
            <CTextarea
-                label="Adresse"
+                :label="$t('edit_article.adresse')"
                 placeholder="Adresse..."
                 horizontal
                 v-model="adresse"
                 rows="9"
               />
             <CSelect
-                label="Category"
+                :label="$t('edit_article.category')"
                 horizontal
                 :options="categories"
                 placeholder="Please select"
                 :value.sync="category"
            />
             <CSelect
-                label="Methode paiment"
+                :label="$t('edit_article.payment_method')"
                 horizontal
                 :options="methode_paiements"
                 placeholder="Please select"
                 :value.sync="methode_paiement"
            />
            <CTextarea
-                label="Description"
+                :label="$t('edit_article.description')"
                 placeholder="Description..."
                 horizontal
                 v-model="description"
                 rows="9"
               />
             <CInputFile
-                label="Poster"
+                :label="$t('edit_article.photo')"
                 horizontal
-                :placeholder="photo.name ? photo.name  : 'Choisi photo'"
+                :placeholder="photo.name ? photo.name  : $t('edit_article.photo')"
                 custom 
                 @change="setPhoto"
               />
@@ -72,8 +72,8 @@
             
             
             
-            <CButton color="primary" @click="update()">Save</CButton>
-            <CButton color="primary" @click="goBack">Back</CButton>
+            <CButton color="primary" @click="update()">{{$t('edit_article.submit')}}</CButton>
+            <CButton color="primary" @click="goBack">{{$t('edit_article.back')}}</CButton>
           </CForm>
         </CCardBody>
       </CCard>
@@ -82,7 +82,7 @@
        <CCard>
         <CCardHeader>
           <CIcon name="cil-justify-center"/>
-          <strong> Cuurent Poster</strong>
+          <strong>{{$t('edit_article.current_poster')}}</strong>
          
         </CCardHeader>
         <CCardBody>

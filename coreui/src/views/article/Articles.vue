@@ -4,7 +4,7 @@
       <transition name="slide">
         <CCard>
           <CCardHeader>
-            Mes Articles
+            {{$t('articles.title')}}
 
             <!--start search form -->
             <div class="float--right">
@@ -14,7 +14,7 @@
                     <input
                         type="search"
                         class="form-control rounded"
-                        placeholder="Search"
+                        :placeholder="$t('articles.search')"
                         aria-label="Search"
                         aria-describedby="search-addon"
                         v-model="searchKey"
@@ -27,13 +27,13 @@
                       class="m-2"
                       color="secondary"
                   >
-                    <CDropdownHeader>Catégorie</CDropdownHeader>
+                    <CDropdownHeader>{{$t('articles.categories.category')}}</CDropdownHeader>
                     <CDropdownItem
                         v-for="category in categories"
                         :key="category"
                         @click="
                         selectedItemCategory =
-                          category !== 'none' ? category : null
+                          category !== $t('articles.categories.none') ? category : null
                       "
                     >{{ category }}
                     </CDropdownItem
@@ -55,7 +55,7 @@
                         :key="type_transaction"
                         @click="
                         selectedItemType =
-                          type_transaction !== 'none' ? type_transaction : null
+                          type_transaction !== $t('articles.categories.none') ? type_transaction : null
                       "
                     >{{ type_transaction }}
                     </CDropdownItem
@@ -69,13 +69,13 @@
                       class="m-2"
                       color="secondary"
                   >
-                    <CDropdownHeader>Etat de l'article</CDropdownHeader>
+                    <CDropdownHeader>{{$t('articles.status_article.status_article')}}</CDropdownHeader>
                     <CDropdownItem
                         v-for="etat_article in etats"
                         :key="etat_article"
                         @click="
                         selectedItemEtat =
-                          etat_article !== 'none' ? etat_article : null
+                          etat_article !== $t('articles.status_article.none') ? etat_article : null
                       "
                     >{{ etat_article }}
                     </CDropdownItem
@@ -93,7 +93,7 @@
 
           <CCardBody>
             <CButton v-if="auth && !auth.is_admin" color="primary" @click="addUser()" class="mb-3"
-            >Add Article
+            >{{$t('articles.add_article')}}
             </CButton
             >
 
@@ -132,7 +132,7 @@
               <template #show="{ item }">
                 <td>
                   <CButton color="primary" @click="showArticle(item.id)"
-                  >Show
+                  >{{$t('articles.show')}}
                   </CButton
                   >
                 </td>
@@ -140,7 +140,7 @@
               <template #edit="{ item }">
                 <td>
                   <CButton color="primary" @click="editArticle(item.id)"
-                  >Edit
+                  >{{$t('articles.edit')}}
                   </CButton
                   >
                 </td>
@@ -148,7 +148,7 @@
               <template #delete="{ item }">
                 <td>
                   <CButton color="danger" @click="deleteArticle(item.id)"
-                  >Delete
+                  >{{$t('articles.delete')}}
                   </CButton
                   >
                 </td>
@@ -174,9 +174,9 @@ export default {
       selectedItemType: null,
       selectedItemEtat: null,
       searchKey: null,
-      categories: ['Informatique','Téléphone','Voiture','Maisson','Vêtements','Bijoux','appareils électroménagers',"none"],
-      type_transactions: ["location", "exchange", "achter", "none"],
-      etats: ['pending', 'accepted', 'rejected', "none"],
+      categories: ['Informatique','Téléphone','Voiture','Maisson','Vêtements','Bijoux','appareils électroménagers'],
+      type_transactions: ["location", "exchange", "achter"],
+      etats: ['pending', 'accepted', 'rejected'],
       items: [],
       fields: [
         "id",
@@ -217,20 +217,23 @@ export default {
     ...mapGetters({
       auth: 'getAuth'
     }),
+    none (){
+      return this.$t('articles.categories.none');
+    },
     selectedItemCategoryLabelCategory() {
       return this.selectedItemCategory !== null
           ? this.selectedItemCategory
-          : "Catégorie";
+          : this.$t('articles.categories.category');
     },
     selectedItemCategoryLabelType() {
       return this.selectedItemType !== null
           ? this.selectedItemType
-          : "Type de transaction";
+          : this.$t('articles.type_transactions.type_transaction');
     },
     selectedItemEtatLabel() {
       return this.selectedItemEtat !== null
           ? this.selectedItemEtat
-          : "Etat de l'article";
+          : this.$t('articles.status_article.status_article');
     },
   },
   watch: {
@@ -354,6 +357,10 @@ export default {
     },
   },
   mounted: function () {
+    this.etats.push(this.none);
+    this.type_transactions.push(this.none);
+    this.categories.push(this.none);
+    
     this.getArticles();
   },
 };

@@ -3,7 +3,7 @@
      <CCardGroup class="mb-4">
       <CWidgetProgressIcon
         :header="totalUsers.toString()"
-        text="All Users"
+        :text="$t('dashboard.admin.all_users')"
         color="info"
         inverse
       >
@@ -12,7 +12,7 @@
 
       <CWidgetProgressIcon
         :header="usersPendingCount.toString()"
-        text="New Users"
+        :text="$t('dashboard.admin.new_users')"
         color="success"
         inverse
       >
@@ -20,7 +20,7 @@
       </CWidgetProgressIcon>
       <CWidgetProgressIcon
         :header="usersBannedCount.toString()"
-        text="Users Banned"
+        :text="$t('dashboard.admin.users_banned')"
         color="danger"
         inverse
       >
@@ -28,7 +28,7 @@
       </CWidgetProgressIcon>
       <CWidgetProgressIcon
         :header="totalArticles.toString()"
-        text="Articles"
+        :text="$t('dashboard.admin.articles')"
         color="primary"
         inverse
       >
@@ -36,7 +36,7 @@
       </CWidgetProgressIcon>
       <CWidgetProgressIcon
         :header="totalTransactions.toString()"
-        text="All Transactions"
+        :text="$t('dashboard.admin.all_transactions')"
         color="warning"
         inverse
       >
@@ -47,7 +47,7 @@
       <CCol sm="6" md="2">
         <CWidgetProgressIcon
           :header="locationArticlesCount.toString()"
-          text="LOCATION ARTICLES"
+        :text="$t('dashboard.admin.location_articles')"
           color="info"
         >
           <CIcon name="" height="36"/>
@@ -56,7 +56,7 @@
       <CCol sm="6" md="2">
         <CWidgetProgressIcon
           :header="exchangeArticlesCount.toString()"
-          text="EXCHANGE ARTICLES"
+        :text="$t('dashboard.admin.exchange_articles')"
           color="success"
         >
           <CIcon name="" height="36"/>
@@ -65,7 +65,7 @@
       <CCol sm="6" md="2">
         <CWidgetProgressIcon
           :header="achterArticlesCount.toString()"
-          text="ACHAT ARTICLES"
+        :text="$t('dashboard.admin.achat_articles')"
           color="warning"
         >
           <CIcon name="" height="36"/>
@@ -74,7 +74,7 @@
       <CCol sm="6" md="2">
         <CWidgetProgressIcon
           :header="locationsCount.toString()"
-          text="LOCATION TRANSACTIONS"
+        :text="$t('dashboard.admin.location_transactions')"
           color="primary"
         >
           <CIcon name="cil-chartPie" height="36"/>
@@ -83,7 +83,7 @@
       <CCol sm="6" md="2">
         <CWidgetProgressIcon
           :header="exchangesCount.toString()"
-          text="EXCHANGE TRANSACTIONS"
+        :text="$t('dashboard.admin.exchange_transactions')"
           color="danger"
         >
           <CIcon name="cil-speedometer" height="36"/>
@@ -92,7 +92,7 @@
       <CCol sm="6" md="2">
         <CWidgetProgressIcon
           :header="achatsCount.toString()"
-          text="ACHAT TRANSACTIONS"
+        :text="$t('dashboard.admin.achat_transactions')"
           color="info"
         >
           <CIcon name="cil-speech" height="36"/>
@@ -103,7 +103,7 @@
         <CTableWrapper
           :items="getShuffledUsersData()"
           striped
-          caption="Users Active"
+          :caption="$t('dashboard.admin.users_active')"
         />
       </CCol>
   </div>

@@ -15,14 +15,14 @@
               ({{dismissCountDown}}) {{ message }}
             </CAlert>
             <CSelect
-                label="Etat de compte"
+                :label="$t('users.status_account')"
                 horizontal
                 :options="etats"
                 placeholder="Please select"
                 :value.sync="status"
            />
-            <CButton color="primary" @click="update()">Save</CButton>
-            <CButton color="primary" @click="goBack">Back</CButton>
+            <CButton color="primary" @click="update()">{{$t('users.submit')}}</CButton>
+            <CButton color="primary" @click="goBack">{{$t('users.back')}}</CButton>
           </CForm>
         </CCardBody>
       </CCard>

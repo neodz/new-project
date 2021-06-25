@@ -50,7 +50,7 @@ export default {
     dropdown(data){
       let result = {
             _name: 'CSidebarNavDropdown',
-            name: data['name'],
+            name: this.$t('side_bar.'+data['name']),
             route: data['href'],
             icon: data['icon'],
             _children: [],
@@ -62,7 +62,7 @@ export default {
           result._children.push(
             {
                    _name:  'CSidebarNavItem',
-                   name:   data['elements'][i]['name'],
+                   name:   this.$t('side_bar.'+data['elements'][i]['name']),
                    to:     data['elements'][i]['href'],
                    icon:   data['elements'][i]['icon']
             } 
@@ -83,7 +83,7 @@ export default {
               this.buffor[0]._children.push(
                   {
                       _name: 'CSidebarNavItem',
-                      name: data[k]['name'],
+                      name: this.$t('side_bar.'+data[k]['name']),
                       href: data[k]['href'],
                       icon: data[k]['icon'],
                       target: '_blank'
@@ -93,7 +93,7 @@ export default {
               this.buffor[0]._children.push(
                   {
                       _name: 'CSidebarNavItem',
-                      name: data[k]['name'],
+                      name: this.$t('side_bar.'+data[k]['name']),
                       to:   data[k]['href'],
                       icon: data[k]['icon'],
                   }
@@ -104,7 +104,7 @@ export default {
             this.buffor[0]._children.push(
               {
                 _name: 'CSidebarNavTitle',
-                _children: [data[k]['name']]
+                _children: [this.$t('side_bar.'+data[k]['name'])]
               }
             );
           break;
